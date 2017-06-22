@@ -48,6 +48,10 @@ namespace _01_Presentacion.Controllers
                     {
                         return RedirectToAction("Main", "Intranet");
                     }
+                    else if(u.Rol == "Cliente")
+                    {
+                        return RedirectToAction("Index");
+                    }
                     else
                     {
                         return RedirectToAction("Index");
