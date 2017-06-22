@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/MasterPages/MasterExtranet.cshtml";
+}
+
+@section src{
+    <link rel="stylesheet" href="~/Bootstrap/Extranet/booking/css/booking.css">
+    <script src="~/Bootstrap/Extranet/booking/js/booking.js"></script>
+}
+
+<section class="content">
+    <div class="container">
+        <div class="row">
+            <div class="grid_4">
+                <form id="bookingForm">
+                    <h2>Iniciar Sesión</h2>
+                    <div class="tmInput">
+                        Usuario
+                        <input name="Usuario" type="text">
+                    </div>
+                    <div class="tmInput">
+                        Contraseña
+                        <input name="Contraseña" type="password">
+                    </div>
+                    <div class="clear"></div>
+                    <div class="ta__right">
+                        <input style="background-color: rgb(226, 226, 226)" type="submit" value="Ingresar" class="btn" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+  $(function (){
+        $('#bookingForm').bookingForm({
+            ownerEmail: '#'
+        });
+    })
+    $(function() {
+   $('#bookingForm input, #bookingForm textarea').placeholder();
+  });
+
+</script>
