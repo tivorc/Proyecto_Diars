@@ -11,7 +11,7 @@ namespace _03_Dominio
     {
         public int UsuarioID { get; set; }
 
-        [Display(Name = "Usuario")]
+        [Display(Name = "Nombre Usuario")]
         public string NombreUsuario { get; set; }
 
         [DataType(DataType.Password)]
