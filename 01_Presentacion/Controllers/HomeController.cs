@@ -31,14 +31,40 @@ namespace _01_Presentacion.Controllers
         {
             return View();
         }
-
-        // POST: Login
         [HttpPost]
         public ActionResult Login(FormCollection frm)
         {
-            return View();
-        }
+            try
+            {
+                String Usuario = frm["Usuario"].ToString();
+                String Contrasena = frm["Contrasena"].ToString();
+                String mensaje;
+                entUsuario u = appUsuario.Instancia.VerificarAcceso(Usuario, Contrasena, out mensaje);
+                if (mensaje.Equals(""))
+                {
+                    Session["usuario"] = u;
+                    //agregamos objeto usuario a la session
+                    if (u.Rol == "Administrador")
+                    {
+                        return RedirectToAction("Main", "Intranet");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+                else
+                {
+                    ViewBag.mensaje = mensaje;
+                    return View();
+                }
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { mensaje = e.Message });
+            }
 
+        }
         public class Sexo
         {
             public string Valor { get; set; }

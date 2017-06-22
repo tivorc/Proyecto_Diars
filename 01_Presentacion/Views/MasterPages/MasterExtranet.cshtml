@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using _03_Dominio
+<!DOCTYPE html>
 <html lang="es-pe">
 <head>
     <title>La Valentina - @ViewBag.Title</title>
@@ -66,7 +67,8 @@
                                 @{
                                     if (Session["Usuario"] != null)
                                     {
-                                        <div class="pull-right">Hola nombreUsuario</div>
+                                        entUsuario u = (entUsuario)Session["usuario"];
+                                        <div class="pull-right">Hola @u.NombreUsuario</div>
                                     }
                                     else
                                     {
