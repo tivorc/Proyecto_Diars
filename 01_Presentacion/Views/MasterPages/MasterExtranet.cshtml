@@ -68,7 +68,7 @@
                                     if (Session["Usuario"] != null)
                                     {
                                         entUsuario u = (entUsuario)Session["usuario"];
-                                        <div class="pull-right">Hola @u.NombreUsuario</div>
+                                        <div class="pull-right">Hola @u.NombreUsuario  |  @Html.ActionLink("Cerrar Sesión", "Logout")</div>
                                     }
                                     else
                                     {
