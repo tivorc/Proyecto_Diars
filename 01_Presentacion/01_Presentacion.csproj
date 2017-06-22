@@ -94,6 +94,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IntranetController.cs" />
+    <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -110,7 +114,20 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <Folder Include="Views\Cliente\" />
+    <Folder Include="Views\Home\" />
+    <Folder Include="Views\Intranet\" />
+    <Folder Include="Views\Producto\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\02_Aplicacion\02_Aplicacion.csproj">
+      <Project>{c5061eaa-844d-42d1-8d4d-8aba97b56166}</Project>
+      <Name>02_Aplicacion</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\03_Dominio\03_Dominio.csproj">
+      <Project>{93ff4d3e-87f1-4799-b728-3fbfaa4fe541}</Project>
+      <Name>03_Dominio</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

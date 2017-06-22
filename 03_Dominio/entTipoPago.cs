@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace _03_Dominio
 {
-    public class Class1
+    public class entTipoPago
     {
+        public int TipoPagoID { get; set; }
+        public string DescripcionTipoPago { get; set; }
     }
 }

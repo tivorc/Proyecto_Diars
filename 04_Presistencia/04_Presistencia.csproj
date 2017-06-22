@@ -40,8 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Conexion.cs" />
+    <Compile Include="daoCliente.cs" />
+    <Compile Include="daoProducto.cs" />
+    <Compile Include="daoTrabajador.cs" />
+    <Compile Include="daoUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\03_Dominio\03_Dominio.csproj">
+      <Project>{93ff4d3e-87f1-4799-b728-3fbfaa4fe541}</Project>
+      <Name>03_Dominio</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

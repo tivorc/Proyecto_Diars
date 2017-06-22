@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _02_Aplicacion
+namespace _04_Presistencia
 {
-    public class Class1
+    public class daoTrabajador
     {
     }
 }

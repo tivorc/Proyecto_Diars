@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _04_Presistencia
 {
-    public class Class1
+    public class daoUsuario
     {
     }
 }

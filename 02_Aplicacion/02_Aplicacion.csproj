@@ -40,8 +40,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="appCliente.cs" />
+    <Compile Include="appProducto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\03_Dominio\03_Dominio.csproj">
+      <Project>{93ff4d3e-87f1-4799-b728-3fbfaa4fe541}</Project>
+      <Name>03_Dominio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\04_Presistencia\04_Presistencia.csproj">
+      <Project>{20109fd7-0190-4d00-a896-5189c5224794}</Project>
+      <Name>04_Presistencia</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
