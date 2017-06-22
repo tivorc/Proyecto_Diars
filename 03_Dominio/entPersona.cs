@@ -16,6 +16,9 @@ namespace _03_Dominio
 
         [Required]
         public string Apellidos { get; set; }
+
+        [Required]
+        [Display(Name = "DNI")]
         public string Dni { get; set; }
 
         [Display(Name = "Teléfono")]
@@ -26,6 +29,6 @@ namespace _03_Dominio
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Fecha De Nacimiento")]
-        public DateTime FechaNacimiento { get; set; }
+        public DateTime? FechaNacimiento { get; set; }
     }
 }

@@ -9,38 +9,41 @@
     <script src="~/Bootstrap/Extranet/booking/js/booking.js"></script>
 }
 
-<section class="content">
-    <div class="container">
-        <div class="row">
-            <div class="grid_4">
-                <form id="bookingForm" method="post">
+<form method="post">
+    <section class="content">
+        <div class="container">
+            <div class="row" id="bookingForm">
+                <div class="grid_4">
                     <h2>Iniciar Sesión</h2>
                     <div class="tmInput">
                         Usuario
-                        <input name="Usuario" type="text">
+                        <input name="Usuario" type="text" required>
                     </div>
                     <div class="tmInput">
                         Contraseña
-                        <input name="Contrasena" type="password">
+                        <input name="Contrasena" type="password" required>
                     </div>
-                    <div class="clear"></div>
-                    <div class="ta__right">
-                        <input style="background-color: rgb(226, 226, 226)" type="submit" value="Ingresar" class="btn" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-offset-2 grid_10 pull-right">
+                        <input type="submit" value="Ingresar" class="btn" />
+                        </div>
                     </div>
-                </form>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</form>
 
 <script>
-  $(function (){
+    $(function () {
         $('#bookingForm').bookingForm({
             ownerEmail: '#'
         });
     })
-    $(function() {
-   $('#bookingForm input, #bookingForm textarea').placeholder();
-  });
+    $(function () {
+        $('#bookingForm input, #bookingForm textarea').placeholder();
+    });
 
 </script>

@@ -115,6 +115,7 @@
     <Content Include="Bootstrap\Extranet\images\big1.jpg" />
     <Content Include="Bootstrap\Extranet\images\big2.jpg" />
     <Content Include="Bootstrap\Extranet\images\big3.jpg" />
+    <Content Include="Bootstrap\Extranet\images\ceviche_pescado.jpg" />
     <Content Include="Bootstrap\Extranet\images\chibolo.jpg" />
     <Content Include="Bootstrap\Extranet\images\gelatina_fresa.jpg" />
     <Content Include="Bootstrap\Extranet\images\icon1.png" />

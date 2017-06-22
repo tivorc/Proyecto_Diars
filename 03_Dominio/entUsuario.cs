@@ -11,9 +11,11 @@ namespace _03_Dominio
     {
         public int UsuarioID { get; set; }
 
+        [Required]
         [Display(Name = "Nombre Usuario")]
         public string NombreUsuario { get; set; }
 
+        [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Contraseña")]
         public string Contrasena { get; set; }
