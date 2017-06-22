@@ -1,0 +1,56 @@
+﻿@model IEnumerable<_03_Dominio.entProducto>
+
+@{
+    ViewBag.Title = "Platos Disponibles";
+    Layout = "~/Views/MasterPages/MasterIntranet.cshtml";
+}
+
+<h2>Platos Disponibles</h2>
+
+<table class="table table-responsive">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreProducto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DescripcionProducto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PrecioProducto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stock)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubTipoProducto.DescripcionSubTipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubTipoProducto.TipoProducto.DescripcionTipoProducto)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreProducto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescripcionProducto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrecioProducto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubTipoProducto.DescripcionSubTipo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubTipoProducto.TipoProducto.DescripcionTipoProducto)
+            </td>
+        </tr>
+    }
+
+</table>
