@@ -25,22 +25,29 @@ namespace _01_Presentacion.Controllers
         [HttpPost]
         public ActionResult Nuevo(entCliente cli, HttpPostedFileBase archivo)
         {
-            cli.Usuario.ImgUsuario = Path.GetFileName(archivo.FileName);
-            Boolean inserto = appCliente.Instancia.InsertarCliente(cli);
-            if (inserto)
+            if (ModelState.IsValid)
             {
-                if (archivo != null && archivo.ContentLength > 0)
+                cli.Usuario.ImgUsuario = Path.GetFileName(archivo.FileName);
+                Boolean inserto = appCliente.Instancia.InsertarCliente(cli);
+                if (inserto)
                 {
-                    var namearchivo = Path.GetFileName(archivo.FileName);
-                    var ruta = Path.Combine(Server.MapPath("/Bootstrap/Intranet/build/images"), namearchivo);
-                    archivo.SaveAs(ruta);
+                    if (archivo != null && archivo.ContentLength > 0)
+                    {
+                        var namearchivo = Path.GetFileName(archivo.FileName);
+                        var ruta = Path.Combine(Server.MapPath("/Bootstrap/Intranet/build/images"), namearchivo);
+                        archivo.SaveAs(ruta);
+                    }
+                    return RedirectToAction("Index", "Home");
                 }
-                return RedirectToAction("Index", "Home");
+                else
+                {
+                    ViewBag.mensaje = "No se pudo insertar";
+                    return View();
+                }
             }
             else
             {
-                ViewBag.mensaje = "No se pudo insertar";
-                return View();
+                return View(cli);
             }
 
         }

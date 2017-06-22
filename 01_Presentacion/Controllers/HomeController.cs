@@ -131,5 +131,11 @@ namespace _01_Presentacion.Controllers
                 return View(c);
             }
         }
+
+        public ActionResult Logout()
+        {
+            Session["usuario"] = null;
+            return RedirectToAction("Login", "Home");
+        }
     }
 }
