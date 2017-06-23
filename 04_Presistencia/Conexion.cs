@@ -21,8 +21,8 @@ namespace _04_Presistencia
         public SqlConnection conectar()
         {
             SqlConnection cn = new SqlConnection();
-            //cn.ConnectionString = "Data source=proyectodiars2017.database.windows.net; Initial Catalog=ProyectoDiars; User ID=administrador; Password=Abcd1234";
-            cn.ConnectionString = "Data source=.; Initial Catalog=ProyectoDiars; Integrated Security=true";
+            cn.ConnectionString = "Data source=proyectodiars2017.database.windows.net; Initial Catalog=ProyectoDiars; User ID=administrador; Password=Abcd1234";
+            //cn.ConnectionString = "Data source=.; Initial Catalog=ProyectoDiars; Integrated Security=true";
             return cn;
         }
         #endregion metodos
