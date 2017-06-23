@@ -108,7 +108,10 @@ namespace _01_Presentacion.Controllers
             if (ModelState.IsValid)
             {
                 c.Usuario.Rol = "Cliente";
-                c.Usuario.ImgUsuario = Path.GetFileName(archivo.FileName);
+                if (archivo != null && archivo.ContentLength > 0)
+                {
+                    c.Usuario.ImgUsuario = Path.GetFileName(archivo.FileName);
+                }
                 bool inserto = appCliente.Instancia.InsertarCliente(c);
                 if (inserto)
                 {

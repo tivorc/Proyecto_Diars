@@ -24,6 +24,9 @@ namespace _03_Dominio
         [Display(Name = "Teléfono")]
         public string Telefono { get; set; }
         public string Sexo { get; set; }
+
+        [Required]
+        [Display(Name = "Dirección")]
         public string Direccion { get; set; }
 
         [DataType(DataType.Date)]

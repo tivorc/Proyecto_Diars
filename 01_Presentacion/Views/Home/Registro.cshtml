@@ -57,7 +57,7 @@
                         @Html.LabelFor(model => model.Persona.Sexo, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-4">
                             @Html.DropDownListFor(model => model.Persona.Sexo, ViewBag.sexos as SelectList, "Seleccione uno", new { @class = "tmSelect" })
-                            @Html.ValidationMessageFor(model => model.Persona.Direccion, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.Persona.Sexo, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
