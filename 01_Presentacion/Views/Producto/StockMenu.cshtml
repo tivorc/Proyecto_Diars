@@ -1,0 +1,52 @@
+﻿@using _03_Dominio
+
+@{
+    ViewBag.Title = "StockMenu";
+    Layout = "~/Views/MasterPages/MasterIntranet.cshtml";
+}
+
+<h2>Stock Menú</h2>
+<div class="form-group">
+    <div class="row">
+        <div class="col-lg-6">
+            <select class="form-control" id="subTipoProductoID">
+                <option value="0">--Todos--</option>
+                @{
+                    List<entSubTipoProducto> lista = (List<entSubTipoProducto>)ViewBag.Lista;
+                    foreach (var stp in lista)
+                    {
+                        <option value="@stp.SubTipoProductoID">@stp.DescripcionSubTipo</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-lg-6">
+            <button type="button" id="btnBuscar" class="btn btn-primary">Buscar</button>
+        </div>
+    </div>
+</div>
+<br />
+
+<div id="detalle">
+
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+    $(document).ready(function () {
+        muestra();
+    });
+
+    $('#btnBuscar').click(function () {
+        muestra();
+    });
+
+    $('#TipoUnidad').change(function () {
+        muestra();
+    });
+    var muestra = function () {
+        $('#detalle').load('@Url.Action("DetalleStock")', { subTipoProductoID: $('#subTipoProductoID').val() })
+    }
+    </script>
+}
+

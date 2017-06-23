@@ -43,7 +43,7 @@
                                     <a><i class="fa fa-home"></i> Productos <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li>@Html.ActionLink("Menú del día", "PlatosDisponibles", "Producto")</li>
-                                        <li><a href="index2.html">Dashboard2</a></li>
+                                        <li>@Html.ActionLink("Stock Menú", "StockMenu", "Producto")</li>
                                         <li><a href="index3.html">Dashboard3</a></li>
                                     </ul>
                                 </li>
@@ -135,5 +135,6 @@
     <script src="~/Bootstrap/Intranet/vendors/nprogress/nprogress.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="~/Bootstrap/Intranet/build/js/custom.min.js"></script>
+    @RenderSection("scripts", required: false)
 </body>
 </html>

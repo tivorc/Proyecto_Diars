@@ -46,6 +46,7 @@
     <Compile Include="daoTrabajador.cs" />
     <Compile Include="daoUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="daoSubTipoProducto.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\03_Dominio\03_Dominio.csproj">
