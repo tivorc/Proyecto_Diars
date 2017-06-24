@@ -36,17 +36,14 @@
                                 <li>
                                     <a><i class="fa fa-users"></i> Cliente <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li>@Html.ActionLink("Nuevo", "Nuevo", "Cliente")</li>
-                                        <li><a href="index2.html">Dashboard2</a></li>
-                                        <li><a href="index3.html">Dashboard3</a></li>
+                                        <li>@Html.ActionLink("Manetenedor Clientes", "Nuevo", "Cliente")</li>
                                     </ul>
                                 </li>
                                 <li>
                                     <a><i class="fa fa-home"></i> Productos <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li>@Html.ActionLink("Menú del día", "PlatosDisponibles", "Producto")</li>
-                                        <li>@Html.ActionLink("Stock Menú", "StockMenu", "Producto")</li>
-                                        <li><a href="index3.html">Dashboard3</a></li>
+                                        <li>@Html.ActionLink("Mantenedor Platos", "Platos", "Producto")</li>
                                     </ul>
                                 </li>
                                 <li>
@@ -151,5 +148,6 @@
     <!-- Custom Theme Scripts -->
     <script src="~/Bootstrap/Intranet/build/js/custom.min.js"></script>
     @RenderSection("scripts", required: false)
+    @RenderSection("scripts2", required: false)
 </body>
 </html>

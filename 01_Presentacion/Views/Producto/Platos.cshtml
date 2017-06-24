@@ -1,11 +1,11 @@
 ﻿@using _03_Dominio
 
 @{
-    ViewBag.Title = "StockMenu";
+    ViewBag.Title = "Platos";
     Layout = "~/Views/MasterPages/MasterIntranet.cshtml";
 }
 
-<h2>Stock Menú</h2>
+<h2>Platos</h2>
 <div class="form-group">
     <div class="row">
         <div class="col-lg-6">
@@ -41,11 +41,8 @@
         muestra();
     });
 
-    $('#TipoUnidad').change(function () {
-        muestra();
-    });
     var muestra = function () {
-        $('#detalle').load('@Url.Action("DetalleStock")', { subTipoProductoID: $('#subTipoProductoID').val() })
+        $('#detalle').load('@Url.Action("ListaPlatos")', { subTipoProductoID: $('#subTipoProductoID').val() })
     }
     </script>
 }

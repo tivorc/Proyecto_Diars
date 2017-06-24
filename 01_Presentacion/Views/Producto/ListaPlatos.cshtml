@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<_03_Dominio.entProducto>
 
+<p>
+    <a href="@Url.Action("NuevoPlato","Producto")" class="btn btn-primary">Nuevo</a>
+</p>
+
 <table class="table table-responsive">
     <tr>
         <th>
@@ -17,6 +21,7 @@
         <th>
             @Html.DisplayNameFor(model => model.SubTipoProducto.DescripcionSubTipo)
         </th>
+        <th></th>
     </tr>
 
     @foreach (var item in Model)
@@ -37,7 +42,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.SubTipoProducto.DescripcionSubTipo)
             </td>
+            <td>
+                @Html.ActionLink("Editar", "Editar", new { id = item.ProductoID }) |
+                @Html.ActionLink("Eliminar", "Eliminar", new { id = item.ProductoID })
+            </td>
         </tr>
     }
 
 </table>
+
+

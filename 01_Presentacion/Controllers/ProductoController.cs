@@ -25,7 +25,7 @@ namespace _01_Presentacion.Controllers
         }
 
         // GET: PlatosDisponibles
-        public ActionResult StockMenu()
+        public ActionResult Platos()
         {
             int tipoProductoID = 1;
             List<entSubTipoProducto> lista = appSubTipoProducto.Instancia.ListaSubTipoProductos(tipoProductoID);
@@ -33,10 +33,19 @@ namespace _01_Presentacion.Controllers
             return View();
         }
 
-        public ActionResult DetalleStock(int subTipoProductoID)
+        public ActionResult ListaPlatos(int subTipoProductoID)
         {
-            List<entProducto> lista = appProducto.Instancia.ListaPlatosDisponibles(subTipoProductoID);
+            List<entProducto> lista = appProducto.Instancia.ListaPlatos(subTipoProductoID);
             return PartialView(lista);
+        }
+
+        [HttpGet]
+        public ActionResult NuevoPlato()
+        {
+            int tipoProductoID = 1;
+            List<entSubTipoProducto> lista = appSubTipoProducto.Instancia.ListaSubTipoProductos(tipoProductoID);
+            ViewBag.Lista = new SelectList(lista, "SubTipoProductoID", "DescripcionSubTipo");
+            return PartialView();
         }
     }
 }
