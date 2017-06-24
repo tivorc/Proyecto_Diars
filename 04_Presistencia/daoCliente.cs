@@ -31,14 +31,42 @@ namespace _04_Presistencia
                 cmd.Parameters.AddWithValue("@nombre", cli.Persona.Nombre);
                 cmd.Parameters.AddWithValue("@apellidos", cli.Persona.Apellidos);
                 cmd.Parameters.AddWithValue("@dni ", cli.Persona.Dni);
-                cmd.Parameters.AddWithValue("@telefono", cli.Persona.Telefono);
-                cmd.Parameters.AddWithValue("@sexo", cli.Persona.Sexo);
+                if (cli.Persona.Telefono == null)
+                {
+                    cmd.Parameters.AddWithValue("@telefono", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@telefono", cli.Persona.Telefono);
+                }
+                if (cli.Persona.Sexo == null)
+                {
+                    cmd.Parameters.AddWithValue("@sexo", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@sexo", cli.Persona.Sexo);
+                }
                 cmd.Parameters.AddWithValue("@direccion", cli.Persona.Direccion);
-                cmd.Parameters.AddWithValue("@fechaNacimiento", cli.Persona.FechaNacimiento);
+                if (cli.Persona.FechaNacimiento == null)
+                {
+                    cmd.Parameters.AddWithValue("@fechaNacimiento", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@fechaNacimiento", cli.Persona.FechaNacimiento);
+                }
                 cmd.Parameters.AddWithValue("@nombreUsuario", cli.Usuario.NombreUsuario);
                 cmd.Parameters.AddWithValue("@contrasena", cli.Usuario.Contrasena);
                 cmd.Parameters.AddWithValue("@rol", cli.Usuario.Rol);
-                cmd.Parameters.AddWithValue("@imgUsuario", cli.Usuario.ImgUsuario);
+                if (cli.Usuario.ImgUsuario == null)
+                {
+                    cmd.Parameters.AddWithValue("@imgUsuario", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@imgUsuario", cli.Usuario.ImgUsuario);
+                }
 
                 cmd.CommandType = CommandType.StoredProcedure;
                 cn.Open();
