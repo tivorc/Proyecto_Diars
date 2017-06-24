@@ -16,6 +16,12 @@ namespace _01_Presentacion.Controllers
         {
             return View();
         }
-        
+
+        public ActionResult Logout()
+        {
+            Session["usuario"] = null;
+            return RedirectToAction("Login", "Home");
+        }
+
     }
 }
