@@ -1,4 +1,5 @@
 ﻿@using _03_Dominio
+
 <!DOCTYPE html>
 <html lang="es-pe">
 <head>
@@ -68,10 +69,17 @@
                             <div class="clear">&nbsp;</div>
                             <div class="clear">
                                 @{
-                                    if (Session["Usuario"] != null)
+                                    if (Session["usuario"] != null)
                                     {
                                         entUsuario u = (entUsuario)Session["usuario"];
-                                        <div class="pull-right">Hola @u.NombreUsuario  |  @Html.ActionLink("Cerrar Sesión", "Logout")</div>
+                                        if(u.Rol == "Cliente")
+                                        {
+                                            <div class="pull-right">Hola @u.NombreUsuario  |  @Html.ActionLink("Cerrar Sesión", "Logout")</div>
+                                        }
+                                        else
+                                        {
+                                            Response.Redirect("~/Intranet/Main");
+                                        }
                                     }
                                     else
                                     {
