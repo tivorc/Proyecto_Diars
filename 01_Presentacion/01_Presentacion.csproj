@@ -3592,6 +3592,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IntranetController.cs" />
+    <Compile Include="Controllers\PedidoController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -4470,6 +4471,9 @@
     <Content Include="Views\Producto\Platos.cshtml" />
     <Content Include="Views\Producto\ListaPlatos.cshtml" />
     <Content Include="Views\Producto\NuevoPlato.cshtml" />
+    <Content Include="Views\Pedido\buscarCliente.cshtml" />
+    <Content Include="Views\Pedido\DetalleListaCliente.cshtml" />
+    <Content Include="Views\Pedido\ListaInfoCliente.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

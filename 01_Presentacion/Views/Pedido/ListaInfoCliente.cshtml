@@ -1,0 +1,46 @@
+﻿@model _03_Dominio.entCliente
+
+@{
+    ViewBag.Title = "ListaInfoCliente";
+    Layout = "~/Views/MasterPages/MasterIntranet.cshtml";
+}
+
+<h2>Informacion de cliente</h2>
+
+<div>
+    <table class="table">
+        <dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.Persona.Nombre)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Persona.Nombre)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Persona.Dni)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Persona.Dni)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Persona.Direccion)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Persona.Direccion)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Persona.Telefono)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Persona.Telefono)
+            </dd>
+      </dl>
+    </table>
+</div>
+
+
+<p>
+    @Html.ActionLink("Agregar Menu", "Edit") |
+    @Html.ActionLink("Agregar Producto", "Index")
+</p>

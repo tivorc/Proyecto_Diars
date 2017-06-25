@@ -30,6 +30,28 @@ namespace _02_Aplicacion
                 throw e;
             }
         }
+        public List<entCliente> ListaCliente(string idNombre)
+        {
+            try
+            {
+                return daoCliente.Instancia.ListaCliente(idNombre);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public entCliente DevolverCliente(Int16 idCliente)
+        {
+            try
+            {
+                return daoCliente.Instancia.DevolverCliente(idCliente);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
         #endregion metodos
     }
 }

@@ -11,7 +11,7 @@ namespace _03_Dominio
         public int PedidoID { get; set; }
         public entCliente Cliente { get; set; }
         public entTipoPago TipoPago { get; set; }
-        public int TipoPedido { get; set; }
+        public string TipoPedido { get; set; }
         public int Fecha { get; set; }
         public int EstadoPedido { get; set; }
     }
