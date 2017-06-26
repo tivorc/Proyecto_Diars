@@ -4476,6 +4476,7 @@
     <Content Include="Views\Pedido\ListaInfoCliente.cshtml" />
     <Content Include="Views\Cliente\Lista.cshtml" />
     <Content Include="Views\Cliente\DetalleLista.cshtml" />
+    <Content Include="Views\Cliente\Editar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

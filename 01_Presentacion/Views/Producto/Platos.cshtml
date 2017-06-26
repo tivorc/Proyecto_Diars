@@ -8,9 +8,9 @@
 <h2>Platos</h2>
 <div class="form-group">
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-3">
             <select class="form-control" id="subTipoProductoID">
-                <option value="0">--Todos--</option>
+                <option value="0">-- Filtar platos --</option>
                 @{
                     List<entSubTipoProducto> lista = (List<entSubTipoProducto>)ViewBag.Lista;
                     foreach (var stp in lista)
@@ -19,9 +19,6 @@
                     }
                 }
             </select>
-        </div>
-        <div class="col-lg-6">
-            <button type="button" id="btnBuscar" class="btn btn-primary">Buscar</button>
         </div>
     </div>
 </div>
@@ -37,7 +34,7 @@
         muestra();
     });
 
-    $('#btnBuscar').click(function () {
+    $('#subTipoProductoID').change(function () {
         muestra();
     });
 

@@ -34,7 +34,7 @@ namespace _01_Presentacion.Controllers
                 Boolean inserto = appCliente.Instancia.InsertarCliente(cli);
                 if (inserto)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Lista", "Cliente");
                 }
                 else
                 {
@@ -58,6 +58,36 @@ namespace _01_Presentacion.Controllers
         {
             List<entCliente> lista = appCliente.Instancia.ListaCliente(Nombre);
             return PartialView(lista);
+        }
+
+        public ActionResult Editar(int id)
+        {
+            entCliente c = appCliente.Instancia.DevolverCliente(id);
+            return View(c);
+        }
+
+        // PST: Editar
+        [HttpPost]
+        public ActionResult Editar(entCliente c)
+        {
+
+            if (ModelState.IsValid)
+            {
+                bool inserto = appCliente.Instancia.EditarCliente(c);
+                if (inserto)
+                {
+                    return RedirectToAction("Lista");
+                }
+                else
+                {
+                    ViewBag.mensaje = "No se pudo insertar";
+                    return View();
+                }
+            }
+            else
+            {
+                return View(c);
+            }
         }
 
     }

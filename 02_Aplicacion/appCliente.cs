@@ -19,7 +19,7 @@ namespace _02_Aplicacion
         #endregion singleton
 
         #region metodos
-        public Boolean InsertarCliente(entCliente cli)
+        public bool InsertarCliente(entCliente cli)
         {
             try
             {
@@ -30,6 +30,7 @@ namespace _02_Aplicacion
                 throw e;
             }
         }
+
         public List<entCliente> ListaCliente(string idNombre)
         {
             try
@@ -41,11 +42,24 @@ namespace _02_Aplicacion
                 throw e;
             }
         }
-        public entCliente DevolverCliente(Int16 idCliente)
+
+        public entCliente DevolverCliente(int idCliente)
         {
             try
             {
                 return daoCliente.Instancia.DevolverCliente(idCliente);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public bool EditarCliente(entCliente c)
+        {
+            try
+            {
+                return daoCliente.Instancia.EditarCliente(c);
             }
             catch (Exception e)
             {

@@ -1,18 +1,27 @@
 ﻿@model _03_Dominio.entCliente
 
 @{
-    ViewBag.Title = "Nuevo Cliente";
+    ViewBag.Title = "Editar";
     Layout = "~/Views/MasterPages/MasterIntranet.cshtml";
 }
 
-<h2>Nuevo Cliente</h2>
+<h2>Editar Ciente</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
+    
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(model => model.ClienteID)
+        @Html.HiddenFor(model => model.Persona.PersonaID)
+        @Html.HiddenFor(model => model.Usuario.UsuarioID)
+        @Html.HiddenFor(model => model.Usuario.NombreUsuario)
+        @Html.HiddenFor(model => model.Usuario.Contrasena)
+        @Html.HiddenFor(model => model.Usuario.Rol)
+        @Html.HiddenFor(model => model.Usuario.Estado)
+        @Html.HiddenFor(model => model.Usuario.ImgUsuario)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Persona.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -74,7 +83,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Registrar" class="btn btn-default" />
+                <input type="submit" value="Guardar" class="btn btn-default" />
             </div>
         </div>
     </div>
