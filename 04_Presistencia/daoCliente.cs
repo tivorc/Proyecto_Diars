@@ -157,7 +157,12 @@ namespace _04_Presistencia
                     pe.Dni = dr["dni"].ToString();
                     pe.Telefono = dr["telefono"].ToString();
                     pe.Direccion = dr["direccion"].ToString();
-                    pe.FechaNacimiento = Convert.ToDateTime(dr["fechaNacimiento"]);
+                    string fecha = dr["fechaNacimiento"].ToString();
+                    if (fecha != "")
+                    {
+                        pe.FechaNacimiento = Convert.ToDateTime(fecha);
+                    }
+                    //pe.FechaNacimiento = Convert.ToDateTime(dr["fechaNacimiento"]);
                     cli.Persona = pe;
                     entUsuario u = new entUsuario();
                     u.UsuarioID = Convert.ToInt16(dr["usuarioID"]);

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<_03_Dominio.entCliente>
+
+<p>
+    <a href="@Url.Action("Nuevo","Cliente")" class="btn btn-primary">Nuevo</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Persona.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Persona.Apellidos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Persona.Dni)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Persona.Telefono)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Persona.Sexo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Persona.Direccion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Persona.FechaNacimiento)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Persona.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Persona.Apellidos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Persona.Dni)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Persona.Telefono)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Persona.Sexo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Persona.Direccion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Persona.FechaNacimiento)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Editar", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Eliminar", "Eliminar", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

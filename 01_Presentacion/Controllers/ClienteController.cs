@@ -49,11 +49,15 @@ namespace _01_Presentacion.Controllers
 
         }
 
-        [HttpGet]
         public ActionResult Lista()
         {
-            List<entCliente> lista = appCliente.Instancia.ListaCliente("");
-            return View(lista);
+            return View();
+        }
+
+        public ActionResult DetalleLista(string Nombre)
+        {
+            List<entCliente> lista = appCliente.Instancia.ListaCliente(Nombre);
+            return PartialView(lista);
         }
 
     }

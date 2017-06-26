@@ -9,28 +9,28 @@
 <div class="form-group">
     <div class="row">
         <div class="col-md-3">
-            <input type="text" id="nombre" class="form-control" placeholder="Nombre">
+            <input type="text" id="Nombre" class="form-control" placeholder="Nombre">
         </div>
     </div>
 </div>
 <br />
 
-<div id="detalle">
+<div id="detallexd">
 
 </div>
 
-@section scripts{
+@section scripts2{
     <script type="text/javascript">
         $(document).ready(function () {
-            muestra();
+            muestra2();
         });
 
-        $('#nombre').keyup(function () {
-            muestra();
+        $('#Nombre').keyup(function () {
+            muestra2();
         });
 
-        var muestra = function () {
-            $('#detalle').load('@Url.Action("DetalleLista")', { nombre: $('#nombre').val() })
+        var muestra2 = function () {
+            $('#detallexd').load('@Url.Action("DetalleLista")', { Nombre: $('#Nombre').val() })
         }
     </script>
 }
