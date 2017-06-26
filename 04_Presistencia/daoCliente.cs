@@ -20,10 +20,10 @@ namespace _04_Presistencia
         #endregion singleton
 
         #region metodos
-        public Boolean InsertarCliente(entCliente cli)
+        public bool InsertarCliente(entCliente cli)
         {
             SqlCommand cmd = null;
-            Boolean inserto = false;
+            bool inserto = false;
             try
             {
                 SqlConnection cn = Conexion.Instancia.conectar();
@@ -56,8 +56,22 @@ namespace _04_Presistencia
                 {
                     cmd.Parameters.AddWithValue("@fechaNacimiento", cli.Persona.FechaNacimiento);
                 }
-                cmd.Parameters.AddWithValue("@nombreUsuario", cli.Usuario.NombreUsuario);
-                cmd.Parameters.AddWithValue("@contrasena", cli.Usuario.Contrasena);
+                if (cli.Usuario.NombreUsuario == null)
+                {
+                    cmd.Parameters.AddWithValue("@nombreUsuario", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@nombreUsuario", cli.Usuario.NombreUsuario);
+                }
+                if (cli.Usuario.Contrasena == null)
+                {
+                    cmd.Parameters.AddWithValue("@contrasena", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@contrasena", cli.Usuario.Contrasena);
+                }
                 cmd.Parameters.AddWithValue("@rol", cli.Usuario.Rol);
                 if (cli.Usuario.ImgUsuario == null)
                 {
