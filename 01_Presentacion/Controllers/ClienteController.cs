@@ -49,33 +49,12 @@ namespace _01_Presentacion.Controllers
 
         }
 
-        //[HttpPost]
-        //public ActionResult Nuevo(entCliente cli, HttpPostedFileBase archivo)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        cli.Usuario.ImgUsuario = Path.GetFileName(archivo.FileName);
-        //        Boolean inserto = appCliente.Instancia.InsertarCliente(cli);
-        //        if (inserto)
-        //        {
-        //            if (archivo != null && archivo.ContentLength > 0)
-        //            {
-        //                var namearchivo = Path.GetFileName(archivo.FileName);
-        //                var ruta = Path.Combine(Server.MapPath("/Bootstrap/Extranet/images"), namearchivo);
-        //                archivo.SaveAs(ruta);
-        //            }
-        //            return RedirectToAction("Index", "Home");
-        //        }
-        //        else
-        //        {
-        //            ViewBag.mensaje = "No se pudo insertar";
-        //            return View();
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return View(cli);
-        //    }
-        //}
+        [HttpGet]
+        public ActionResult Lista()
+        {
+            List<entCliente> lista = appCliente.Instancia.ListaCliente("");
+            return View(lista);
+        }
+
     }
 }

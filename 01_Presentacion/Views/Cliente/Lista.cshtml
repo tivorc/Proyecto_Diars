@@ -1,0 +1,37 @@
+﻿@using _03_Dominio
+
+@{
+    ViewBag.Title = "Lista";
+    Layout = "~/Views/MasterPages/MasterIntranet.cshtml";
+}
+
+<h2>Platos</h2>
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-3">
+            <input type="text" id="nombre" class="form-control" placeholder="Nombre">
+        </div>
+    </div>
+</div>
+<br />
+
+<div id="detalle">
+
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            muestra();
+        });
+
+        $('#nombre').keyup(function () {
+            muestra();
+        });
+
+        var muestra = function () {
+            $('#detalle').load('@Url.Action("DetalleLista")', { nombre: $('#nombre').val() })
+        }
+    </script>
+}
+

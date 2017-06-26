@@ -134,7 +134,7 @@ namespace _04_Presistencia
         }
 
 
-        public List<entCliente> ListaCliente(string idNombre)
+        public List<entCliente> ListaCliente(string nombre)
         {
             SqlCommand cmd = null;
             List<entCliente> lista = new List<entCliente>();
@@ -143,7 +143,7 @@ namespace _04_Presistencia
                 SqlConnection cn = Conexion.Instancia.conectar();
                 cmd = new SqlCommand("spListarCliente", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@nombre", idNombre);
+                cmd.Parameters.AddWithValue("@nombre", nombre);
                 cn.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
