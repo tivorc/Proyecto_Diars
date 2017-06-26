@@ -184,7 +184,7 @@ namespace _04_Presistencia
             finally { if (cmd != null) { cmd.Connection.Close(); } }
         }
 
-        public bool EditarCliente(entCliente c)
+        public bool EditarClienteExtranet(entCliente c)
         {
             SqlCommand cmd = null;
             bool inserto = false;
@@ -255,6 +255,54 @@ namespace _04_Presistencia
                 else
                 {
                     cmd.Parameters.AddWithValue("@estado", c.Usuario.ImgUsuario);
+                }
+                cmd.CommandType = CommandType.StoredProcedure;
+                cn.Open();
+                int i = cmd.ExecuteNonQuery();
+                if (i > 0) { inserto = true; }
+                return inserto;
+            }
+            catch (Exception e) { throw e; }
+            finally { if (cmd != null) { cmd.Connection.Close(); } }
+        }
+
+        public bool EditarClienteIntranet(entCliente c)
+        {
+            SqlCommand cmd = null;
+            bool inserto = false;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.conectar();
+                cmd = new SqlCommand("spEditarClienteIntranet", cn);
+                cmd.Parameters.AddWithValue("@clienteID", c.ClienteID);
+                cmd.Parameters.AddWithValue("@personaID", c.Persona.PersonaID);
+                cmd.Parameters.AddWithValue("@nombre", c.Persona.Nombre);
+                cmd.Parameters.AddWithValue("@apellidos", c.Persona.Apellidos);
+                cmd.Parameters.AddWithValue("@dni", c.Persona.Dni);
+                if (c.Persona.Telefono == null)
+                {
+                    cmd.Parameters.AddWithValue("@telefono", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@telefono", c.Persona.Telefono);
+                }
+                if (c.Persona.Sexo == null)
+                {
+                    cmd.Parameters.AddWithValue("@sexo", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@sexo", c.Persona.Sexo);
+                }
+                cmd.Parameters.AddWithValue("@direccion", c.Persona.Direccion);
+                if (c.Persona.FechaNacimiento == null)
+                {
+                    cmd.Parameters.AddWithValue("@fechaNacimiento", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@fechaNacimiento", c.Persona.FechaNacimiento);
                 }
                 cmd.CommandType = CommandType.StoredProcedure;
                 cn.Open();

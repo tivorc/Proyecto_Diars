@@ -73,7 +73,7 @@ namespace _01_Presentacion.Controllers
 
             if (ModelState.IsValid)
             {
-                bool inserto = appCliente.Instancia.EditarCliente(c);
+                bool inserto = appCliente.Instancia.EditarClienteIntranet(c);
                 if (inserto)
                 {
                     return RedirectToAction("Lista");

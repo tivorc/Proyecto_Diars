@@ -55,17 +55,18 @@ namespace _02_Aplicacion
             }
         }
 
-        public bool EditarCliente(entCliente c)
+        public bool EditarClienteIntranet(entCliente c)
         {
             try
             {
-                return daoCliente.Instancia.EditarCliente(c);
+                return daoCliente.Instancia.EditarClienteIntranet(c);
             }
             catch (Exception e)
             {
                 throw e;
             }
         }
+
         #endregion metodos
     }
 }
