@@ -4471,12 +4471,14 @@
     <Content Include="Views\Producto\Platos.cshtml" />
     <Content Include="Views\Producto\ListaPlatos.cshtml" />
     <Content Include="Views\Producto\NuevoPlato.cshtml" />
-    <Content Include="Views\Pedido\buscarCliente.cshtml" />
+    <Content Include="Views\Pedido\AgregarCliente.cshtml" />
     <Content Include="Views\Pedido\DetalleListaCliente.cshtml" />
-    <Content Include="Views\Pedido\ListaInfoCliente.cshtml" />
     <Content Include="Views\Cliente\Lista.cshtml" />
     <Content Include="Views\Cliente\DetalleLista.cshtml" />
     <Content Include="Views\Cliente\Editar.cshtml" />
+    <Content Include="Views\Pedido\Main.cshtml" />
+    <Content Include="Views\Pedido\AgregarMenu2.cshtml" />
+    <Content Include="Views\Pedido\AgregarMenu.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

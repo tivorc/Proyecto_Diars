@@ -1,0 +1,50 @@
+﻿@using _03_Dominio
+
+@{
+    ViewBag.Title = "AgregarMenu";
+    Layout = "~/Views/MasterPages/MasterIntranet.cshtml";
+}
+
+<h2>AgregarMenu</h2>
+
+<div class="form-group">
+    <div class="row">
+        <div class="col-lg-3">
+            <select class="form-control" id="subTipoProductoID">
+                <option value="0">--Seleccionar Entrada--</option>
+                @{
+                    List<entProducto> ListaEntrada = (List<entProducto>)ViewBag.lista1;
+                    foreach (var stp in ListaEntrada)
+                    {
+                        <option value="@stp.ProductoID">@stp.NombreProducto</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-lg-3">
+            <select class="form-control" id="subTipoProductoID">
+                <option value="0">--Seleccionar Entrada--</option>
+                @{
+                    List<entProducto> ListaSegundo = (List<entProducto>)ViewBag.lista2;
+                    foreach (var stp in ListaSegundo)
+                    {
+                        <option value="@stp.ProductoID">@stp.NombreProducto</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-lg-3">
+            <select class="form-control" id="subTipoProductoID">
+                <option value="0">--Seleccionar Entrada--</option>
+                @{
+                    List<entProducto> ListaPostre = (List<entProducto>)ViewBag.lista3;
+                    foreach (var stp in ListaPostre)
+                    {
+                        <option value="@stp.ProductoID">@stp.NombreProducto</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+</div>
+

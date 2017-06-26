@@ -11,6 +11,9 @@ namespace _03_Dominio
         public int MenuID { get; set; }
         public entPedido Pedido { get; set; }
         public int Cantidad { get; set; }
+        public entProducto Entrada { get; set; }
+        public entProducto Segundo { get; set; }
+        public entProducto Postre { get; set; }
         public int Precio { get; set; }
     }
 }

@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "BuscarCliente";
+    Layout = "~/Views/MasterPages/MasterIntranet.cshtml";
+}
+
+<h2>Main</h2>
+
+
+<div class="form-group">
+    <div class="row">
+        <div class="col-lg-3">
+            <input type="text" class="form-control input-sm" id="buscaCliente" placeholder="Buscar" aria-controls="dataTables-example">
+        </div>
+        <div class="col-lg-3">
+            <button type="button" id="btnBuscar" class="btn btn-primary">Buscar</button>
+        </div>
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Cancelar", "Main")
+</p>
+}

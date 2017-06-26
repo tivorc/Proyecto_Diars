@@ -11,21 +11,69 @@ namespace _01_Presentacion.Controllers
     {
 
 
-        public ActionResult buscarCliente()
+        public ActionResult AgregarCliente()
         {
             return View();
         }
 
-
-        public ActionResult DetalleListaCliente(string idNombre)
+        public ActionResult ClientePedido(int id)
         {
-            List<entCliente> lista = appCliente.Instancia.ListaCliente(idNombre);
+
+            entCliente cli = appCliente.Instancia.DevolverCliente(id);
+            entPedido p = new entPedido();
+            p.Cliente = cli;
+            Session["pedido"] = p;
+            return RedirectToAction("Main", "Pedido");
+        }
+
+        [HttpGet]
+        public ActionResult AgregarMenu()
+        {
+            List<entProducto> lista1 = appProducto.Instancia.ListaTamanoPizza();
+            ViewBag.Lista = new SelectList(lista, "tamanoPizzaID", "descripcionTamanoPizza");
+            List<entProducto> listaEntrada = appProducto.Instancia.ListaPlatosDisponibles(1);
+            ViewBag.lista1 = listaEntrada;
+            List<entProducto> listaSegundo = appProducto.Instancia.ListaPlatosDisponibles(2);
+            ViewBag.lista2 = listaSegundo;
+            List<entProducto> listaPostre = appProducto.Instancia.ListaPlatosDisponibles(3);
+            ViewBag.lista3 = listaPostre;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AgregarMenu(entMenu menu)
+        {
+            if (ModelState.IsValid)
+            {
+                entPedido p = (entPedido)Session["pedido"];
+                menu.Pedido = p;
+                List<entMenu> listaMenu = (List<entMenu>)Session["listaMenu"];
+                listaMenu.Add(menu);
+                return RedirectToAction("Main", "Pedido");
+            }
+            else
+            {
+                List<entProducto> listaEntrada = appProducto.Instancia.ListaPlatosDisponibles(1);
+                ViewBag.lista1 = listaEntrada;
+                List<entProducto> listaSegundo = appProducto.Instancia.ListaPlatosDisponibles(2);
+                ViewBag.lista2 = listaSegundo;
+                List<entProducto> listaPostre = appProducto.Instancia.ListaPlatosDisponibles(3);
+                ViewBag.lista3 = listaPostre;
+                return View(menu);
+            }
+        }
+
+        public ActionResult DetalleListaCliente(string Nombre)
+        {
+            List<entCliente> lista = appCliente.Instancia.ListaCliente(Nombre);
             return PartialView(lista);
         }
-        public ActionResult ListaInfoCliente(Int16 id)
+
+        public ActionResult Main()
         {
-            entCliente cli = appCliente.Instancia.DevolverCliente(id);
-            return View(cli);
+            Session["pedido"] = null;
+            Session["listaMenu"] = new List<entMenu>();
+            return View();
         }
     }
 }

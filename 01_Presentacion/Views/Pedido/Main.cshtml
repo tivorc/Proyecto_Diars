@@ -1,0 +1,32 @@
+﻿@using _03_Dominio
+
+@{
+    ViewBag.Title = "Main";
+    Layout = "~/Views/MasterPages/MasterIntranet.cshtml";
+}
+
+<h2>Main</h2>
+
+
+
+@{
+    if (Session["pedido"] != null)
+    {
+        entPedido p = (entPedido)Session["pedido"];
+        <div class="form-group">
+            <label class="control-label col-md-1">Cliente: </label>
+            <div class="col-md-3">
+                <input type="text" class="form-control" disabled="disabled" placeholder="@p.Cliente.Persona.Nombre @p.Cliente.Persona.Apellidos">
+            </div>
+        </div>
+        <p>
+            @Html.ActionLink("Agregar Menú", "AgregarCliente")
+        </p>
+    }
+    else
+    {
+        <p>
+            @Html.ActionLink("Agregar Cliente", "AgregarCliente")
+        </p>
+    }
+}

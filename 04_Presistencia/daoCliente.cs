@@ -144,7 +144,7 @@ namespace _04_Presistencia
             try
             {
                 SqlConnection cn = Conexion.Instancia.conectar();
-                cmd = new SqlCommand("spListarCliente", cn);
+                cmd = new SqlCommand("spListarClientes", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@nombre", nombre);
                 cn.Open();

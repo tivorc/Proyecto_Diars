@@ -28,19 +28,20 @@
 
 </div>
 
+
 @section scripts{
     <script type="text/javascript">
-    $(document).ready(function () {
-        muestra();
-    });
+        $(document).ready(function () {
+            muestra();
+        });
 
-    $('#subTipoProductoID').change(function () {
-        muestra();
-    });
+        $('#subTipoProductoID').change(function () {
+           muestra();
+        });
 
-    var muestra = function () {
-        $('#detalle').load('@Url.Action("ListaPlatos")', { subTipoProductoID: $('#subTipoProductoID').val() })
-    }
+        var muestra = function () {
+            $('#detalle').load('@Url.Action("ListaPlatos")', { subTipoProductoID: $('#subTipoProductoID').val() })
+        }
     </script>
 }
 

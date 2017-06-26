@@ -23,7 +23,7 @@
             @Html.DisplayFor(modelItem => item.Persona.Nombre)
         </td>
         <td>
-            @Html.ActionLink("Seleccionar", "ListaInfoCliente", new {id=item.ClienteID}) |
+            @Html.ActionLink("Agregar", "ClientePedido", new {id=item.ClienteID}) |
         </td>
     </tr>
 }
