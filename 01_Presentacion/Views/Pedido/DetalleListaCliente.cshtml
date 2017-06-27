@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<_03_Dominio.entCliente>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ClienteID)
+            @Html.DisplayNameFor(model => model.Persona.Nombre)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Persona.Nombre)
+            @Html.DisplayNameFor(model => model.Persona.Apellidos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Persona.Direccion)
         </th>
         <th></th>
     </tr>
@@ -17,13 +17,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.ClienteID)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Persona.Nombre)
         </td>
         <td>
-            @Html.ActionLink("Agregar", "ClientePedido", new {id=item.ClienteID}) |
+            @Html.DisplayFor(modelItem => item.Persona.Apellidos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Persona.Direccion)
+        </td>
+        <td>
+            @Html.ActionLink("Seleccionar", "ClientePedido", new {id=item.ClienteID})
         </td>
     </tr>
 }

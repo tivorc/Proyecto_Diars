@@ -17,7 +17,6 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">
-            @*@Html.LabelFor(model => model.Entrada.ProductoID, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <label class="control-label col-md-2">Entrada</label>
             <div class="col-md-3">
                 @Html.DropDownListFor(model => model.Entrada.ProductoID, (SelectList)ViewBag.lista1, "<Seleccionar Entrada>", htmlAttributes: new { @class = "form-control" })
@@ -26,7 +25,6 @@
         </div>
 
         <div class="form-group">
-            @*@Html.LabelFor(model => model.Segundo.ProductoID, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <label class="control-label col-md-2">Segundo</label>
             <div class="col-md-3">
                 @Html.DropDownListFor(model => model.Segundo.ProductoID, (SelectList)ViewBag.lista2, "<Seleccionar Segundo>", htmlAttributes: new { @class = "form-control" })
@@ -35,7 +33,6 @@
         </div>
 
         <div class="form-group">
-            @*@Html.LabelFor(model => model.Postre.ProductoID, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <label class="control-label col-md-2">Postre</label>
             <div class="col-md-3">
                 @Html.DropDownListFor(model => model.Postre.ProductoID, (SelectList)ViewBag.lista3, "<Seleccionar Postre>", htmlAttributes: new { @class = "form-control" })
@@ -53,12 +50,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Guardar" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Cancelar", "Main")
+    @Html.ActionLink("Regresar", "MainPedido")
 </div>

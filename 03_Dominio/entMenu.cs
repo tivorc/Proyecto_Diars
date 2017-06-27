@@ -15,6 +15,6 @@ namespace _03_Dominio
         public entProducto Entrada { get; set; }
         public entProducto Segundo { get; set; }
         public entProducto Postre { get; set; }
-        public decimal Precio { get; set; }
+        public decimal? Precio { get; set; }
     }
 }

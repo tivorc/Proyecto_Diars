@@ -73,6 +73,14 @@ namespace _01_Presentacion.Controllers
             return View();
         }
 
+        public ActionResult QuitarMenu(entMenu m)
+        {
+            List<entMenu> listaMenuPedido = (List<entMenu>)Session["listaMenu"];
+            listaMenuPedido.Remove(m);
+            Session["listaMenu"] = listaMenuPedido;
+            return RedirectToAction("MainPedido", "Pedido");
+        }
+
         public ActionResult MainPedido()
         {
             List<entMenu> listaMenuPedido = (List<entMenu>)Session["listaMenu"];
@@ -92,5 +100,14 @@ namespace _01_Presentacion.Controllers
             }
             return View(listamenu);
         }
+
+
+        public ActionResult RegistrarPedido()
+        {
+            List<entMenu> listaMenuPedido = (List<entMenu>)Session["listaMenu"];
+            entPedido p = (entPedido)Session["pedido"];
+            return View();
+        }
     }
+
 }

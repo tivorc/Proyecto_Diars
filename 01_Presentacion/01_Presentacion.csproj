@@ -128,6 +128,7 @@
     <Content Include="Bootstrap\Extranet\images\la_valentina_logo.png" />
     <Content Include="Bootstrap\Extranet\images\magnify.png" />
     <Content Include="Bootstrap\Extranet\images\marker.png" />
+    <Content Include="Bootstrap\Extranet\images\mazamorra_morada.JPG" />
     <Content Include="Bootstrap\Extranet\images\page1_img1.jpg" />
     <Content Include="Bootstrap\Extranet\images\page1_img2.jpg" />
     <Content Include="Bootstrap\Extranet\images\page1_img3.jpg" />
@@ -4477,7 +4478,6 @@
     <Content Include="Views\Cliente\DetalleLista.cshtml" />
     <Content Include="Views\Cliente\Editar.cshtml" />
     <Content Include="Views\Pedido\Main.cshtml" />
-    <Content Include="Views\Pedido\AgregarMenu2.cshtml" />
     <Content Include="Views\Pedido\AgregarMenu.cshtml" />
     <Content Include="Views\Pedido\MainPedido.cshtml" />
     <None Include="Web.Debug.config">
