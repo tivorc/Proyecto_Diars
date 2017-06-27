@@ -90,5 +90,50 @@ namespace _01_Presentacion.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult Eliminar(int id)
+        {
+            try
+            {
+                entCliente c = appCliente.Instancia.DevolverCliente(id);
+                if (c == null)
+                {
+                    ViewBag.Message = "El cliente no existe";
+                    return RedirectToAction("Index", "Error", new { mensaje = ViewBag.Message });
+                }
+                else
+                {
+                    return View(c);
+                }
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { mensaje = e.Message });
+            }
+        }
+
+        [HttpPost, ActionName("Eliminar")]
+        [ValidateAntiForgeryToken]
+        public ActionResult ConfimaEliminacion(int id)
+        {
+            try
+            {
+                entCliente p = appCliente.Instancia.DevolverCliente(id);
+                bool elimino = appCliente.Instancia.EliminarCliente(p.ClienteID);
+                if (elimino)
+                {
+                    return RedirectToAction("Lista");
+                }
+                else
+                {
+                    ViewBag.mensaje = "No se pudo eliminar";
+                    return View(p);
+                }
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { mensaje = e.Message });
+            }
+        }
     }
 }

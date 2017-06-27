@@ -106,6 +106,11 @@ namespace _01_Presentacion.Controllers
         {
             List<entMenu> listaMenuPedido = (List<entMenu>)Session["listaMenu"];
             entPedido p = (entPedido)Session["pedido"];
+            p.TipoPedido = "Llamada";
+            entTipoPago tp = new entTipoPago();
+            tp.TipoPagoID = 1;
+            p.TipoPago = tp;
+            int pedidoID = appPedido.Instancia.InsertarPedido(p);
             return View();
         }
     }

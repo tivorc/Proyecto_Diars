@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Conexion.cs" />
     <Compile Include="daoCliente.cs" />
+    <Compile Include="daoPedido.cs" />
     <Compile Include="daoProducto.cs" />
     <Compile Include="daoTrabajador.cs" />
     <Compile Include="daoUsuario.cs" />

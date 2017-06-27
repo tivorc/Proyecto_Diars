@@ -67,6 +67,18 @@ namespace _02_Aplicacion
             }
         }
 
+        public bool EliminarCliente(int clienteID)
+        {
+            try
+            {
+                return daoCliente.Instancia.EliminarCliente(clienteID);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         #endregion metodos
     }
 }

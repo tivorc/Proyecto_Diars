@@ -314,6 +314,28 @@ namespace _04_Presistencia
             finally { if (cmd != null) { cmd.Connection.Close(); } }
         }
 
+        public bool EliminarCliente(int clienteID)
+        {
+            SqlCommand cmd = null;
+            bool elimino = false;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.conectar();
+                cmd = new SqlCommand("spEliminarCliente", cn);
+                cmd.Parameters.AddWithValue("@clienteID", clienteID);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cn.Open();
+                int i = cmd.ExecuteNonQuery();
+                if (i > 0) { elimino = true; }
+                return elimino;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally { if (cmd != null) { cmd.Connection.Close(); } }
+        }
+
         #endregion metodos 
     }
 }

@@ -43,8 +43,7 @@ namespace _01_Presentacion.Controllers
                 if (mensaje.Equals(""))
                 {
                     Session["usuario"] = u;
-                    //agregamos objeto usuario a la session
-                    if (u.Rol == "Administrador")
+                    if (u.Rol.Equals("Administrador") || u.Rol.Equals("Trabajador"))
                     {
                         return RedirectToAction("Main", "Intranet");
                     }
