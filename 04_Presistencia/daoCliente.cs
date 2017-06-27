@@ -114,6 +114,7 @@ namespace _04_Presistencia
                     pe.Apellidos = dr["apellidos"].ToString();
                     pe.Dni = dr["dni"].ToString();
                     pe.Telefono = dr["telefono"].ToString();
+                    pe.Sexo = dr["sexo"].ToString();
                     pe.Direccion = dr["direccion"].ToString();
                     string fecha = dr["fechaNacimiento"].ToString();
                     if (fecha != "")

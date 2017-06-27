@@ -24,7 +24,6 @@ namespace _04_Presistencia
         public int InsertarPedido(entPedido p)
         {
             SqlCommand cmd = null;
-            int id = 0;
             try
             {
                 SqlConnection cn = Conexion.Instancia.conectar();
@@ -32,11 +31,14 @@ namespace _04_Presistencia
                 cmd.Parameters.AddWithValue("@clienteID", p.Cliente.ClienteID);
                 cmd.Parameters.AddWithValue("@tipoPagoID", p.TipoPago.TipoPagoID);
                 cmd.Parameters.AddWithValue("@tipoPedido", p.TipoPedido);
-                cmd.Parameters.Add("@id", SqlDbType.Text, 20).Direction = ParameterDirection.Output;
+
                 cmd.CommandType = CommandType.StoredProcedure;
+
                 cn.Open();
-                cmd.ExecuteNonQuery();
-                id = Convert.ToInt32(cmd.Parameters["@id"].Value);
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                dr.Read();
+                int id = Convert.ToInt32(dr["@a"]);
                 return id;
             }
             catch (Exception e) { throw e; }

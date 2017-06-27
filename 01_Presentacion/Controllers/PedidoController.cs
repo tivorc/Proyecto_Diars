@@ -111,7 +111,7 @@ namespace _01_Presentacion.Controllers
             tp.TipoPagoID = 1;
             p.TipoPago = tp;
             int pedidoID = appPedido.Instancia.InsertarPedido(p);
-            return View();
+            return RedirectToAction("Main", "Intranet");
         }
     }
 
