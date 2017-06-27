@@ -18,7 +18,26 @@
     </div>
 </div>
 
+<div id="detalle">
+
+</div>
+
 <p>
     @Html.ActionLink("Cancelar", "Main")
 </p>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            muestra();
+        });
+
+        $('#buscaCliente').change(function () {
+           muestra();
+        });
+
+        var muestra = function () {
+            $('#detalle').load('@Url.Action("DetalleListaCliente")', { Nombre: $('#buscaCliente').val() })
+        }
+    </script>
 }

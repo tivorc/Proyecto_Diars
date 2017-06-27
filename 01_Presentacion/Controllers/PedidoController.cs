@@ -10,7 +10,6 @@ namespace _01_Presentacion.Controllers
     public class PedidoController : Controller
     {
 
-
         public ActionResult AgregarCliente()
         {
             return View();
@@ -18,7 +17,8 @@ namespace _01_Presentacion.Controllers
 
         public ActionResult ClientePedido(int id)
         {
-
+            Session["pedido"] = null;
+            Session["listaMenu"] = new List<entMenu>();
             entCliente cli = appCliente.Instancia.DevolverCliente(id);
             entPedido p = new entPedido();
             p.Cliente = cli;
@@ -29,14 +29,12 @@ namespace _01_Presentacion.Controllers
         [HttpGet]
         public ActionResult AgregarMenu()
         {
-            List<entProducto> lista1 = appProducto.Instancia.ListaTamanoPizza();
-            ViewBag.Lista = new SelectList(lista, "tamanoPizzaID", "descripcionTamanoPizza");
             List<entProducto> listaEntrada = appProducto.Instancia.ListaPlatosDisponibles(1);
-            ViewBag.lista1 = listaEntrada;
+            ViewBag.Lista1 = new SelectList(listaEntrada, "productoID", "nombreProducto");
             List<entProducto> listaSegundo = appProducto.Instancia.ListaPlatosDisponibles(2);
-            ViewBag.lista2 = listaSegundo;
+            ViewBag.Lista2 = new SelectList(listaSegundo, "productoID", "nombreProducto");
             List<entProducto> listaPostre = appProducto.Instancia.ListaPlatosDisponibles(3);
-            ViewBag.lista3 = listaPostre;
+            ViewBag.Lista3 = new SelectList(listaPostre, "productoID", "nombreProducto");
             return View();
         }
 
@@ -49,16 +47,17 @@ namespace _01_Presentacion.Controllers
                 menu.Pedido = p;
                 List<entMenu> listaMenu = (List<entMenu>)Session["listaMenu"];
                 listaMenu.Add(menu);
-                return RedirectToAction("Main", "Pedido");
+                Session["listaMenu"] = listaMenu;
+                return RedirectToAction("MainPedido", "Pedido");
             }
             else
             {
                 List<entProducto> listaEntrada = appProducto.Instancia.ListaPlatosDisponibles(1);
-                ViewBag.lista1 = listaEntrada;
+                ViewBag.Lista1 = new SelectList(listaEntrada, "productoID", "nombreProducto");
                 List<entProducto> listaSegundo = appProducto.Instancia.ListaPlatosDisponibles(2);
-                ViewBag.lista2 = listaSegundo;
+                ViewBag.Lista2 = new SelectList(listaSegundo, "productoID", "nombreProducto");
                 List<entProducto> listaPostre = appProducto.Instancia.ListaPlatosDisponibles(3);
-                ViewBag.lista3 = listaPostre;
+                ViewBag.Lista3 = new SelectList(listaPostre, "productoID", "nombreProducto");
                 return View(menu);
             }
         }
@@ -71,9 +70,27 @@ namespace _01_Presentacion.Controllers
 
         public ActionResult Main()
         {
-            Session["pedido"] = null;
-            Session["listaMenu"] = new List<entMenu>();
             return View();
+        }
+
+        public ActionResult MainPedido()
+        {
+            List<entMenu> listaMenuPedido = (List<entMenu>)Session["listaMenu"];
+            List<entMenu> listamenu = new List<entMenu>();
+            foreach (var i in listaMenuPedido)
+            {
+                entMenu menu = new entMenu();
+                entProducto entrada = appProducto.Instancia.DevolverPlato(i.Entrada.ProductoID);
+                entProducto segundo = appProducto.Instancia.DevolverPlato(i.Segundo.ProductoID);
+                entProducto postre = appProducto.Instancia.DevolverPlato(i.Postre.ProductoID);
+                menu.Entrada = entrada;
+                menu.Segundo = segundo;
+                menu.Postre = postre;
+                menu.Precio = segundo.PrecioProducto;
+                menu.Cantidad = i.Cantidad;
+                listamenu.Add(menu);
+            }
+            return View(listamenu);
         }
     }
 }

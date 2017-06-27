@@ -9,6 +9,7 @@ namespace _03_Dominio
 {
     public class entSubTipoProducto
     {
+        [Display(Name = "Tipo Producto")]
         public int SubTipoProductoID { get; set; }
         public entTipoProducto TipoProducto { get; set; }
 

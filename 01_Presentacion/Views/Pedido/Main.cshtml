@@ -13,15 +13,19 @@
     if (Session["pedido"] != null)
     {
         entPedido p = (entPedido)Session["pedido"];
-        <div class="form-group">
-            <label class="control-label col-md-1">Cliente: </label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" disabled="disabled" placeholder="@p.Cliente.Persona.Nombre @p.Cliente.Persona.Apellidos">
+        <div class="row">
+            <div class="form-group">
+                <label class="control-label col-md-1">Cliente: </label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" disabled="disabled" placeholder="@p.Cliente.Persona.Nombre @p.Cliente.Persona.Apellidos">
+                </div>
             </div>
         </div>
-        <p>
-            @Html.ActionLink("Agregar Menú", "AgregarCliente")
-        </p>
+        <div>
+            <p>
+                @Html.ActionLink("Agregar Menú", "AgregarMenu")
+            </p>
+        </div>
     }
     else
     {

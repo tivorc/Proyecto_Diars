@@ -44,6 +44,42 @@ namespace _02_Aplicacion
             }
         }
 
+        public entProducto DevolverPlato(int platoID)
+        {
+            try
+            {
+                return daoProducto.Instancia.DevolverPlato(platoID);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public bool EditarProducto(entProducto p)
+        {
+            try
+            {
+                return daoProducto.Instancia.EditarProducto(p);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public bool InsertarProducto(entProducto p)
+        {
+            try
+            {
+                return daoProducto.Instancia.InsertarProducto(p);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         #endregion metodos
     }
 }

@@ -118,7 +118,7 @@ namespace _01_Presentacion.Controllers
                     if (archivo != null && archivo.ContentLength > 0)
                     {
                         var namearchivo = Path.GetFileName(archivo.FileName);
-                        var ruta = Path.Combine(Server.MapPath("/Bootstrap/Intranet/build/images"), namearchivo);
+                        var ruta = Path.Combine(Server.MapPath("/Bootstrap/Extranet/images"), namearchivo);
                         archivo.SaveAs(ruta);
                     }
                     return RedirectToAction("Index", "Home");

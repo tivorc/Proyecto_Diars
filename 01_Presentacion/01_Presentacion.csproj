@@ -4479,6 +4479,7 @@
     <Content Include="Views\Pedido\Main.cshtml" />
     <Content Include="Views\Pedido\AgregarMenu2.cshtml" />
     <Content Include="Views\Pedido\AgregarMenu.cshtml" />
+    <Content Include="Views\Pedido\MainPedido.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
