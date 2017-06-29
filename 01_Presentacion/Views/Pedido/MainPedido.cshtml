@@ -2,7 +2,7 @@
 @model IEnumerable<_03_Dominio.entMenu>
 
 @{
-    ViewBag.Title = "MainPedido";
+    ViewBag.Title = "Main Pedido";
     Layout = "~/Views/MasterPages/MasterIntranet.cshtml";
 }
 
@@ -17,11 +17,27 @@
         </div>
     </div>
 </div>
-<div>
-    <p>
-        @Html.ActionLink("Agregar Menú", "AgregarMenu")
-    </p>
+<div class="row">
+    <div class="col-lg-3">
+        <p>
+            @Html.ActionLink("Agregar Menú", "AgregarMenu")
+        </p>
+    </div>
+
+    <div class="col-lg-3">
+        <select class="form-control" id="subTipoProductoID">
+            @{
+                List<entTipoPago> lista = (List<entTipoPago>)ViewBag.Lista;
+                foreach (var stp in lista)
+                {
+                    <option value="@stp.TipoPagoID">@stp.DescripcionTipoPago</option>
+                }
+            }
+        </select>
+    </div>
 </div>
+
+
 
 <table class="table table-responsive">
     <tr>
@@ -68,7 +84,7 @@
             </td>
             <td>
                 @*@Html.ActionLink("Editar", "Editar", new { id = item.ProductoID }) |*@
-                @Html.ActionLink("Eliminar", "Eliminar", new { id = item })
+                @Html.ActionLink("Eliminar", "QuitarMenu", new { id = item.MenuID })
             </td>
         </tr>
     }

@@ -12,7 +12,7 @@ namespace _03_Dominio
         public entCliente Cliente { get; set; }
         public entTipoPago TipoPago { get; set; }
         public string TipoPedido { get; set; }
-        public int Fecha { get; set; }
-        public int EstadoPedido { get; set; }
+        public DateTime Fecha { get; set; }
+        public string EstadoPedido { get; set; }
     }
 }

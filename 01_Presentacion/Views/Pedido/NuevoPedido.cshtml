@@ -1,0 +1,45 @@
+﻿@using _03_Dominio
+
+@{
+    ViewBag.Title = "Nuevo Pedido";
+    Layout = "~/Views/MasterPages/MasterIntranet.cshtml";
+}
+
+<h2>Registro de Pedido</h2>
+
+@{
+    if (Session["pedido"] != null)
+    {
+        entPedido ped = (entPedido)Session["pedido"];
+        <div class="row">
+            <div class="form-group">
+                <label class="control-label col-md-1">Cliente: </label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" disabled="disabled" placeholder="@ped.Cliente.Persona.Nombre">
+                </div>
+                <div>
+                    <a href="@Url.Action("AgregarCliente","Pedido")" class="btn btn-primary">Cambiar Cliente</a>
+                </div>
+            </div>
+        </div>
+        <div>
+            <p>
+                <a href="@Url.Action("AgregarMenu","Pedido")" class="btn btn-primary">Agregar Menú</a>
+            </p>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="form-group">
+                <label class="control-label col-md-1">Cliente: </label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" disabled="disabled" placeholder="Ninguno Seleccionado">
+                </div>
+                <div>
+                    <a href="@Url.Action("AgregarCliente","Pedido")" class="btn btn-primary">Agregar Cliente</a>
+                </div>
+            </div>
+        </div>
+    }
+}

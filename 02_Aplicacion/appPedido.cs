@@ -32,6 +32,18 @@ namespace _02_Aplicacion
             }
         }
 
+        public List<entPedido> ListaPedidos(string tipoPedido, string estado)
+        {
+            try
+            {
+                return daoPedido.Instancia.ListaPedidos(tipoPedido, estado);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         #endregion metodos
     }
 }

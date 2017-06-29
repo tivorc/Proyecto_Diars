@@ -180,6 +180,28 @@ namespace _04_Presistencia
             finally { if (cmd != null) { cmd.Connection.Close(); } }
         }
 
+        public bool EliminarProducto(int productoID)
+        {
+            SqlCommand cmd = null;
+            bool elimino = false;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.conectar();
+                cmd = new SqlCommand("spEliminarProducto", cn);
+                cmd.Parameters.AddWithValue("@productoID", productoID);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cn.Open();
+                int i = cmd.ExecuteNonQuery();
+                if (i > 0) { elimino = true; }
+                return elimino;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally { if (cmd != null) { cmd.Connection.Close(); } }
+        }
+
         #endregion metodos
     }
 }

@@ -9,21 +9,42 @@ namespace _01_Presentacion.Controllers
 {
     public class PedidoController : Controller
     {
+        public ActionResult Main()
+        {
+            Session["pedido"] = null;
+            return View();
+        }
+
+        public ActionResult DetalleMain(string estado)
+        {
+            List<entPedido> lista = appPedido.Instancia.ListaPedidos("Llamada", estado);
+            return PartialView(lista);
+        }
+
+        public ActionResult NuevoPedido()
+        {
+            return View();
+        }
 
         public ActionResult AgregarCliente()
         {
             return View();
         }
 
+        public ActionResult DetalleListaCliente(string Nombre)
+        {
+            List<entCliente> lista = appCliente.Instancia.ListaCliente(Nombre);
+            return PartialView(lista);
+        }
+
         public ActionResult ClientePedido(int id)
         {
-            Session["pedido"] = null;
             Session["listaMenu"] = new List<entMenu>();
             entCliente cli = appCliente.Instancia.DevolverCliente(id);
             entPedido p = new entPedido();
             p.Cliente = cli;
             Session["pedido"] = p;
-            return RedirectToAction("Main", "Pedido");
+            return RedirectToAction("NuevoPedido", "Pedido");
         }
 
         [HttpGet]
@@ -46,6 +67,14 @@ namespace _01_Presentacion.Controllers
                 entPedido p = (entPedido)Session["pedido"];
                 menu.Pedido = p;
                 List<entMenu> listaMenu = (List<entMenu>)Session["listaMenu"];
+                if(listaMenu.Count == 0)
+                {
+                    menu.MenuID = 1;
+                }
+                else
+                {
+                    menu.MenuID = listaMenu.Last().MenuID + 1;
+                }
                 listaMenu.Add(menu);
                 Session["listaMenu"] = listaMenu;
                 return RedirectToAction("MainPedido", "Pedido");
@@ -62,27 +91,20 @@ namespace _01_Presentacion.Controllers
             }
         }
 
-        public ActionResult DetalleListaCliente(string Nombre)
-        {
-            List<entCliente> lista = appCliente.Instancia.ListaCliente(Nombre);
-            return PartialView(lista);
-        }
 
-        public ActionResult Main()
-        {
-            return View();
-        }
 
-        public ActionResult QuitarMenu(entMenu m)
+        public ActionResult QuitarMenu(int id)
         {
             List<entMenu> listaMenuPedido = (List<entMenu>)Session["listaMenu"];
-            listaMenuPedido.Remove(m);
+            listaMenuPedido.Remove(listaMenuPedido.Find(x => x.MenuID == id));
             Session["listaMenu"] = listaMenuPedido;
             return RedirectToAction("MainPedido", "Pedido");
         }
 
         public ActionResult MainPedido()
         {
+            List<entTipoPago> lista = appTipoPago.Instancia.ListarTipoPago();
+            ViewBag.Lista = lista;
             List<entMenu> listaMenuPedido = (List<entMenu>)Session["listaMenu"];
             List<entMenu> listamenu = new List<entMenu>();
             foreach (var i in listaMenuPedido)
@@ -96,6 +118,7 @@ namespace _01_Presentacion.Controllers
                 menu.Postre = postre;
                 menu.Precio = segundo.PrecioProducto;
                 menu.Cantidad = i.Cantidad;
+                menu.MenuID = i.MenuID;
                 listamenu.Add(menu);
             }
             return View(listamenu);
@@ -111,7 +134,12 @@ namespace _01_Presentacion.Controllers
             tp.TipoPagoID = 1;
             p.TipoPago = tp;
             int pedidoID = appPedido.Instancia.InsertarPedido(p);
-            return RedirectToAction("Main", "Intranet");
+            foreach (var item in listaMenuPedido)
+            {
+                item.Pedido.PedidoID = pedidoID;
+                appMenu.Instancia.InsertarMenu(item);
+            }
+            return RedirectToAction("Main", "Pedido");
         }
     }
 

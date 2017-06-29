@@ -1,0 +1,64 @@
+﻿@model _03_Dominio.entProducto
+
+@{
+    ViewBag.Title = "Eliminar";
+    Layout = "~/Views/MasterPages/MasterIntranet.cshtml";
+}
+
+<h2>Eliminar Producto</h2>
+
+<h3>¿Está seguro de eliminar?</h3>
+<div>
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreProducto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreProducto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DescripcionProducto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DescripcionProducto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecioProducto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrecioProducto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Stock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Stock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubTipoProducto.DescripcionSubTipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubTipoProducto.DescripcionSubTipo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar a la lista", "Platos")
+        </div>
+    }
+</div>

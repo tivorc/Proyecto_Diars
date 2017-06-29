@@ -80,6 +80,18 @@ namespace _02_Aplicacion
             }
         }
 
+        public bool EliminarProducto(int productoID)
+        {
+            try
+            {
+                return daoProducto.Instancia.EliminarProducto(productoID);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         #endregion metodos
     }
 }

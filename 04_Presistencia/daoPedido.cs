@@ -36,10 +36,47 @@ namespace _04_Presistencia
 
                 cn.Open();
 
-                SqlDataReader dr = cmd.ExecuteReader();
-                dr.Read();
-                int id = Convert.ToInt32(dr["@a"]);
+                int id = (int)cmd.ExecuteScalar();
                 return id;
+            }
+            catch (Exception e) { throw e; }
+            finally { if (cmd != null) { cmd.Connection.Close(); } }
+        }
+
+        public List<entPedido> ListaPedidos(string tipoPedido, string estado)
+        {
+            SqlCommand cmd = null;
+            List<entPedido> lista = new List<entPedido>();
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.conectar();
+                cmd = new SqlCommand("spListarPedidos", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@tipoPedido", tipoPedido);
+                cmd.Parameters.AddWithValue("@estado", estado);
+                cn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    entPedido ped = new entPedido();
+                    ped.PedidoID = Convert.ToInt32(dr["pedidoID"]);
+                    ped.EstadoPedido = dr["estadoPedido"].ToString();
+                    ped.Fecha = Convert.ToDateTime(dr["fecha"]);
+                    entPersona per = new entPersona();
+                    per.PersonaID = Convert.ToInt32(dr["personaID"]);
+                    per.Nombre = dr["nombre"].ToString();
+                    per.Direccion = dr["direccion"].ToString();
+                    entCliente cli = new entCliente();
+                    cli.ClienteID = Convert.ToInt32(dr["clienteID"]);
+                    entTipoPago tp = new entTipoPago();
+                    tp.TipoPagoID = Convert.ToInt32(dr["tipoPagoID"]);
+                    tp.DescripcionTipoPago = dr["descripcionTipoPago"].ToString();
+                    cli.Persona = per;
+                    ped.Cliente = cli;
+                    ped.TipoPago = tp;
+                    lista.Add(ped);
+                }
+                return lista;
             }
             catch (Exception e) { throw e; }
             finally { if (cmd != null) { cmd.Connection.Close(); } }
