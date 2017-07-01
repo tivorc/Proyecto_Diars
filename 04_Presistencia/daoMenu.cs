@@ -63,6 +63,7 @@ namespace _04_Presistencia
                     entMenu m = new entMenu();
                     m.MenuID = Convert.ToInt32(dr["menuID"]);
                     m.Cantidad = Convert.ToInt32(dr["cantidad"]);
+                    m.Precio = Convert.ToDecimal(dr["precio"]);
 
                     entPedido ped = new entPedido();
                     ped.PedidoID = Convert.ToInt32(dr["pedidoID"]);

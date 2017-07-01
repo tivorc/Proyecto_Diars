@@ -155,6 +155,8 @@ namespace _01_Presentacion.Controllers
         public ActionResult MenuPedido(int pedidoID)
         {
             entPedido p = appPedido.Instancia.DevolverPedido(pedidoID);
+            List<entMenu> lista = appMenu.Instancia.DevolverMenusPedido(pedidoID);
+            ViewBag.lista = lista;
             return View(p);
         }
 

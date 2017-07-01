@@ -99,6 +99,7 @@ namespace _04_Presistencia
                 {
                     ped = new entPedido();
                     ped.PedidoID = Convert.ToInt32(dr["pedidoID"]);
+                    ped.TipoPedido = dr["tipoPedido"].ToString();
                     ped.EstadoPedido = dr["estadoPedido"].ToString();
                     ped.Fecha = Convert.ToDateTime(dr["fecha"]);
 

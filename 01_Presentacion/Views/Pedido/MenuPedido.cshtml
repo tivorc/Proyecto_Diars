@@ -1,21 +1,20 @@
 ﻿@model _03_Dominio.entPedido
+@using _03_Dominio
 
 @{
     ViewBag.Title = "MenuPedido";
     Layout = "~/Views/MasterPages/MasterIntranet.cshtml";
 }
 
-<h2>MenuPedido</h2>
+<h2>Detalles del Pedido @Html.DisplayFor(model => model.PedidoID):</h2>
 <div>
-    <h4>entPedido</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(p => p.PedidoID)
+            @Html.DisplayNameFor(model => model.Cliente.Persona.Nombre)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PedidoID)
+            @Html.DisplayFor(model => model.Cliente.Persona.Nombre) @Html.DisplayFor(model => model.Cliente.Persona.Apellidos)
         </dd>
 
         <dt>
@@ -35,6 +34,22 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.Cliente.Persona.Direccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cliente.Persona.Direccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoPago.DescripcionTipoPago)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoPago.DescripcionTipoPago)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.EstadoPedido)
         </dt>
 
@@ -45,13 +60,59 @@
     </dl>
 </div>
 
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+@{
+    List<entMenu> lista = (List<entMenu>)ViewBag.lista;
+    <table class="table">
+        <tr>
+            <th>
+                Entrada
+            </th>
+            <th>
+                Segundo
+            </th>
+            <th>
+                Postre
+            </th>
+            <th>
+                Cantidad
+            </th>
+            <th>
+                Precio
+            </th>
+            <th>
+                Subtotal
+            </th>
+        </tr>
 
-<div id="detalle">
+        @foreach (var item in lista)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Entrada.NombreProducto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Segundo.NombreProducto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Postre.NombreProducto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cantidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Precio)
+                </td>
+                <td>
+                    @(@item.Precio * @item.Cantidad)
+                </td>
+            </tr>
+        }
 
+    </table>
+}
+
+<div>
+    <a href="@Url.Action("Main","Pedido")" class="btn btn-default">Regresar</a>
 </div>
 
 @section scripts{
