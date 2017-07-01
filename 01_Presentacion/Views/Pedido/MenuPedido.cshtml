@@ -1,0 +1,68 @@
+﻿@model _03_Dominio.entPedido
+
+@{
+    ViewBag.Title = "MenuPedido";
+    Layout = "~/Views/MasterPages/MasterIntranet.cshtml";
+}
+
+<h2>MenuPedido</h2>
+<div>
+    <h4>entPedido</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(p => p.PedidoID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PedidoID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoPedido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoPedido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstadoPedido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstadoPedido)
+        </dd>
+
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<div id="detalle">
+
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            muestra();
+        });
+
+        var muestra = function () {
+            $('#detalle').load('@Url.Action("DetalleMenuPedido")', { pedidoID: $('#codigo').val() })
+            //$('#Nombre').val()
+        }
+    </script>
+}

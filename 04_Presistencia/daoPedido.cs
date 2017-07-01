@@ -65,6 +65,7 @@ namespace _04_Presistencia
                     entPersona per = new entPersona();
                     per.PersonaID = Convert.ToInt32(dr["personaID"]);
                     per.Nombre = dr["nombre"].ToString();
+                    per.Apellidos = dr["apellidos"].ToString();
                     per.Direccion = dr["direccion"].ToString();
                     entCliente cli = new entCliente();
                     cli.ClienteID = Convert.ToInt32(dr["clienteID"]);
@@ -77,6 +78,49 @@ namespace _04_Presistencia
                     lista.Add(ped);
                 }
                 return lista;
+            }
+            catch (Exception e) { throw e; }
+            finally { if (cmd != null) { cmd.Connection.Close(); } }
+        }
+
+        public entPedido DevolverPedido(int pedidoID)
+        {
+            SqlCommand cmd = null;
+            entPedido ped = null;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.conectar();
+                cmd = new SqlCommand("spDevolverPedido", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@pedidoID", pedidoID);
+                cn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    ped = new entPedido();
+                    ped.PedidoID = Convert.ToInt32(dr["pedidoID"]);
+                    ped.EstadoPedido = dr["estadoPedido"].ToString();
+                    ped.Fecha = Convert.ToDateTime(dr["fecha"]);
+
+                    entCliente cli = new entCliente();
+                    cli.ClienteID = Convert.ToInt32(dr["clienteID"]);
+                    ped.Cliente = cli;
+
+                    entPersona per = new entPersona();
+                    per.PersonaID = Convert.ToInt32(dr["personaID"]);
+                    per.Nombre = dr["nombre"].ToString();
+                    per.Apellidos = dr["apellidos"].ToString();
+                    per.Dni = dr["dni"].ToString();
+                    per.Telefono = dr["telefono"].ToString();
+                    per.Direccion = dr["direccion"].ToString();
+                    cli.Persona = per;
+
+                    entTipoPago tp = new entTipoPago();
+                    tp.TipoPagoID = Convert.ToInt32(dr["tipoPagoID"]);
+                    tp.DescripcionTipoPago = dr["descripcionTipoPago"].ToString();
+                    ped.TipoPago = tp;
+                }
+                return ped;
             }
             catch (Exception e) { throw e; }
             finally { if (cmd != null) { cmd.Connection.Close(); } }

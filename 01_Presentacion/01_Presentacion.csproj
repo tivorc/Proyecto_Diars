@@ -4480,11 +4480,12 @@
     <Content Include="Views\Cliente\Editar.cshtml" />
     <Content Include="Views\Pedido\NuevoPedido.cshtml" />
     <Content Include="Views\Pedido\AgregarMenu.cshtml" />
-    <Content Include="Views\Pedido\MainPedido.cshtml" />
     <Content Include="Views\Cliente\Eliminar.cshtml" />
     <Content Include="Views\Producto\Eliminar.cshtml" />
     <Content Include="Views\Pedido\Main.cshtml" />
     <Content Include="Views\Pedido\DetalleMain.cshtml" />
+    <Content Include="Views\Pedido\MenuPedido.cshtml" />
+    <Content Include="Views\Pedido\DetalleMenuPedido.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

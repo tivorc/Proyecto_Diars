@@ -12,6 +12,7 @@ namespace _01_Presentacion.Controllers
         public ActionResult Main()
         {
             Session["pedido"] = null;
+            Session["listaMenu"] = new List<entMenu>();
             return View();
         }
 
@@ -23,6 +24,29 @@ namespace _01_Presentacion.Controllers
 
         public ActionResult NuevoPedido()
         {
+            List<entTipoPago> lista = appTipoPago.Instancia.ListarTipoPago();
+            ViewBag.Lista = lista;
+            if ((List<entMenu>)Session["listaMenu"] != null)
+            {
+                List<entMenu> listaMenuPedido = (List<entMenu>)Session["listaMenu"];
+                List<entMenu> listamenu = new List<entMenu>();
+                foreach (var i in listaMenuPedido)
+                {
+                    entMenu menu = new entMenu();
+                    entProducto entrada = appProducto.Instancia.DevolverPlato(i.Entrada.ProductoID);
+                    entProducto segundo = appProducto.Instancia.DevolverPlato(i.Segundo.ProductoID);
+                    entProducto postre = appProducto.Instancia.DevolverPlato(i.Postre.ProductoID);
+                    menu.Entrada = entrada;
+                    menu.Segundo = segundo;
+                    menu.Postre = postre;
+                    menu.Precio = segundo.PrecioProducto;
+                    menu.Cantidad = i.Cantidad;
+                    menu.MenuID = i.MenuID;
+                    listamenu.Add(menu);
+                }
+                Session["listaMenu"] = listamenu;
+                return View(listamenu);
+            }
             return View();
         }
 
@@ -39,7 +63,6 @@ namespace _01_Presentacion.Controllers
 
         public ActionResult ClientePedido(int id)
         {
-            Session["listaMenu"] = new List<entMenu>();
             entCliente cli = appCliente.Instancia.DevolverCliente(id);
             entPedido p = new entPedido();
             p.Cliente = cli;
@@ -67,7 +90,7 @@ namespace _01_Presentacion.Controllers
                 entPedido p = (entPedido)Session["pedido"];
                 menu.Pedido = p;
                 List<entMenu> listaMenu = (List<entMenu>)Session["listaMenu"];
-                if(listaMenu.Count == 0)
+                if (listaMenu.Count == 0)
                 {
                     menu.MenuID = 1;
                 }
@@ -77,7 +100,7 @@ namespace _01_Presentacion.Controllers
                 }
                 listaMenu.Add(menu);
                 Session["listaMenu"] = listaMenu;
-                return RedirectToAction("MainPedido", "Pedido");
+                return RedirectToAction("NuevoPedido", "Pedido");
             }
             else
             {
@@ -98,31 +121,9 @@ namespace _01_Presentacion.Controllers
             List<entMenu> listaMenuPedido = (List<entMenu>)Session["listaMenu"];
             listaMenuPedido.Remove(listaMenuPedido.Find(x => x.MenuID == id));
             Session["listaMenu"] = listaMenuPedido;
-            return RedirectToAction("MainPedido", "Pedido");
+            return RedirectToAction("NuevoPedido", "Pedido");
         }
 
-        public ActionResult MainPedido()
-        {
-            List<entTipoPago> lista = appTipoPago.Instancia.ListarTipoPago();
-            ViewBag.Lista = lista;
-            List<entMenu> listaMenuPedido = (List<entMenu>)Session["listaMenu"];
-            List<entMenu> listamenu = new List<entMenu>();
-            foreach (var i in listaMenuPedido)
-            {
-                entMenu menu = new entMenu();
-                entProducto entrada = appProducto.Instancia.DevolverPlato(i.Entrada.ProductoID);
-                entProducto segundo = appProducto.Instancia.DevolverPlato(i.Segundo.ProductoID);
-                entProducto postre = appProducto.Instancia.DevolverPlato(i.Postre.ProductoID);
-                menu.Entrada = entrada;
-                menu.Segundo = segundo;
-                menu.Postre = postre;
-                menu.Precio = segundo.PrecioProducto;
-                menu.Cantidad = i.Cantidad;
-                menu.MenuID = i.MenuID;
-                listamenu.Add(menu);
-            }
-            return View(listamenu);
-        }
 
 
         public ActionResult RegistrarPedido()
@@ -134,12 +135,33 @@ namespace _01_Presentacion.Controllers
             tp.TipoPagoID = 1;
             p.TipoPago = tp;
             int pedidoID = appPedido.Instancia.InsertarPedido(p);
+            entPedido id = new entPedido();
+            id.PedidoID = pedidoID;
             foreach (var item in listaMenuPedido)
             {
-                item.Pedido.PedidoID = pedidoID;
+                item.Pedido = id;
                 appMenu.Instancia.InsertarMenu(item);
             }
             return RedirectToAction("Main", "Pedido");
+        }
+
+        public ActionResult Cancelar()
+        {
+            Session["pedido"] = null;
+            Session["listaMenu"] = null;
+            return RedirectToAction("Main", "Pedido");
+        }
+
+        public ActionResult MenuPedido(int pedidoID)
+        {
+            entPedido p = appPedido.Instancia.DevolverPedido(pedidoID);
+            return View(p);
+        }
+
+        public ActionResult DetalleMenuPedido(int pedidoID)
+        {
+            List<entMenu> lista = appMenu.Instancia.DevolverMenusPedido(pedidoID);
+            return PartialView(lista);
         }
     }
 

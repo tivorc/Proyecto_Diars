@@ -44,6 +44,18 @@ namespace _02_Aplicacion
             }
         }
 
+        public entPedido DevolverPedido(int pedidoID)
+        {
+            try
+            {
+                return daoPedido.Instancia.DevolverPedido(pedidoID);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         #endregion metodos
     }
 }

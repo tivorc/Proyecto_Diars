@@ -31,6 +31,18 @@ namespace _02_Aplicacion
             }
         }
 
+        public List<entMenu> DevolverMenusPedido(int pedidoID)
+        {
+            try
+            {
+                return daoMenu.Instancia.DevolverMenusPedido(pedidoID);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         #endregion metodos
     }
 }

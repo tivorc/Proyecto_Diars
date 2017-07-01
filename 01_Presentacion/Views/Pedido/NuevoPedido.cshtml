@@ -1,4 +1,5 @@
 ﻿@using _03_Dominio
+@model IEnumerable<_03_Dominio.entMenu>
 
 @{
     ViewBag.Title = "Nuevo Pedido";
@@ -13,33 +14,219 @@
         entPedido ped = (entPedido)Session["pedido"];
         <div class="row">
             <div class="form-group">
-                <label class="control-label col-md-1">Cliente: </label>
-                <div class="col-md-3">
-                    <input type="text" class="form-control" disabled="disabled" placeholder="@ped.Cliente.Persona.Nombre">
-                </div>
                 <div>
+                    <label class="control-label col-md-1">Cliente: </label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" disabled="disabled" placeholder="@ped.Cliente.Persona.Nombre @ped.Cliente.Persona.Apellidos">
+                </div>
+                <div class="col-md-3">
                     <a href="@Url.Action("AgregarCliente","Pedido")" class="btn btn-primary">Cambiar Cliente</a>
                 </div>
             </div>
         </div>
-        <div>
-            <p>
-                <a href="@Url.Action("AgregarMenu","Pedido")" class="btn btn-primary">Agregar Menú</a>
-            </p>
-        </div>
-    }
-    else
-    {
+        <br />
         <div class="row">
             <div class="form-group">
-                <label class="control-label col-md-1">Cliente: </label>
-                <div class="col-md-3">
-                    <input type="text" class="form-control" disabled="disabled" placeholder="Ninguno Seleccionado">
-                </div>
                 <div>
-                    <a href="@Url.Action("AgregarCliente","Pedido")" class="btn btn-primary">Agregar Cliente</a>
+                    <label class="control-label col-md-1">Tipo de pago: </label>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-control">
+                        @{
+                            List<entTipoPago> lista = (List<entTipoPago>)ViewBag.Lista;
+                            foreach (var stp in lista)
+                            {
+                                <option value="@stp.TipoPagoID">@stp.DescripcionTipoPago</option>
+                            }
+                        }
+                    </select>
                 </div>
             </div>
         </div>
-    }
+        <br />
+        <div class="row">
+            <div class="form-group">
+                <div>
+                    <label class="control-label col-md-1">Agregar Platos: </label>
+                </div>
+                <div class="col-md-3">
+                    <p>
+                        <a href="@Url.Action("AgregarMenu","Pedido")" class="btn btn-primary btn-block">Agregar</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <br />
+        List<entMenu> lista2 = (List<entMenu>)Session["listaMenu"];
+        if (lista2.Count >= 1)
+                                {
+            <table class="table table-responsive">
+                <tr>
+                    <th>
+                        Entrada
+                    </th>
+                    <th>
+                        Segundo
+                    </th>
+                    <th>
+                        Postre
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Precio)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Cantidad)
+                    </th>
+                    <th>
+                        Importe
+                    </th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model)
+                            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Entrada.NombreProducto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Segundo.NombreProducto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Postre.NombreProducto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Precio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cantidad)
+                        </td>
+                        <td>
+                            @(@item.Precio * @item.Cantidad)
+                        </td>
+                        <td>
+                            @*@Html.ActionLink("Editar", "Editar", new { id = item.ProductoID }) |*@
+                            @Html.ActionLink("Eliminar", "QuitarMenu", new { id = item.MenuID })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
+            <div>
+                <a href="@Url.Action("Cancelar","Pedido")" class="btn btn-danger">Cancelar Pedido</a>
+                <a href="@Url.Action("RegistrarPedido","Pedido")" class="btn btn-success">Registrar Pedido</a>
+            </div>
+        }
+        }
+        else
+        {
+            <div class="row">
+                <div class="form-group">
+                    <div>
+                        <label class="control-label col-md-1">Cliente: </label>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" disabled="disabled" placeholder="Ninguno Seleccionado">
+                    </div>
+                    <div>
+                        <a href="@Url.Action("AgregarCliente","Pedido")" class="btn btn-primary">Agregar Cliente</a>
+                    </div>
+
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="form-group">
+                    <div>
+                        <label class="control-label col-md-1">Tipo de pago: </label>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-control">
+                            @{
+                                List<entTipoPago> lista = (List<entTipoPago>)ViewBag.Lista;
+                                foreach (var stp in lista)
+                                {
+                                    <option value="@stp.TipoPagoID">@stp.DescripcionTipoPago</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="form-group">
+                    <div>
+                        <label class="control-label col-md-1">Agregar Platos: </label>
+                    </div>
+                    <div class="col-md-3">
+                        <p>
+                            <a href="@Url.Action("AgregarMenu","Pedido")" class="btn btn-primary btn-block">Agregar</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            List<entMenu> lista2 = (List<entMenu>)Session["listaMenu"];
+            if (lista2.Count >= 1)
+            {
+                <table class="table table-responsive">
+                    <tr>
+                        <th>
+                            Entrada
+                        </th>
+                        <th>
+                            Segundo
+                        </th>
+                        <th>
+                            Postre
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Precio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Cantidad)
+                        </th>
+                        <th>
+                            Importe
+                        </th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Entrada.NombreProducto)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Segundo.NombreProducto)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Postre.NombreProducto)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Precio)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Cantidad)
+                            </td>
+                            <td>
+                                @(@item.Precio * @item.Cantidad)
+                            </td>
+                            <td>
+                                @*@Html.ActionLink("Editar", "Editar", new { id = item.ProductoID }) |*@
+                                @Html.ActionLink("Eliminar", "QuitarMenu", new { id = item.MenuID })
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+
+                <div>
+                        <a href="@Url.Action("Cancelar","Pedido")" class="btn btn-danger">Cancelar Pedido</a>
+                        <a href="@Url.Action("RegistrarPedido","Pedido")" class="btn btn-success">Registrar Pedido</a>
+                </div>
+                }
+            }
 }
