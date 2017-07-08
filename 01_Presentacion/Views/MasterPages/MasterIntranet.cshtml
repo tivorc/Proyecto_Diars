@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using _03_Dominio
+
+<!DOCTYPE html>
 <html lang="es-pe">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -54,23 +56,29 @@
 
                     <li class="light-blue dropdown-modal">
                         <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                            <img class="nav-user-photo" src="~/Bootstrap/Intranet/images/avatars/user.jpg" alt="Jason's Photo" />
-                            <span class="user-info">
-                                <small>Welcome,</small>
-                                Jason
-                            </span>
+                            @{
+                                if (Session["usuario"] != null)
+                                {
+                                    entUsuario u = (entUsuario)Session["usuario"];
+                                    if (u.Rol == "Administrador")
+                                    {
+                                        <img class="nav-user-photo" src="~/Bootstrap/Extranet/images/@u.ImgUsuario" alt="" />
+                                        <span class="user-info">
+                                            <small>Bienvenido,</small>
+                                            @u.NombreUsuario
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        Response.Redirect("~/Home/Index");
+                                    }
+                                }
+                            }
 
                             <i class="ace-icon fa fa-caret-down"></i>
                         </a>
 
                         <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-                            <li>
-                                <a href="#">
-                                    <i class="ace-icon fa fa-cog"></i>
-                                    Settings
-                                </a>
-                            </li>
-
                             <li>
                                 <a href="profile.html">
                                     <i class="ace-icon fa fa-user"></i>
@@ -98,7 +106,7 @@
 				try{ace.settings.loadState('main-container')}catch(e){}
         </script>
 
-        <div id="sidebar" class="sidebar                  responsive                    ace-save-state">
+        <div id="sidebar" class="sidebar responsive ace-save-state">
             <script type="text/javascript">
 					try{ace.settings.loadState('sidebar')}catch(e){}
             </script>
@@ -254,7 +262,7 @@
                 <div class="footer-content">
                     <span class="bigger-120">
                         <span class="blue bolder">La Valentina</span>
-                        Restaurante &copy; 1998-2017
+                        Restaurante &copy; 2000-2017
                     </span>
 
                 </div>
@@ -269,10 +277,6 @@
     <!--[if !IE]> -->
     <script src="~/Bootstrap/Intranet/js/jquery-2.1.4.min.js"></script>
 
-    <!-- <![endif]-->
-    <!--[if IE]>
-    <script src="assets/js/jquery-1.11.3.min.js"></script>
-    <![endif]-->
     <script type="text/javascript">
         if ('ontouchstart' in document.documentElement) document.write("<script src='Bootstrap/Intranet/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
     </script>

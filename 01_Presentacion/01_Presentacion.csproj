@@ -125,6 +125,7 @@
     <Content Include="Bootstrap\Extranet\images\icon1.png" />
     <Content Include="Bootstrap\Extranet\images\icon2.png" />
     <Content Include="Bootstrap\Extranet\images\icon3.png" />
+    <Content Include="Bootstrap\Extranet\images\jcruzado.jpg" />
     <Content Include="Bootstrap\Extranet\images\la_valentina_logo.png" />
     <Content Include="Bootstrap\Extranet\images\magnify.png" />
     <Content Include="Bootstrap\Extranet\images\marker.png" />
