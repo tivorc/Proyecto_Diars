@@ -19,17 +19,17 @@
 
 </div>
 
-@section scripts2{
+@section scripts{
     <script type="text/javascript">
         $(document).ready(function () {
-            muestra2();
+            muestra();
         });
 
         $('#Nombre').keyup(function () {
-            muestra2();
+            muestra();
         });
 
-        var muestra2 = function () {
+        var muestra = function () {
             $('#detallexd').load('@Url.Action("DetalleLista")', { Nombre: $('#Nombre').val() })
         }
     </script>

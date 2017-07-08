@@ -26,116 +26,72 @@
             </div>
         </div>
         <br />
-        <div class="row">
-            <div class="form-group">
-                <div>
-                    <label class="control-label col-md-1">Tipo de pago: </label>
-                </div>
-                <div class="col-md-3">
-                    <select class="form-control">
-                        @{
-                            List<entTipoPago> lista = (List<entTipoPago>)ViewBag.Lista;
-                            foreach (var stp in lista)
-                            {
-                                <option value="@stp.TipoPagoID">@stp.DescripcionTipoPago</option>
-                            }
-                        }
-                    </select>
+        if (ped.TipoPago != null)
+        {
+            <div class="row">
+                <div class="form-group">
+                    <div>
+                        <label class="control-label col-md-1">Tipo de pago: </label>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" disabled="disabled" placeholder="@ped.TipoPago.DescripcionTipoPago">
+                    </div>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" id="btnBuscar">
+                        Cambiar
+                    </button>
                 </div>
             </div>
-        </div>
-        <br />
-        <div class="row">
-            <div class="form-group">
-                <div>
-                    <label class="control-label col-md-1">Agregar Platos: </label>
-                </div>
-                <div class="col-md-3">
-                    <p>
-                        <a href="@Url.Action("AgregarMenu","Pedido")" class="btn btn-primary btn-block">Agregar</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <br />
-        List<entMenu> lista2 = (List<entMenu>)Session["listaMenu"];
-        if (lista2.Count >= 1)
-                                {
-            <table class="table table-responsive">
-                <tr>
-                    <th>
-                        Entrada
-                    </th>
-                    <th>
-                        Segundo
-                    </th>
-                    <th>
-                        Postre
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Precio)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Cantidad)
-                    </th>
-                    <th>
-                        Importe
-                    </th>
-                    <th></th>
-                </tr>
-                @foreach (var item in Model)
-                            {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Entrada.NombreProducto)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Segundo.NombreProducto)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Postre.NombreProducto)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Precio)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Cantidad)
-                        </td>
-                        <td>
-                            @(@item.Precio * @item.Cantidad)
-                        </td>
-                        <td>
-                            @*@Html.ActionLink("Editar", "Editar", new { id = item.ProductoID }) |*@
-                            @Html.ActionLink("Eliminar", "QuitarMenu", new { id = item.MenuID })
-                        </td>
-                    </tr>
-                }
-
-            </table>
-
-            <div>
-                <a href="@Url.Action("Cancelar","Pedido")" class="btn btn-danger">Cancelar Pedido</a>
-                <a href="@Url.Action("RegistrarPedido","Pedido")" class="btn btn-success">Registrar Pedido</a>
-            </div>
-        }
         }
         else
         {
             <div class="row">
                 <div class="form-group">
                     <div>
-                        <label class="control-label col-md-1">Cliente: </label>
+                        <label class="control-label col-md-1">Tipo de pago: </label>
                     </div>
                     <div class="col-md-3">
-                        <input type="text" class="form-control" disabled="disabled" placeholder="Ninguno Seleccionado">
+                        <input type="text" class="form-control" disabled="disabled" placeholder="No ha seleccionado">
                     </div>
-                    <div>
-                        <a href="@Url.Action("AgregarCliente","Pedido")" class="btn btn-primary">Agregar Cliente</a>
-                    </div>
-
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" id="btnBuscar">
+                        Agregar método
+                    </button>
                 </div>
             </div>
-            <br />
+        }
+
+
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Alumno</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-3">
+                            <select class="form-control">
+                                @{
+                                    List<entTipoPago> lista = (List<entTipoPago>)ViewBag.Lista;
+                                    foreach (var stp in lista)
+                                    {
+                                        <option value="@stp.TipoPagoID">@stp.DescripcionTipoPago</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <br />
+                        <br />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary">Seleccionar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        @*<br />
             <div class="row">
                 <div class="form-group">
                     <div>
@@ -153,80 +109,206 @@
                         </select>
                     </div>
                 </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="form-group">
-                    <div>
-                        <label class="control-label col-md-1">Agregar Platos: </label>
-                    </div>
-                    <div class="col-md-3">
-                        <p>
-                            <a href="@Url.Action("AgregarMenu","Pedido")" class="btn btn-primary btn-block">Agregar</a>
-                        </p>
+            </div>*@
+                <br />
+                <div class="row">
+                    <div class="form-group">
+                        <div>
+                            <label class="control-label col-md-1">Agregar Platos: </label>
+                        </div>
+                        <div class="col-md-3">
+                            <p>
+                                <a href="@Url.Action("AgregarMenu","Pedido")" class="btn btn-primary btn-block">Agregar</a>
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <br/>
-            List<entMenu> lista2 = (List<entMenu>)Session["listaMenu"];
-            if (lista2.Count >= 1)
-            {
-                <table class="table table-responsive">
-                    <tr>
-                        <th>
-                            Entrada
-                        </th>
-                        <th>
-                            Segundo
-                        </th>
-                        <th>
-                            Postre
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Precio)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Cantidad)
-                        </th>
-                        <th>
-                            Importe
-                        </th>
-                        <th></th>
-                    </tr>
-                    @foreach (var item in Model)
-                    {
+                <br />
+                List<entMenu> lista2 = (List<entMenu>)Session["listaMenu"];
+                if (lista2.Count >= 1)
+                {
+                    <table class="table table-responsive">
                         <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Entrada.NombreProducto)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Segundo.NombreProducto)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Postre.NombreProducto)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Precio)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Cantidad)
-                            </td>
-                            <td>
-                                @(@item.Precio * @item.Cantidad)
-                            </td>
-                            <td>
-                                @*@Html.ActionLink("Editar", "Editar", new { id = item.ProductoID }) |*@
-                                @Html.ActionLink("Eliminar", "QuitarMenu", new { id = item.MenuID })
-                            </td>
+                            <th>
+                                Entrada
+                            </th>
+                            <th>
+                                Segundo
+                            </th>
+                            <th>
+                                Postre
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Precio)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Cantidad)
+                            </th>
+                            <th>
+                                Importe
+                            </th>
+                            <th></th>
                         </tr>
-                    }
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Entrada.NombreProducto)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Segundo.NombreProducto)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Postre.NombreProducto)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Precio)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Cantidad)
+                                </td>
+                                <td>
+                                    @(@item.Precio * @item.Cantidad)
+                                </td>
+                                <td>
+                                    @*@Html.ActionLink("Editar", "Editar", new { id = item.ProductoID }) |*@
+                                    @Html.ActionLink("Eliminar", "QuitarMenu", new { id = item.MenuID })
+                                </td>
+                            </tr>
+                        }
 
-                </table>
+                    </table>
 
-                <div>
+                    <div>
                         <a href="@Url.Action("Cancelar","Pedido")" class="btn btn-danger">Cancelar Pedido</a>
                         <a href="@Url.Action("RegistrarPedido","Pedido")" class="btn btn-success">Registrar Pedido</a>
-                </div>
+                    </div>
+                    }
                 }
-            }
+                else
+                {
+                    <div class="row">
+                        <div class="form-group">
+                            <div>
+                                <label class="control-label col-md-1">Cliente: </label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" disabled="disabled" placeholder="Ninguno Seleccionado">
+                            </div>
+                            <div>
+                                <a href="@Url.Action("AgregarCliente","Pedido")" class="btn btn-primary">Agregar Cliente</a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <br />
+
+
+                    <div class="row">
+                        <div class="form-group">
+                            <div>
+                                <label class="control-label col-md-1">Tipo de pago: </label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" disabled="disabled" placeholder="No ha seleccionado">
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" id="btnBuscar">
+                                Agregar método
+                            </button>
+                        </div>
+                    </div>
+
+                        @*<div class="row">
+                                <div class="form-group">
+                                    <div>
+                                        <label class="control-label col-md-1">Tipo de pago: </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select class="form-control">
+                                            @{
+                                                List<entTipoPago> lista = (List<entTipoPago>)ViewBag.Lista;
+                                                foreach (var stp in lista)
+                                                {
+                                                    <option value="@stp.TipoPagoID">@stp.DescripcionTipoPago</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>*@
+                        <br />
+                        <div class="row">
+                            <div class="form-group">
+                                <div>
+                                    <label class="control-label col-md-1">Agregar Platos: </label>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>
+                                        <a href="@Url.Action("AgregarMenu","Pedido")" class="btn btn-primary btn-block">Agregar</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                    List<entMenu> lista2 = (List<entMenu>)Session["listaMenu"];
+                    if (lista2.Count >= 1)
+                    {
+                        <table class="table table-responsive">
+                            <tr>
+                                <th>
+                                    Entrada
+                                </th>
+                                <th>
+                                    Segundo
+                                </th>
+                                <th>
+                                    Postre
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Precio)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Cantidad)
+                                </th>
+                                <th>
+                                    Importe
+                                </th>
+                                <th></th>
+                            </tr>
+                            @foreach (var item in Model)
+{
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Entrada.NombreProducto)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Segundo.NombreProducto)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Postre.NombreProducto)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Precio)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Cantidad)
+                                    </td>
+                                    <td>
+                                        @(@item.Precio * @item.Cantidad)
+                                    </td>
+                                    <td>
+                                        @*@Html.ActionLink("Editar", "Editar", new { id = item.ProductoID }) |*@
+                                        @Html.ActionLink("Eliminar", "QuitarMenu", new { id = item.MenuID })
+                                    </td>
+                                </tr>
+                            }
+
+                        </table>
+
+                        <div>
+                            <a href="@Url.Action("Cancelar","Pedido")" class="btn btn-danger">Cancelar Pedido</a>
+                            <a href="@Url.Action("RegistrarPedido","Pedido")" class="btn btn-success">Registrar Pedido</a>
+                        </div>
+                    }
+                }
 }

@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Main";
+    Layout = "~/Views/MasterPages/MasterIntranet.cshtml";
+}
+
+<h2>Pedido por llamadas</h2>
+
+<div class="form-group">
+    <div class="row">
+        <div class="col-lg-3">
+            <select class="form-control" id="estado">
+                <option value="">-- Todos --</option>
+                <option value="Registrado">Registrado</option>
+                <option value="Reparto">En Reparto</option>
+                <option value="Finalizado">Finalizado</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="detalle">
+
+</div>
+
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            muestra();
+        });
+
+        $('#estado').change(function () {
+           muestra();
+        });
+
+        var muestra = function () {
+            $('#detalle').load('@Url.Action("DetalleMain")', { estado: $('#estado').val() })
+        }
+    </script>
+}
+
+
+
+
