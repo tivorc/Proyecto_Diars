@@ -27,7 +27,7 @@
                 @Html.DisplayFor(modelItem => item.Persona.Direccion)
             </td>
             <td>
-                <a href="@Html.ActionLink("Seleccionar", "ClientePedido", new { id = item.ClienteID })" class="btn btn-primary">Seleccionar</a>
+                @Html.ActionLink("Seleccionar", "AgregarCliente", new { id = item.ClienteID })
             </td>
         </tr>
     }

@@ -374,8 +374,10 @@
     <Content Include="Views\Pedido\DetalleMenuPedido.cshtml" />
     <Content Include="Views\PedidoLlamada\Main.cshtml" />
     <Content Include="Views\PedidoLlamada\DetalleMain.cshtml" />
-    <Content Include="Views\PedidoLlamada\Nuevo.cshtml" />
+    <Content Include="Views\PedidoLlamada\Paso1.cshtml" />
     <Content Include="Views\PedidoLlamada\BusquedaCliente.cshtml" />
+    <Content Include="Views\PedidoLlamada\Paso2.cshtml" />
+    <Content Include="Views\PedidoLlamada\AgregarMenu.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
