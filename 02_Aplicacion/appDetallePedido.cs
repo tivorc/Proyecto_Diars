@@ -8,23 +8,23 @@ using System.Threading.Tasks;
 
 namespace _02_Aplicacion
 {
-    public class appMenu
+    public class appDetallePedido
     {
         #region singleton
-        private static readonly appMenu _instancia = new appMenu();
-        public static appMenu Instancia
+        private static readonly appDetallePedido _instancia = new appDetallePedido();
+        public static appDetallePedido Instancia
         {
-            get { return appMenu._instancia; }
+            get { return appDetallePedido._instancia; }
         }
         #endregion singleton
 
         #region metodos
 
-        public List<entMenu> DevolverMenusPedido(int pedidoID)
+        public List<entDetallePedido> DevolverProductosPedido(int pedidoID)
         {
             try
             {
-                return daoMenu.Instancia.DevolverMenusPedido(pedidoID);
+                return daoDetallePedido.Instancia.DevolverProductosPedido(pedidoID);
             }
             catch (Exception e)
             {

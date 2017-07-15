@@ -319,6 +319,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IntranetController.cs" />
+    <Compile Include="Controllers\PagoController.cs" />
     <Compile Include="Controllers\PedidoController.cs" />
     <Compile Include="Controllers\PedidoLlamadaController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
@@ -371,13 +372,16 @@
     <Content Include="Views\Pedido\Main.cshtml" />
     <Content Include="Views\Pedido\DetalleMain.cshtml" />
     <Content Include="Views\Pedido\MenuPedido.cshtml" />
-    <Content Include="Views\Pedido\DetalleMenuPedido.cshtml" />
     <Content Include="Views\PedidoLlamada\Main.cshtml" />
     <Content Include="Views\PedidoLlamada\DetalleMain.cshtml" />
-    <Content Include="Views\PedidoLlamada\Paso1.cshtml" />
-    <Content Include="Views\PedidoLlamada\BusquedaCliente.cshtml" />
-    <Content Include="Views\PedidoLlamada\Paso2.cshtml" />
-    <Content Include="Views\PedidoLlamada\AgregarMenu.cshtml" />
+    <Content Include="Views\PedidoLlamada\NuevoPedido.cshtml" />
+    <Content Include="Views\PedidoLlamada\DetalleMenu.cshtml" />
+    <Content Include="Views\PedidoLlamada\SeleccionarProducto.cshtml" />
+    <Content Include="Views\PedidoLlamada\DetalleProducto.cshtml" />
+    <Content Include="Views\PedidoLlamada\ClientePedido.cshtml" />
+    <Content Include="Views\PedidoLlamada\ListaClientes.cshtml" />
+    <Content Include="Views\PedidoLlamada\DetallePedido.cshtml" />
+    <Content Include="Views\Pago\Main.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

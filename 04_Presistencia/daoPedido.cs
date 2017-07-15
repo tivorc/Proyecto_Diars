@@ -21,23 +21,23 @@ namespace _04_Presistencia
 
         #region metodos
 
-        public int InsertarPedido(entPedido p)
+        public bool InsertarPedido(string xml)
         {
             SqlCommand cmd = null;
+            bool inserto = false;
             try
             {
                 SqlConnection cn = Conexion.Instancia.conectar();
-                cmd = new SqlCommand("spInsertarPedido", cn);
-                cmd.Parameters.AddWithValue("@clienteID", p.Cliente.ClienteID);
-                cmd.Parameters.AddWithValue("@tipoPagoID", p.TipoPago.TipoPagoID);
-                cmd.Parameters.AddWithValue("@tipoPedido", p.TipoPedido);
+                cmd = new SqlCommand("spInsertarPedidoLlamada", cn);
+                cmd.Parameters.AddWithValue("@prmstrXML", xml);
 
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cn.Open();
 
-                int id = (int)cmd.ExecuteScalar();
-                return id;
+                int i = cmd.ExecuteNonQuery();
+                if (i > 0) { inserto = true; }
+                return inserto;
             }
             catch (Exception e) { throw e; }
             finally { if (cmd != null) { cmd.Connection.Close(); } }

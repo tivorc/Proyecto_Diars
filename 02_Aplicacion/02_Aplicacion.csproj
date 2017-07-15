@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="appCliente.cs" />
+    <Compile Include="appDetallePedido.cs" />
     <Compile Include="appMenu.cs" />
     <Compile Include="appPedido.cs" />
     <Compile Include="appProducto.cs" />

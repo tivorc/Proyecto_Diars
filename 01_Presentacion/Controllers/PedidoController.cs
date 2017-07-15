@@ -128,20 +128,20 @@ namespace _01_Presentacion.Controllers
 
         public ActionResult RegistrarPedido()
         {
-            List<entMenu> listaMenuPedido = (List<entMenu>)Session["listaMenu"];
-            entPedido p = (entPedido)Session["pedido"];
-            p.TipoPedido = "Llamada";
-            entTipoPago tp = new entTipoPago();
-            tp.TipoPagoID = 1;
-            p.TipoPago = tp;
-            int pedidoID = appPedido.Instancia.InsertarPedido(p);
-            entPedido id = new entPedido();
-            id.PedidoID = pedidoID;
-            foreach (var item in listaMenuPedido)
-            {
-                item.Pedido = id;
-                appMenu.Instancia.InsertarMenu(item);
-            }
+            //List<entMenu> listaMenuPedido = (List<entMenu>)Session["listaMenu"];
+            //entPedido p = (entPedido)Session["pedido"];
+            //p.TipoPedido = "Llamada";
+            //entTipoPago tp = new entTipoPago();
+            //tp.TipoPagoID = 1;
+            //p.TipoPago = tp;
+            //int pedidoID = appPedido.Instancia.InsertarPedido(p);
+            //entPedido id = new entPedido();
+            //id.PedidoID = pedidoID;
+            //foreach (var item in listaMenuPedido)
+            //{
+            //    item.Pedido = id;
+            //    appMenu.Instancia.InsertarMenu(item);
+            //}
             return RedirectToAction("Main", "Pedido");
         }
 
@@ -158,12 +158,6 @@ namespace _01_Presentacion.Controllers
             List<entMenu> lista = appMenu.Instancia.DevolverMenusPedido(pedidoID);
             ViewBag.lista = lista;
             return View(p);
-        }
-
-        public ActionResult DetalleMenuPedido(int pedidoID)
-        {
-            List<entMenu> lista = appMenu.Instancia.DevolverMenusPedido(pedidoID);
-            return PartialView(lista);
         }
     }
 

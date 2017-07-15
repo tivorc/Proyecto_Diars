@@ -44,6 +44,18 @@ namespace _02_Aplicacion
             }
         }
 
+        public List<entProducto> ListaProductos(string producto)
+        {
+            try
+            {
+                return daoProducto.Instancia.ListaProductos(producto);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public entProducto DevolverPlato(int platoID)
         {
             try

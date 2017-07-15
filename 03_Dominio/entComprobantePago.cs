@@ -11,7 +11,7 @@ namespace _03_Dominio
         public int ComprobantePagoID { get; set; }
         public entPago Pago { get; set; }
         public int Numero { get; set; }
-        public int TotalComprobante { get; set; }
-        public int EstadoComprobante { get; set; }
+        public decimal TotalComprobante { get; set; }
+        public string EstadoComprobante { get; set; }
     }
 }

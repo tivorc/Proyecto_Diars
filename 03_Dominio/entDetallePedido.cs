@@ -12,5 +12,6 @@ namespace _03_Dominio
         public entPedido Pedido { get; set; }
         public entProducto Producto { get; set; }
         public int CantidadProducto { get; set; }
+        public decimal PrecioProducto { get; set; }
     }
 }

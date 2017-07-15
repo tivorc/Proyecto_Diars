@@ -1,0 +1,55 @@
+﻿@model IEnumerable<_03_Dominio.entDetallePedido>
+
+<table class="table">
+    <tr>
+        <th>
+            #
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Producto.NombreProducto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Producto.DescripcionProducto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CantidadProducto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Producto.PrecioProducto)
+        </th>
+        <th>
+            Importe
+        </th>
+    </tr>
+
+@{var indice = 0;
+decimal subTotalProducto = 0;}
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @{var i = indice + 1; indice = i;}
+            @i
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Producto.NombreProducto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Producto.DescripcionProducto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CantidadProducto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Producto.PrecioProducto)
+        </td>
+        <td>
+            @(@item.Producto.PrecioProducto * @item.CantidadProducto)
+        </td>
+        @{subTotalProducto = subTotalProducto + (decimal)(item.Producto.PrecioProducto * item.CantidadProducto);}
+    </tr>
+}
+
+</table>
+<div class="pull-right">
+    Sub Total: <input type="text" value="@subTotalProducto" id="subTotalProducto" />
+</div>

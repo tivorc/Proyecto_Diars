@@ -1,0 +1,50 @@
+﻿@using _03_Dominio
+
+@{
+    if (Session["pedido"] != null)
+    {
+        entPedido p = (entPedido)Session["pedido"];
+        <div class="row">
+            <div class="col-md-1">
+                Cliente:
+            </div>
+            <div class="col-md-3">
+                <input type="text" class="form-control" disabled="disabled" placeholder="@Html.DisplayFor(model => p.Cliente.Persona.Nombre) @Html.DisplayFor(model => p.Cliente.Persona.Apellidos)">
+            </div>
+            <div class="col-md-2">
+                <input type="button" value="Cambiar Cliente" class="btn btn-primary btn-block" data-toggle="modal" data-target="#agregarCliente" />
+            </div>
+        </div>
+        
+        <div class="row">
+            <div>
+                <label class="control-label col-md-1">Dirección:</label>
+            </div>
+            <div class="col-md-3">
+                <input type="text" class="form-control" disabled="disabled" placeholder="@Html.DisplayFor(model => p.Cliente.Persona.Direccion)">
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-md-1">
+                Cliente:
+            </div>
+            <div class="col-md-3">
+                <input type="text" class="form-control" disabled="disabled" placeholder="Ningún cliente seleccionado">
+            </div>
+            <div class="col-md-2">
+                <input type="button" value="Agregar Cliente" class="btn btn-primary btn-block" data-toggle="modal" data-target="#agregarCliente" />
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <label class="control-label col-md-1">Dirección:</label>
+            </div>
+            <div class="col-md-3">
+                <input type="text" class="form-control" disabled="disabled" placeholder="No hay direccion para mostrar">
+            </div>
+        </div>
+    }
+}

@@ -21,36 +21,31 @@ namespace _01_Presentacion.Controllers
             return PartialView(lista);
         }
 
-        public ActionResult InicializarPedido()
-        {
-            Session["pedido"] = null;
-            Session["listaMenu"] = null;
-            return RedirectToAction("Paso1", "PedidoLlamada");
-        }
-
-        public ActionResult Paso1()
-        {
-            return View();
-        }
-
-        public ActionResult BusquedaCliente(string Nombre)
+        public ActionResult ListaClientes(string Nombre)
         {
             List<entCliente> lista = appCliente.Instancia.ListaCliente(Nombre);
             return PartialView(lista);
         }
 
-        public ActionResult AgregarCliente(int id)
+        public JavaScriptResult AgregarCliente(int personaID)
         {
-            entCliente cli = appCliente.Instancia.DevolverCliente(id);
-            entPedido p = new entPedido();
+            entCliente cli = appCliente.Instancia.DevolverCliente(personaID);
+            entPedido p = null;
+            if (Session["pedido"] != null)
+            {
+                p = (entPedido)Session["pedido"];
+            }
+            else
+            {
+                p = new entPedido();
+            }
             p.Cliente = cli;
             Session["pedido"] = p;
-            return RedirectToAction("Paso2", "PedidoLlamada");
+            return JavaScript("muestraClientePedido();");
         }
 
-        public ActionResult Paso2()
+        public ActionResult NuevoPedido()
         {
-            entPedido p = (entPedido)Session["pedido"];
             List<entTipoPago> lista = appTipoPago.Instancia.ListarTipoPago();
             ViewBag.Lista = lista;
             List<entProducto> listaEntrada = appProducto.Instancia.ListaPlatosDisponibles(1);
@@ -59,12 +54,11 @@ namespace _01_Presentacion.Controllers
             ViewBag.Segundo = listaSegundo;
             List<entProducto> listaPostre = appProducto.Instancia.ListaPlatosDisponibles(3);
             ViewBag.Postre = listaPostre;
-            return View(p);
+            return View();
         }
 
-        public ActionResult AgregarMenu(int entrada, int segundo, int postre)
+        public JavaScriptResult AgregarMenu(int entrada, int segundo, int postre, int cantidad)
         {
-
             entProducto ent = appProducto.Instancia.DevolverPlato(entrada);
             entProducto seg = appProducto.Instancia.DevolverPlato(segundo);
             entProducto pos = appProducto.Instancia.DevolverPlato(postre);
@@ -72,19 +66,131 @@ namespace _01_Presentacion.Controllers
             menu.Entrada = ent;
             menu.Segundo = seg;
             menu.Postre = pos;
-            menu.Cantidad = 1;
-            List < entMenu > listaMenu = (List<entMenu>)Session["listaMenu"];
-            if (listaMenu.Count == 0)
+            menu.Precio = seg.PrecioProducto;
+            menu.Cantidad = cantidad;
+
+            List<entMenu> listaMenu = null;
+            if (Session["listaMenu"] != null)
             {
-                menu.MenuID = 1;
+                listaMenu = (List<entMenu>)Session["listaMenu"];
             }
             else
             {
-                menu.MenuID = listaMenu.Last().MenuID + 1;
+                listaMenu = new List<entMenu>();
             }
+
             listaMenu.Add(menu);
             Session["listaMenu"] = listaMenu;
-            return PartialView(listaMenu);
+            return JavaScript("muestradetalle();");
+        }
+
+        public JavaScriptResult AgregarProducto(int productoID, int cantidadProducto)
+        {
+            entProducto pro = appProducto.Instancia.DevolverPlato(productoID);
+            entDetallePedido dtPedido = new entDetallePedido();
+            dtPedido.Producto = pro;
+            dtPedido.CantidadProducto = cantidadProducto;
+            List<entDetallePedido> listaProductos = null;
+            if (Session["listaProducto"] != null)
+            {
+                listaProductos = (List<entDetallePedido>)Session["listaProducto"];
+            }
+            else
+            {
+                listaProductos = new List<entDetallePedido>();
+            }
+            listaProductos.Add(dtPedido);
+            Session["listaProducto"] = listaProductos;
+            return JavaScript("muestradetalle();");
+        }
+
+        public ActionResult DetalleMenu()
+        {
+            if (Session["listaMenu"] != null)
+            {
+                List<entMenu> lista = (List<entMenu>)Session["listaMenu"];
+                return PartialView(lista);
+            }
+            else
+            {
+                List<entMenu> lista = new List<entMenu>();
+                return PartialView(lista);
+            }
+
+        }
+
+        public ActionResult DetalleProducto()
+        {
+            if (Session["listaProducto"] != null)
+            {
+                List<entDetallePedido> lista = (List<entDetallePedido>)Session["listaProducto"];
+                return PartialView(lista);
+            }
+            else
+            {
+                List<entDetallePedido> lista = new List<entDetallePedido>();
+                return PartialView(lista);
+            }
+        }
+
+        public ActionResult SeleccionarProducto(string busquedaProducto)
+        {
+            List<entProducto> lista = appProducto.Instancia.ListaProductos(busquedaProducto);
+            return PartialView(lista);
+        }
+
+        public ActionResult ClientePedido()
+        {
+            return PartialView();
+        }
+
+        public ActionResult Cancelar()
+        {
+            Session["pedido"] = null;
+            Session["listaMenu"] = null;
+            Session["listaProducto"] = null;
+            return RedirectToAction("Main", "PedidoLlamada");
+        }
+
+        public ActionResult GrabarPedido(int tipoPago)
+        {
+            if (Session["pedido"] != null && (Session["listaMenu"] != null || Session["listaProducto"] != null))
+            {
+                entTipoPago tp = new entTipoPago();
+                tp.TipoPagoID = tipoPago;
+                entPedido ped = (entPedido)Session["pedido"];
+                ped.TipoPago = tp;
+                ped.TipoPedido = "Llamada";
+
+                List<entMenu> men = (List<entMenu>)Session["listaMenu"];
+
+                List<entDetallePedido> pro = (List<entDetallePedido>)Session["listaProducto"];
+
+                bool inserto = false;
+                inserto = appPedido.Instancia.InsertarPedido(ped, men, pro);
+
+                Session["pedido"] = null;
+                Session["listaMenu"] = null;
+                Session["listaProducto"] = null;
+                return RedirectToAction("Main", "PedidoLlamada");
+            }
+            else
+            {
+                ViewBag.alerta = "Debe ingresar";
+                return View();
+            }
+        }
+
+
+        public ActionResult DetallePedido(int pedidoID)
+        {
+            entPedido p = appPedido.Instancia.DevolverPedido(pedidoID);
+            List<entMenu> listaMenu = appMenu.Instancia.DevolverMenusPedido(pedidoID);
+            List<entDetallePedido> listaProducto = appDetallePedido.Instancia.DevolverProductosPedido(pedidoID);
+            ViewBag.listaMenu = listaMenu;
+            ViewBag.listaProducto = listaProducto;
+            return View(p);
         }
     }
+
 }

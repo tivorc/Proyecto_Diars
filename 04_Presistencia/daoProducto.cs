@@ -95,6 +95,43 @@ namespace _04_Presistencia
             finally { if (cmd != null) { cmd.Connection.Close(); } }
         }
 
+        public List<entProducto> ListaProductos(string producto)
+        {
+            SqlCommand cmd = null;
+            List<entProducto> lista = new List<entProducto>();
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.conectar();
+                cmd = new SqlCommand("spListarProducto", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@producto", producto);
+                cn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    entProducto p = new entProducto();
+                    p.ProductoID = Convert.ToInt32(dr["productoID"]);
+                    p.NombreProducto = dr["nombreProducto"].ToString();
+                    p.DescripcionProducto = dr["descripcionProducto"].ToString();
+                    p.PrecioProducto = Convert.ToDecimal(dr["precioProducto"]);
+                    p.Stock = Convert.ToInt32(dr["stock"]);
+                    p.ImgProducto = dr["imgProducto"].ToString();
+                    entTipoProducto tp = new entTipoProducto();
+                    tp.TipoProductoID = Convert.ToInt32(dr["tipoProductoID"]);
+                    tp.DescripcionTipoProducto = dr["descripcionTipoProducto"].ToString();
+                    entSubTipoProducto stp = new entSubTipoProducto();
+                    stp.SubTipoProductoID = Convert.ToInt32(dr["subTipoProductoID"]);
+                    stp.DescripcionSubTipo = dr["descripcionSubTipo"].ToString();
+                    stp.TipoProducto = tp;
+                    p.SubTipoProducto = stp;
+                    lista.Add(p);
+                }
+                return lista;
+            }
+            catch (Exception e) { throw e; }
+            finally { if (cmd != null) { cmd.Connection.Close(); } }
+        }
+
         public entProducto DevolverPlato(int platoID)
         {
             SqlCommand cmd = null;

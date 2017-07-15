@@ -2,7 +2,7 @@
 @using _03_Dominio
 
 @{
-    ViewBag.Title = "MenuPedido";
+    ViewBag.Title = "DetallePedido";
     Layout = "~/Views/MasterPages/MasterIntranet.cshtml";
 }
 
@@ -61,7 +61,7 @@
 </div>
 
 @{
-    List<entMenu> lista = (List<entMenu>)ViewBag.lista;
+    List<entMenu> listaMenu = (List<entMenu>)ViewBag.listaMenu;
     <table class="table">
         <tr>
             <th>
@@ -83,8 +83,8 @@
                 Subtotal
             </th>
         </tr>
-
-        @foreach (var item in lista)
+        @{decimal subTotalMenu = 0;}
+        @foreach (var item in listaMenu)
         {
             <tr>
                 <td>
@@ -105,12 +105,63 @@
                 <td>
                     @(@item.Precio * @item.Cantidad)
                 </td>
+                @{subTotalMenu = subTotalMenu + (decimal)(item.Precio * item.Cantidad);}
             </tr>
-        }
+                    }
 
     </table>
 }
 
+@{
+    List<entDetallePedido> listaProducto = (List<entDetallePedido>)ViewBag.listaProducto;
+    <table class="table">
+        <tr>
+            <th>
+                Producto
+            </th>
+            <th>
+                Descripción
+            </th>
+            <th>
+                Precio
+            </th>
+            <th>
+                Cantidad
+            </th>
+            <th>
+                Subtotal
+            </th>
+        </tr>
+
+        @{decimal subTotalProducto = 0;}
+        @foreach (var item in listaProducto)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Producto.NombreProducto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Producto.DescripcionProducto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrecioProducto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CantidadProducto)
+                </td>
+                <td>
+                    @(@item.PrecioProducto * @item.CantidadProducto)
+                </td>
+                @{subTotalProducto = subTotalProducto + (decimal)(item.PrecioProducto * item.CantidadProducto);}
+            </tr>
+                    }
+
+    </table>
+}
+
+<div class="pull-right">
+    Total: <input type="text" value="@(@subTotalProducto +@subTotalMenu)" id="subTotalMenu" />
+</div>
 <div>
-    <a href="@Url.Action("Main","Pedido")" class="btn btn-default">Regresar</a>
+    <a href="@Url.Action("Main","PedidoLlamada")" class="btn btn-default">Regresar</a>
 </div>
