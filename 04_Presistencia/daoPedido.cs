@@ -43,7 +43,7 @@ namespace _04_Presistencia
             finally { if (cmd != null) { cmd.Connection.Close(); } }
         }
 
-        public List<entPedido> ListaPedidos(string tipoPedido, string estado)
+        public List<entPedido> ListaPedidos(string tipoPedido, string estado, string nombre)
         {
             SqlCommand cmd = null;
             List<entPedido> lista = new List<entPedido>();
@@ -54,6 +54,7 @@ namespace _04_Presistencia
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@tipoPedido", tipoPedido);
                 cmd.Parameters.AddWithValue("@estado", estado);
+                cmd.Parameters.AddWithValue("@cliente", nombre);
                 cn.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())

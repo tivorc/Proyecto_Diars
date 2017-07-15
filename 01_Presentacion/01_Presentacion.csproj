@@ -382,6 +382,8 @@
     <Content Include="Views\PedidoLlamada\ListaClientes.cshtml" />
     <Content Include="Views\PedidoLlamada\DetallePedido.cshtml" />
     <Content Include="Views\Pago\Main.cshtml" />
+    <Content Include="Views\Pago\DetalleMain.cshtml" />
+    <Content Include="Views\Pago\PagoPaypal.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

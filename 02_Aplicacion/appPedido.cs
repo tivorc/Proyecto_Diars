@@ -74,11 +74,11 @@ namespace _02_Aplicacion
             }
         }
 
-        public List<entPedido> ListaPedidos(string tipoPedido, string estado)
+        public List<entPedido> ListaPedidos(string tipoPedido, string estado, string nombre)
         {
             try
             {
-                return daoPedido.Instancia.ListaPedidos(tipoPedido, estado);
+                return daoPedido.Instancia.ListaPedidos(tipoPedido, estado, nombre);
             }
             catch (Exception e)
             {

@@ -15,9 +15,9 @@ namespace _01_Presentacion.Controllers
             return View();
         }
 
-        public ActionResult DetalleMain(string estado)
+        public ActionResult DetalleMain(string estado, string nombre)
         {
-            List<entPedido> lista = appPedido.Instancia.ListaPedidos("Llamada", estado);
+            List<entPedido> lista = appPedido.Instancia.ListaPedidos("Llamada", estado, nombre);
             return PartialView(lista);
         }
 
