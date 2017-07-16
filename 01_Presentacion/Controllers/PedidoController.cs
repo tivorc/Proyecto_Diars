@@ -33,9 +33,9 @@ namespace _01_Presentacion.Controllers
                 foreach (var i in listaMenuPedido)
                 {
                     entMenu menu = new entMenu();
-                    entProducto entrada = appProducto.Instancia.DevolverPlato(i.Entrada.ProductoID);
-                    entProducto segundo = appProducto.Instancia.DevolverPlato(i.Segundo.ProductoID);
-                    entProducto postre = appProducto.Instancia.DevolverPlato(i.Postre.ProductoID);
+                    entProducto entrada = appProducto.Instancia.DevolverProducto(i.Entrada.ProductoID);
+                    entProducto segundo = appProducto.Instancia.DevolverProducto(i.Segundo.ProductoID);
+                    entProducto postre = appProducto.Instancia.DevolverProducto(i.Postre.ProductoID);
                     menu.Entrada = entrada;
                     menu.Segundo = segundo;
                     menu.Postre = postre;

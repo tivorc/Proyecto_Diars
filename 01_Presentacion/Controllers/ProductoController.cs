@@ -85,7 +85,7 @@ namespace _01_Presentacion.Controllers
         {
             try
             {
-                entProducto p = appProducto.Instancia.DevolverPlato(id);
+                entProducto p = appProducto.Instancia.DevolverProducto(id);
                 if (p == null)
                 {
                     ViewBag.Message = "El cliente no existe";
@@ -108,7 +108,7 @@ namespace _01_Presentacion.Controllers
         {
             try
             {
-                entProducto p = appProducto.Instancia.DevolverPlato(id);
+                entProducto p = appProducto.Instancia.DevolverProducto(id);
                 bool elimino = appProducto.Instancia.EliminarProducto(p.ProductoID);
                 if (elimino)
                 {

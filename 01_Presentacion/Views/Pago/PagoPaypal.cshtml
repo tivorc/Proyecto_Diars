@@ -1,4 +1,4 @@
-﻿@model IEnumerable<_03_Dominio.entPedido>
+﻿@model _03_Dominio.entPedido
 
 @{
     ViewBag.Title = "PagoPaypal";
@@ -7,43 +7,45 @@
 
 <h2>PagoPaypal</h2>
 
-<table class="table">
-    <tr>
-        <th>
+<div>
+    <h4>entPedido</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
             @Html.DisplayNameFor(model => model.PedidoID)
-        </th>
-        <th>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PedidoID)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.TipoPedido)
-        </th>
-        <th>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoPedido)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Fecha)
-        </th>
-        <th>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.EstadoPedido)
-        </th>
-        <th></th>
-    </tr>
+        </dt>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.PedidoID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TipoPedido)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fecha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EstadoPedido)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+        <dd>
+            @Html.DisplayFor(model => model.EstadoPedido)
+        </dd>
 
-</table>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Main")
+</p>

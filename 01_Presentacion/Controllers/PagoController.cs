@@ -29,7 +29,7 @@ namespace _01_Presentacion.Controllers
             int id = p.PedidoID;
             if (p.TipoPago.DescripcionTipoPago.Equals("Paypal"))
             {
-                return RedirectToAction("PagoPaypal", "Pago", new { idg : id});
+                return RedirectToAction("PagoPaypal", "Pago", new { @id = p.PedidoID});
             }
             else
             {
@@ -45,9 +45,10 @@ namespace _01_Presentacion.Controllers
             return View();
         }
 
-        public ActionResult PagoPaypal(entPedido p)
+        public ActionResult PagoPaypal(int id)
         {
-            return PartialView(p);
+            entPedido p = appPedido.Instancia.DevolverPedido(id);
+            return View(p);
         }
     }
 }

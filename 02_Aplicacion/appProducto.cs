@@ -56,11 +56,11 @@ namespace _02_Aplicacion
             }
         }
 
-        public entProducto DevolverPlato(int platoID)
+        public entProducto DevolverProducto(int productoID)
         {
             try
             {
-                return daoProducto.Instancia.DevolverPlato(platoID);
+                return daoProducto.Instancia.DevolverProducto(productoID);
             }
             catch (Exception e)
             {

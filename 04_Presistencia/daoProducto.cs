@@ -132,16 +132,16 @@ namespace _04_Presistencia
             finally { if (cmd != null) { cmd.Connection.Close(); } }
         }
 
-        public entProducto DevolverPlato(int platoID)
+        public entProducto DevolverProducto(int productoID)
         {
             SqlCommand cmd = null;
             entProducto p = null;
             try
             {
                 SqlConnection cn = Conexion.Instancia.conectar();
-                cmd = new SqlCommand("spDevolverPlato", cn);
+                cmd = new SqlCommand("spDevolverProducto", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@productoID", platoID);
+                cmd.Parameters.AddWithValue("@productoID", productoID);
                 cn.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read())

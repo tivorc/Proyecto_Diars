@@ -21,7 +21,7 @@ namespace _04_Presistencia
         public SqlConnection conectar()
         {
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data source=.; Initial Catalog=ProyectoDiars; Integrated Security=true";
+            cn.ConnectionString = "Data source=.; Initial Catalog=BDLaValentina; Integrated Security=true";
             return cn;
         }
         #endregion metodos

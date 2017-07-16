@@ -59,9 +59,9 @@ namespace _01_Presentacion.Controllers
 
         public JavaScriptResult AgregarMenu(int entrada, int segundo, int postre, int cantidad)
         {
-            entProducto ent = appProducto.Instancia.DevolverPlato(entrada);
-            entProducto seg = appProducto.Instancia.DevolverPlato(segundo);
-            entProducto pos = appProducto.Instancia.DevolverPlato(postre);
+            entProducto ent = appProducto.Instancia.DevolverProducto(entrada);
+            entProducto seg = appProducto.Instancia.DevolverProducto(segundo);
+            entProducto pos = appProducto.Instancia.DevolverProducto(postre);
             entMenu menu = new entMenu();
             menu.Entrada = ent;
             menu.Segundo = seg;
@@ -86,7 +86,7 @@ namespace _01_Presentacion.Controllers
 
         public JavaScriptResult AgregarProducto(int productoID, int cantidadProducto)
         {
-            entProducto pro = appProducto.Instancia.DevolverPlato(productoID);
+            entProducto pro = appProducto.Instancia.DevolverProducto(productoID);
             entDetallePedido dtPedido = new entDetallePedido();
             dtPedido.Producto = pro;
             dtPedido.CantidadProducto = cantidadProducto;
