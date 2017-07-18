@@ -1,30 +1,32 @@
-﻿using System;
+﻿using _02_Aplicacion;
+using _03_Dominio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using _03_Dominio;
-using _02_Aplicacion;
+
 namespace _01_Presentacion.Controllers
 {
-    public class PedidoController : Controller
+    public class PedidoPresencialController : Controller
     {
-        public ActionResult Nuevo()
+        public ActionResult Main()
         {
-            if (Session["usuario"] != null)
-            {
-
-            }
-            else
-            {
-                return RedirectToAction("Login", "Home");
-            }
+            List<entMesa> listaMesa = appMesa.Instancia.ListarMesas();
+            ViewBag.Mesa = listaMesa;
             return View();
         }
-        public ActionResult DetalleNuevo()
+
+        public ActionResult DetalleMain(int mesa,string estado)
         {
-            List<entTipoPago> lista = appTipoPago.Instancia.ListarTipoPago();
-            ViewBag.Lista = lista;
+            List<entPedido> lista = appPedido.Instancia.ListaPedidosPresencial(mesa, estado);
+            return PartialView(lista);
+        }
+
+        public ActionResult NuevoPedido()
+        {
+            List<entMesa> listaMesa = appMesa.Instancia.ListarMesas();
+            ViewBag.Mesa = listaMesa;
             List<entProducto> listaEntrada = appProducto.Instancia.ListaPlatosDisponibles(1);
             ViewBag.Entrada = listaEntrada;
             List<entProducto> listaSegundo = appProducto.Instancia.ListaPlatosDisponibles(2);
@@ -32,6 +34,41 @@ namespace _01_Presentacion.Controllers
             List<entProducto> listaPostre = appProducto.Instancia.ListaPlatosDisponibles(3);
             ViewBag.Postre = listaPostre;
             return View();
+        }
+
+        public ActionResult SeleccionarProducto(string busquedaProducto)
+        {
+            List<entProducto> lista = appProducto.Instancia.ListaProductos(busquedaProducto);
+            return PartialView(lista);
+        }
+
+        public ActionResult DetalleMenu()
+        {
+            if (Session["listaMenu"] != null)
+            {
+                List<entMenu> lista = (List<entMenu>)Session["listaMenu"];
+                return PartialView(lista);
+            }
+            else
+            {
+                List<entMenu> lista = new List<entMenu>();
+                return PartialView(lista);
+            }
+
+        }
+
+        public ActionResult DetalleProducto()
+        {
+            if (Session["listaProducto"] != null)
+            {
+                List<entDetallePedido> lista = (List<entDetallePedido>)Session["listaProducto"];
+                return PartialView(lista);
+            }
+            else
+            {
+                List<entDetallePedido> lista = new List<entDetallePedido>();
+                return PartialView(lista);
+            }
         }
 
         public JavaScriptResult AgregarMenu(int entrada, int segundo, int postre, int cantidad)
@@ -81,78 +118,38 @@ namespace _01_Presentacion.Controllers
             return JavaScript("muestradetalle();");
         }
 
-        public ActionResult DetalleMenu()
+        public ActionResult GrabarPedido(int mesa)
         {
-            if (Session["listaMenu"] != null)
+            if ((Session["listaMenu"] != null || Session["listaProducto"] != null) && mesa != 0)
             {
-                List<entMenu> lista = (List<entMenu>)Session["listaMenu"];
-                return PartialView(lista);
-            }
-            else
-            {
-                List<entMenu> lista = new List<entMenu>();
-                return PartialView(lista);
-            }
-
-        }
-
-        public ActionResult DetalleProducto()
-        {
-            if (Session["listaProducto"] != null)
-            {
-                List<entDetallePedido> lista = (List<entDetallePedido>)Session["listaProducto"];
-                return PartialView(lista);
-            }
-            else
-            {
-                List<entDetallePedido> lista = new List<entDetallePedido>();
-                return PartialView(lista);
-            }
-        }
-
-        public ActionResult SeleccionarProducto(string busquedaProducto)
-        {
-            List<entProducto> lista = appProducto.Instancia.ListaProductos(busquedaProducto);
-            return PartialView(lista);
-        }
-
-        public ActionResult Cancelar()
-        {
-            Session["pedido"] = null;
-            Session["listaMenu"] = null;
-            Session["listaProducto"] = null;
-            return RedirectToAction("Index", "Home");
-        }
-
-        public ActionResult GrabarPedido(int tipoPago)
-        {
-            if (Session["listaMenu"] != null || Session["listaProducto"] != null)
-            {
-                entUsuario u = (entUsuario)Session["usuario"];
-                entCliente c = appCliente.Instancia.DevolverClienteLogin(u.UsuarioID);
-                entTipoPago tp = new entTipoPago();
-                tp.TipoPagoID = tipoPago;
+                entMesa m = new entMesa();
+                m.MesaID = mesa;
                 entPedido ped = new entPedido();
-                ped.TipoPago = tp;
-                ped.TipoPedido = "Online";
-                ped.Cliente = c;
+                ped.Mesa = m;
+                ped.TipoPedido = "Presencial";
 
                 List<entMenu> men = (List<entMenu>)Session["listaMenu"];
 
                 List<entDetallePedido> pro = (List<entDetallePedido>)Session["listaProducto"];
 
-                //bool inserto = false;
-                //inserto = appPedido.Instancia.InsertarPedidoLlamada(ped, men, pro);
+                bool inserto = false;
+                inserto = appPedido.Instancia.InsertarPedidoPresencial(ped, men, pro);
 
                 Session["listaMenu"] = null;
                 Session["listaProducto"] = null;
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Main", "PedidoPresencial");
             }
             else
             {
                 return View();
             }
         }
-    }
 
+        public ActionResult Cancelar()
+        {
+            Session["listaMenu"] = null;
+            Session["listaProducto"] = null;
+            return RedirectToAction("Main", "PedidoPresencial");
+        }
+    }
 }

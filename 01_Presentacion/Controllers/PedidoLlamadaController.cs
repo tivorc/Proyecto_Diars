@@ -17,7 +17,7 @@ namespace _01_Presentacion.Controllers
 
         public ActionResult DetalleMain(string estado, string nombre)
         {
-            List<entPedido> lista = appPedido.Instancia.ListaPedidos("Llamada", estado, nombre);
+            List<entPedido> lista = appPedido.Instancia.ListaPedidosLlamada(estado, nombre);
             return PartialView(lista);
         }
 
@@ -47,6 +47,7 @@ namespace _01_Presentacion.Controllers
         public ActionResult NuevoPedido()
         {
             List<entTipoPago> lista = appTipoPago.Instancia.ListarTipoPago();
+            lista.Remove(lista.Find(x => x.DescripcionTipoPago.Equals("Paypal")));
             ViewBag.Lista = lista;
             List<entProducto> listaEntrada = appProducto.Instancia.ListaPlatosDisponibles(1);
             ViewBag.Entrada = listaEntrada;
@@ -167,7 +168,7 @@ namespace _01_Presentacion.Controllers
                 List<entDetallePedido> pro = (List<entDetallePedido>)Session["listaProducto"];
 
                 bool inserto = false;
-                inserto = appPedido.Instancia.InsertarPedido(ped, men, pro);
+                inserto = appPedido.Instancia.InsertarPedidoLlamada(ped, men, pro);
 
                 Session["pedido"] = null;
                 Session["listaMenu"] = null;
@@ -176,7 +177,6 @@ namespace _01_Presentacion.Controllers
             }
             else
             {
-                ViewBag.alerta = "Debe ingresar";
                 return View();
             }
         }

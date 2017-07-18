@@ -1,0 +1,70 @@
+﻿@using _03_Dominio
+
+@{
+    ViewBag.Title = "Main";
+    Layout = "~/Views/MasterPages/MasterIntranet.cshtml";
+}
+
+<h2>Pedido Presencial</h2>
+<div class="form-group">
+    <div class="row">
+        <div>
+            <label class="control-label col-md-1">Mesa:</label>
+        </div>
+        <div class="col-md-3">
+            <select class="form-control" id="mesa">
+                @{
+                    List<entMesa> listaMesa = (List<entMesa>)ViewBag.Mesa;
+                    <option value="0">Todas</option>
+                    foreach (var m in listaMesa)
+                    {
+                        <option value="@m.MesaID">Mesa @m.NumeroMesa</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <div class="row">
+        <div>
+            <label class="control-label col-md-1">Estado Pedido:</label>
+        </div>
+        <div class="col-md-3">
+            <select class="form-control" id="estado">
+                <option value="Registrado">Registrado</option>
+                <option value="Reparto">Anulado</option>
+            </select>
+        </div>
+    </div>
+</div>
+<br />
+
+<p>
+    <a href="@Url.Action("NuevoPedido","PedidoPresencial")" class="btn btn-primary">Nuevo Pedido</a>
+</p>
+
+<div id="detalle">
+
+</div>
+
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            muestra();
+        });
+
+        $('#mesa').change(function () {
+            muestra();
+        });
+
+        $('#estado').change(function () {
+            muestra();
+        });
+
+        var muestra = function () {
+            $('#detalle').load('@Url.Action("DetalleMain")', { mesa: $('#mesa').val(), estado: $('#estado').val() })
+        }
+    </script>
+}

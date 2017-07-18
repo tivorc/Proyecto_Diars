@@ -198,7 +198,7 @@
 
                     <b class="arrow"></b>
 
-                    <ul class="submenu">
+                    @*<ul class="submenu">
 
                         <li class="">
                             <a href="@Url.Action("Main", "Pedido")">
@@ -209,14 +209,27 @@
                             <b class="arrow"></b>
                         </li>
 
-                    </ul>
+                    </ul>*@
 
                     <ul class="submenu">
 
                         <li class="">
                             <a href="@Url.Action("Main", "PedidoLlamada")">
                                 <i class="menu-icon fa fa-caret-right"></i>
-                                Delivery Llamada
+                                Pedido Llamada
+                            </a>
+
+                            <b class="arrow"></b>
+                        </li>
+
+                    </ul>
+
+                    <ul class="submenu">
+
+                        <li class="">
+                            <a href="@Url.Action("Main", "PedidoPresencial")">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Pedido Presencial
                             </a>
 
                             <b class="arrow"></b>
@@ -252,14 +265,14 @@
 
                 </li>
 
-                <li class="">
+                @*<li class="">
                     <a href="#">
                         <i class="menu-icon fa fa-list-alt"></i>
                         <span class="menu-text"> Widgets </span>
                     </a>
 
                     <b class="arrow"></b>
-                </li>
+                </li>*@
 
             </ul><!-- /.nav-list -->
 

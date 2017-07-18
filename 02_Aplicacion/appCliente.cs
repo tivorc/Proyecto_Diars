@@ -55,6 +55,18 @@ namespace _02_Aplicacion
             }
         }
 
+        public entCliente DevolverClienteLogin(int idUsuario)
+        {
+            try
+            {
+                return daoCliente.Instancia.DevolverClienteLogin(idUsuario);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public bool EditarClienteIntranet(entCliente c)
         {
             try

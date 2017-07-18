@@ -1,17 +1,10 @@
 ﻿@model IEnumerable<_03_Dominio.entPedido>
 
-
-<h3>@ViewBag.titulo</h3>
+<h3>Pedidos Presencial</h3>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.PedidoID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cliente.Persona.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cliente.Persona.Direccion)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Fecha)
@@ -21,6 +14,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TipoPago.DescripcionTipoPago)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mesa.NumeroMesa)
         </th>
         <th></th>
     </tr>
@@ -32,12 +28,6 @@
                 @Html.DisplayFor(modelItem => item.PedidoID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cliente.Persona.Nombre) @Html.DisplayFor(modelItem => item.Cliente.Persona.Apellidos)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cliente.Persona.Direccion)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Fecha)
             </td>
             <td>
@@ -47,10 +37,14 @@
                 @Html.DisplayFor(modelItem => item.TipoPago.DescripcionTipoPago)
             </td>
             <td>
-                @Html.ActionLink("Pagar", "IdentificarTipo", new { pedidoID = item.PedidoID })
+                @Html.DisplayFor(modelItem => item.Mesa.NumeroMesa)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Detalles", "DetallePedido", new { pedidoID = item.PedidoID }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
     }
 
 </table>
-

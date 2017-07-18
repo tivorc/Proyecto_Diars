@@ -11,26 +11,23 @@ namespace _01_Presentacion.Controllers
 {
     public class HomeController : Controller
     {
-        // GET: Home
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Menu
         public ActionResult Menu()
         {
-            int idSubTipoPlato = 0;
-            List<entProducto> lista = appProducto.Instancia.ListaPlatosDisponibles(idSubTipoPlato);
+            List<entProducto> lista = appProducto.Instancia.ListaPlatosDisponibles(0);
             return View(lista);
         }
 
-        // GET: Login
         [HttpGet]
         public ActionResult Login()
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult Login(FormCollection frm)
         {
@@ -70,40 +67,37 @@ namespace _01_Presentacion.Controllers
         }
         public class Sexo
         {
-            public string Valor { get; set; }
+            public string SexoID { get; set; }
             public string Descripcion { get; set; }
+
+            public Sexo(string sexoID, string descripcion)
+            {
+                this.SexoID = sexoID;
+                this.Descripcion = descripcion;
+            }
         }
-        // GET: Registro
+
         [HttpGet]
         public ActionResult Registro()
         {
-            List<Sexo> sexos = new List<Sexo>();
-            Sexo sexo1 = new Sexo();
-            sexo1.Valor = "F";
-            sexo1.Descripcion = "Femenino";
-            Sexo sexo2 = new Sexo();
-            sexo2.Valor = "M";
-            sexo2.Descripcion = "Masculino";
-            sexos.Add(sexo1);
-            sexos.Add(sexo2);
-            ViewBag.sexos = new SelectList(sexos, "Valor", "Descripcion");
+            List<Sexo> lista = new List<Sexo>();
+            Sexo sexo = new Sexo("F", "Femenino");
+            lista.Add(sexo);
+            sexo = new Sexo("M", "Masculino");
+            lista.Add(sexo);
+            ViewBag.sexos = new SelectList(lista, "SexoID", "Descripcion");
             return View();
         }
 
-        // GET: Registro
         [HttpPost]
         public ActionResult Registro(entCliente c, HttpPostedFileBase archivo)
         {
-            List<Sexo> sexos = new List<Sexo>();
-            Sexo sexo1 = new Sexo();
-            sexo1.Valor = "F";
-            sexo1.Descripcion = "Femenino";
-            Sexo sexo2 = new Sexo();
-            sexo2.Valor = "M";
-            sexo2.Descripcion = "Masculino";
-            sexos.Add(sexo1);
-            sexos.Add(sexo2);
-            ViewBag.sexos = new SelectList(sexos, "Valor", "Descripcion");
+            List<Sexo> lista = new List<Sexo>();
+            Sexo sexo = new Sexo("F", "Femenino");
+            lista.Add(sexo);
+            sexo = new Sexo("M", "Masculino");
+            lista.Add(sexo);
+            ViewBag.sexos = new SelectList(lista, "SexoID", "Descripcion");
             if (ModelState.IsValid)
             {
                 c.Usuario.Rol = "Cliente";

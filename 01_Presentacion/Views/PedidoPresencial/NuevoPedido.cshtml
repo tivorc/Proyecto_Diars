@@ -5,22 +5,20 @@
     Layout = "~/Views/MasterPages/MasterIntranet.cshtml";
 }
 
-<h2>Nuevo Pedido</h2>
-<div id="clientePedido">
-
-</div>
+<h2>NuevoPedido</h2>
 <br />
 <div class="row">
     <div>
-        <label class="control-label col-md-1">Tipo de pago:</label>
+        <label class="control-label col-md-1">Mesa:</label>
     </div>
     <div class="col-md-3">
-        <select class="form-control" id="tipoPago">
+        <select class="form-control" id="mesa">
             @{
-                List<entTipoPago> lista = (List<entTipoPago>)ViewBag.Lista;
-                foreach (var stp in lista)
+                List<entMesa> listaMesa = (List<entMesa>)ViewBag.Mesa;
+                <option value="0">--Seleccionar--</option>
+                foreach (var m in listaMesa)
                 {
-                    <option value="@stp.TipoPagoID">@stp.DescripcionTipoPago</option>
+                    <option value="@m.MesaID">Mesa @m.NumeroMesa (@m.CapacidadMesa personas)</option>
                 }
             }
         </select>
@@ -40,6 +38,7 @@
     </div>
 </div>
 <br />
+
 <!-- Modal para Agregar Menú-->
 <div class="modal fade" id="Menu" tabindex="1" role="dialog" aria-labelledby="Menu" aria-hidden="true">
     <div class="modal-dialog">
@@ -154,36 +153,7 @@
     </div>
 </div>
 <!-- Fin modal para Agregar Menú-->
-<!-- Modal para Agregar Cliente-->
-<div class="modal fade" id="agregarCliente" tabindex="1" role="dialog" aria-labelledby="agregarCliente" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <p class="modal-title"> Agregar Cliente</p>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="form-group">
-                        <div>
-                            <label class="control-label col-md-2">Buscar Cliente: </label>
-                        </div>
-                        <div class="col-md-3">
-                            <input type="text" class="form-control" placeholder="Ingrese cliente a buscar" id="buscarCliente">
-                        </div>
-                    </div>
-                </div>
-                <div class="row" id="muestraListaClientes">
 
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnAgregarCliente">Seleccionar</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Fin modal para Agregar Cliente-->
 <div class="row">
     <div id="detalleMenu" class="col-md-6">
 
@@ -194,13 +164,9 @@
     </div>
 </div>
 
-<div class="pull-right">
-    Total: <input type="text" value="" id="totalPedido" />
-</div>
-
 <div class="row">
     <div>
-        <a href="@Url.Action("Cancelar","PedidoLlamada")" class="btn btn-default">Cancelar</a>
+        <a href="@Url.Action("Cancelar","PedidoPresencial")" class="btn btn-default">Cancelar</a>
         <button type="button" class="btn btn-info" id="btnGuardar">Guardar</button>
     </div>
 </div>
@@ -210,21 +176,7 @@
         $(document).ready(function () {
             muestradetalle();
             muestraProducto();
-            muestraClientePedido();
-            muestraListaClientes();
         });
-
-        $('#buscarCliente').keyup(function () {
-            muestraListaClientes();
-        });
-
-        var muestraListaClientes = function () {
-            $('#muestraListaClientes').load('@Url.Action("ListaClientes")', { Nombre: $('#buscarCliente').val() })
-        }
-
-        var muestraClientePedido = function () {
-            $('#clientePedido').load('@Url.Action("ClientePedido")')
-        }
 
         $('#busquedaProducto').keyup(function () {
             muestraProducto();
@@ -267,26 +219,14 @@
             })
         });
 
-        $('#btnAgregarCliente').click(function () {
-            $('#tablaCliente tbody tr').each(function () {
-                if ($(this).find('.rdbtnPersona').is(':checked')) {
-                    var _personaID = $(this).find('.PersonaID').val();
-
-                    $.post('@Url.Action("AgregarCliente")', {
-                        personaID: _personaID,
-                    })
-                }
-            })
-        });
-
         $('#btnGuardar').click(function () {
             $.ajax({
                 type: "POST",
                 url: '@Url.Action("GrabarPedido")',
                 data: {
-                    tipoPago: $('#tipoPago').val()
+                    mesa: $('#mesa').val()
                 }
-            }).done(function () { alert("El pedido se guardó correctamente"); location.href = "@Url.Action("Main","PedidoLlamada")"; })
+            }).done(function () { alert("El pedido se guardó correctamente"); location.href = "@Url.Action("Main","PedidoPresencial")"; })
         });
     </script>
 }

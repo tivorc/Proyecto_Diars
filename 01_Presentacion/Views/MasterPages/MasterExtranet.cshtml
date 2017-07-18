@@ -9,6 +9,8 @@
     <link rel="icon" href="~/Bootstrap/Extranet/images/favicon.ico">
     <link rel="shortcut icon" href="~/Bootstrap/Extranet/images/favicon.ico" />
 
+    @*<link rel="stylesheet" href="~/Bootstrap/Intranet/css/bootstrap.min.css" />*@
+
     <!-- Font Awesome -->
     <link href="~/Bootstrap/Intranet/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
@@ -60,9 +62,9 @@
                         <div class="navigation">
                             <nav>
                                 <ul class="sf-menu">
-                                    <li @*class="current"*@>@Html.ActionLink("Inicio", "Index")</li>
-                                    <li>@Html.ActionLink("Menu del día", "Menu")</li>
-                                    <li><a href="index-2.html">Pedido</a></li>
+                                    <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                                    <li><a href="@Url.Action("Menu","Home")">Menu del día</a></li>
+                                    <li><a href="@Url.Action("Nuevo","Pedido")">Pedido</a></li>
                                     <li><a href="index-4.html">Contacto</a></li>
                                 </ul>
                             </nav>
@@ -74,7 +76,7 @@
                                         entUsuario u = (entUsuario)Session["usuario"];
                                         if(u.Rol == "Cliente")
                                         {
-                                            <div class="pull-right">Hola @u.NombreUsuario  |  @Html.ActionLink("Cerrar Sesión", "Logout")</div>
+                                            <div class="pull-right">Hola @u.NombreUsuario  |  <a href="@Url.Action("Logout","Home")">Cerrar Sesión</a></div>
                                         }
                                         else
                                         {
@@ -84,8 +86,8 @@
                                     else
                                     {
                                         <div class="pull-right">
-                                            @Html.ActionLink("Iniciar Sesión", "Login")  |  @Html.ActionLink("Registrarse", "Registro")
-                                        </div>
+                                            @Html.ActionLink("Iniciar Sesión", "Login")  |  <a href="@Url.Action("Registro","Home")">Registrarse</a>
+</div>
                                     }
                                 }
                             </div>
@@ -124,5 +126,6 @@
             </div>
         </div>
     </footer>
+    @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -322,6 +322,7 @@
     <Compile Include="Controllers\PagoController.cs" />
     <Compile Include="Controllers\PedidoController.cs" />
     <Compile Include="Controllers\PedidoLlamadaController.cs" />
+    <Compile Include="Controllers\PedidoPresencialController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -360,18 +361,11 @@
     <Content Include="Views\Producto\Platos.cshtml" />
     <Content Include="Views\Producto\ListaPlatos.cshtml" />
     <Content Include="Views\Producto\NuevoPlato.cshtml" />
-    <Content Include="Views\Pedido\AgregarCliente.cshtml" />
-    <Content Include="Views\Pedido\DetalleListaCliente.cshtml" />
     <Content Include="Views\Cliente\Lista.cshtml" />
     <Content Include="Views\Cliente\DetalleLista.cshtml" />
     <Content Include="Views\Cliente\Editar.cshtml" />
-    <Content Include="Views\Pedido\NuevoPedido.cshtml" />
-    <Content Include="Views\Pedido\AgregarMenu.cshtml" />
     <Content Include="Views\Cliente\Eliminar.cshtml" />
     <Content Include="Views\Producto\Eliminar.cshtml" />
-    <Content Include="Views\Pedido\Main.cshtml" />
-    <Content Include="Views\Pedido\DetalleMain.cshtml" />
-    <Content Include="Views\Pedido\MenuPedido.cshtml" />
     <Content Include="Views\PedidoLlamada\Main.cshtml" />
     <Content Include="Views\PedidoLlamada\DetalleMain.cshtml" />
     <Content Include="Views\PedidoLlamada\NuevoPedido.cshtml" />
@@ -384,6 +378,20 @@
     <Content Include="Views\Pago\Main.cshtml" />
     <Content Include="Views\Pago\DetalleMain.cshtml" />
     <Content Include="Views\Pago\PagoPaypal.cshtml" />
+    <Content Include="Views\Pago\PagoTarjeta.cshtml" />
+    <Content Include="Views\Pago\PagoEfectivo.cshtml" />
+    <Content Include="Views\PedidoPresencial\Main.cshtml" />
+    <Content Include="Views\PedidoPresencial\DetalleMain.cshtml" />
+    <Content Include="Views\PedidoPresencial\NuevoPedido.cshtml" />
+    <Content Include="Views\PedidoPresencial\SeleccionarProducto.cshtml" />
+    <Content Include="Views\PedidoPresencial\DetalleMenu.cshtml" />
+    <Content Include="Views\PedidoPresencial\DetalleProducto.cshtml" />
+    <Content Include="Views\Pago\DetallePresencial.cshtml" />
+    <Content Include="Views\Pedido\DetalleNuevo.cshtml" />
+    <Content Include="Views\Pedido\DetalleMenu.cshtml" />
+    <Content Include="Views\Pedido\DetalleProducto.cshtml" />
+    <Content Include="Views\Pedido\SeleccionarProducto.cshtml" />
+    <Content Include="Views\Pedido\Nuevo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

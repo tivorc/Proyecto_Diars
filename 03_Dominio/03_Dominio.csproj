@@ -45,6 +45,7 @@
     <Compile Include="entComprobantePago.cs" />
     <Compile Include="entDetallePedido.cs" />
     <Compile Include="entMenu.cs" />
+    <Compile Include="entMesa.cs" />
     <Compile Include="entPago.cs" />
     <Compile Include="entPedido.cs" />
     <Compile Include="entPersona.cs" />

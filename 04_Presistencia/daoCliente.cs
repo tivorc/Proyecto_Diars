@@ -137,7 +137,53 @@ namespace _04_Presistencia
             catch (Exception e) { throw e; }
             finally { if (cmd != null) { cmd.Connection.Close(); } }
         }
-        
+
+        public entCliente DevolverClienteLogin(int idUsuario)
+        {
+            SqlCommand cmd = null;
+            entCliente cli = null;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.conectar();
+                cmd = new SqlCommand("spDevolverClienteLogin", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
+                cn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    cli = new entCliente();
+                    cli.ClienteID = Convert.ToInt16(dr["clienteID"]);
+                    entPersona pe = new entPersona();
+                    pe.PersonaID = Convert.ToInt16(dr["personaID"]);
+                    pe.Nombre = dr["nombre"].ToString();
+                    pe.Apellidos = dr["apellidos"].ToString();
+                    pe.Dni = dr["dni"].ToString();
+                    pe.Telefono = dr["telefono"].ToString();
+                    pe.Sexo = dr["sexo"].ToString();
+                    pe.Direccion = dr["direccion"].ToString();
+                    string fecha = dr["fechaNacimiento"].ToString();
+                    if (fecha != "")
+                    {
+                        pe.FechaNacimiento = Convert.ToDateTime(fecha);
+                    }
+                    //pe.FechaNacimiento = Convert.ToDateTime(dr["fechaNacimiento"]);
+                    cli.Persona = pe;
+                    entUsuario u = new entUsuario();
+                    u.UsuarioID = Convert.ToInt16(dr["usuarioID"]);
+                    u.NombreUsuario = dr["nombreUsuario"].ToString();
+                    u.Contrasena = dr["contrasena"].ToString();
+                    u.Rol = dr["rol"].ToString();
+                    u.Estado = Convert.ToBoolean(dr["estado"]);
+                    u.ImgUsuario = dr["imgUsuario"].ToString();
+                    cli.Usuario = u;
+                }
+                return cli;
+            }
+            catch (Exception e) { throw e; }
+            finally { if (cmd != null) { cmd.Connection.Close(); } }
+        }
+
         public List<entCliente> ListaCliente(string nombre)
         {
             SqlCommand cmd = null;

@@ -21,7 +21,7 @@ namespace _04_Presistencia
 
         #region metodos
 
-        public bool InsertarPedido(string xml)
+        public bool InsertarPedidoLlamada(string xml)
         {
             SqlCommand cmd = null;
             bool inserto = false;
@@ -43,16 +43,37 @@ namespace _04_Presistencia
             finally { if (cmd != null) { cmd.Connection.Close(); } }
         }
 
-        public List<entPedido> ListaPedidos(string tipoPedido, string estado, string nombre)
+        public bool InsertarPedidoPresencial(string xml)
+        {
+            SqlCommand cmd = null;
+            bool inserto = false;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.conectar();
+                cmd = new SqlCommand("spInsertarPedidoPresencial", cn);
+                cmd.Parameters.AddWithValue("@prmstrXML", xml);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cn.Open();
+
+                int i = cmd.ExecuteNonQuery();
+                if (i > 0) { inserto = true; }
+                return inserto;
+            }
+            catch (Exception e) { throw e; }
+            finally { if (cmd != null) { cmd.Connection.Close(); } }
+        }
+
+        public List<entPedido> ListaPedidosLlamada(string estado, string nombre)
         {
             SqlCommand cmd = null;
             List<entPedido> lista = new List<entPedido>();
             try
             {
                 SqlConnection cn = Conexion.Instancia.conectar();
-                cmd = new SqlCommand("spListarPedidos", cn);
+                cmd = new SqlCommand("spListarPedidosLlamada", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@tipoPedido", tipoPedido);
                 cmd.Parameters.AddWithValue("@estado", estado);
                 cmd.Parameters.AddWithValue("@cliente", nombre);
                 cn.Open();
@@ -73,9 +94,87 @@ namespace _04_Presistencia
                     entTipoPago tp = new entTipoPago();
                     tp.TipoPagoID = Convert.ToInt32(dr["tipoPagoID"]);
                     tp.DescripcionTipoPago = dr["descripcionTipoPago"].ToString();
+
                     cli.Persona = per;
                     ped.Cliente = cli;
                     ped.TipoPago = tp;
+
+                    lista.Add(ped);
+                }
+                return lista;
+            }
+            catch (Exception e) { throw e; }
+            finally { if (cmd != null) { cmd.Connection.Close(); } }
+        }
+
+        public List<entPedido> ListaPedidosOnline(string estado, string nombre)
+        {
+            SqlCommand cmd = null;
+            List<entPedido> lista = new List<entPedido>();
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.conectar();
+                cmd = new SqlCommand("spListarPedidosOnline", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@estado", estado);
+                cmd.Parameters.AddWithValue("@cliente", nombre);
+                cn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    entPedido ped = new entPedido();
+                    ped.PedidoID = Convert.ToInt32(dr["pedidoID"]);
+                    ped.EstadoPedido = dr["estadoPedido"].ToString();
+                    ped.Fecha = Convert.ToDateTime(dr["fecha"]);
+                    entPersona per = new entPersona();
+                    per.PersonaID = Convert.ToInt32(dr["personaID"]);
+                    per.Nombre = dr["nombre"].ToString();
+                    per.Apellidos = dr["apellidos"].ToString();
+                    per.Direccion = dr["direccion"].ToString();
+                    entCliente cli = new entCliente();
+                    cli.ClienteID = Convert.ToInt32(dr["clienteID"]);
+                    entTipoPago tp = new entTipoPago();
+                    tp.TipoPagoID = Convert.ToInt32(dr["tipoPagoID"]);
+                    tp.DescripcionTipoPago = dr["descripcionTipoPago"].ToString();
+
+                    cli.Persona = per;
+                    ped.Cliente = cli;
+                    ped.TipoPago = tp;
+
+                    lista.Add(ped);
+                }
+                return lista;
+            }
+            catch (Exception e) { throw e; }
+            finally { if (cmd != null) { cmd.Connection.Close(); } }
+        }
+
+        public List<entPedido> ListaPedidosPresencial(int mesa, string estado)
+        {
+            SqlCommand cmd = null;
+            List<entPedido> lista = new List<entPedido>();
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.conectar();
+                cmd = new SqlCommand("spListarPedidosPresencial", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@mesa", mesa);
+                cmd.Parameters.AddWithValue("@estado", estado);
+                cn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    entPedido ped = new entPedido();
+                    ped.PedidoID = Convert.ToInt32(dr["pedidoID"]);
+                    ped.EstadoPedido = dr["estadoPedido"].ToString();
+                    ped.Fecha = Convert.ToDateTime(dr["fecha"]);
+
+                    entMesa m = new entMesa();
+                    m.MesaID = Convert.ToInt32(dr["mesaID"]);
+                    m.NumeroMesa = Convert.ToInt32(dr["numeroMesa"]);
+
+                    ped.Mesa = m;
+
                     lista.Add(ped);
                 }
                 return lista;
@@ -120,6 +219,17 @@ namespace _04_Presistencia
                     entTipoPago tp = new entTipoPago();
                     tp.TipoPagoID = Convert.ToInt32(dr["tipoPagoID"]);
                     tp.DescripcionTipoPago = dr["descripcionTipoPago"].ToString();
+
+                    entMesa m = new entMesa();
+                    string mesaID = dr["mesaID"].ToString();
+                    if (mesaID != "")
+                    {
+                        m.MesaID = Convert.ToInt32(dr["mesaID"]);
+                        m.NumeroMesa = Convert.ToInt32(dr["numeroMesa"]);
+                        ped.Mesa = m;
+                    }
+                    
+
                     ped.TipoPago = tp;
                 }
                 return ped;
