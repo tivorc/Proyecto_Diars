@@ -12,8 +12,29 @@ namespace _03_Dominio
         public entPedido Pedido { get; set; }
         public entTrabajador Trabajador { get; set; }
         public int FechaPago { get; set; }
-        public int SubtotalPago { get; set; }
-        public int DescuentoPago { get; set; }
-        public int TotalPago { get; set; }
+        public decimal SubtotalPago { get; set; }
+        public decimal DescuentoPago { get; set; }
+        public decimal TotalPago { get; set; }
+
+        public decimal calcularSubTotal(List<entMenu> m, List<entDetallePedido> dp)
+        {
+            decimal subTotal = 0;
+            foreach (var item in m)
+            {
+                subTotal = subTotal + (item.Cantidad * item.Precio);
+            }
+
+            foreach (var item in dp)
+            {
+                subTotal = subTotal + (item.CantidadProducto * item.PrecioProducto);
+            }
+
+            return subTotal;
+        }
+
+        public decimal calcularTotal(decimal subTotal, decimal descuento)
+        {
+            return subTotal - descuento;
+        }
     }
 }

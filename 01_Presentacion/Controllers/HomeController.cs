@@ -22,6 +22,11 @@ namespace _01_Presentacion.Controllers
             return View(lista);
         }
 
+        public ActionResult Contacto()
+        {
+            return View();
+        }
+
         [HttpGet]
         public ActionResult Login()
         {

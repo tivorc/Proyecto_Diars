@@ -179,6 +179,18 @@ namespace _02_Aplicacion
             }
         }
 
+            public List<entPedido> ListarPedidosOnlineCliente(int clienteID)
+        {
+            try
+            {
+                return daoPedido.Instancia.ListarPedidosOnlineCliente(clienteID);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public List<entPedido> ListaPedidosLlamada(string estado, string nombre)
         {
             try

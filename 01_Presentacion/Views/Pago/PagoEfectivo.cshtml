@@ -1,43 +1,65 @@
-﻿@model _03_Dominio.entPedido
+﻿@model _03_Dominio.entPago
 
 @{
-    ViewBag.Title = "Pago Efectivo";
+    ViewBag.Title = "PagoEfectivo";
     Layout = "~/Views/MasterPages/MasterIntranet.cshtml";
 }
 
-<h2>Pago Efectivo</h2>
+<h2>PagoEfectivo</h2>
 
 <div>
-    <h4>Pedido @string.Concat("000", @Html.DisplayFor(model => model.PedidoID))</h4>
+    <h4>Pedido @string.Concat("000", @Html.DisplayFor(model => model.Pedido.PedidoID))</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.TipoPedido)
+            @Html.DisplayNameFor(model => model.PagoID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TipoPedido)
+            @Html.DisplayFor(model => model.PagoID)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Fecha)
+            @Html.DisplayNameFor(model => model.FechaPago)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Fecha)
+            @Html.DisplayFor(model => model.FechaPago)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EstadoPedido)
+            @Html.DisplayNameFor(model => model.SubtotalPago)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EstadoPedido)
+            @Html.DisplayFor(model => model.SubtotalPago)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DescuentoPago)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DescuentoPago)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalPago)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalPago)
         </dd>
 
     </dl>
 </div>
+<div class="row">
+    <input type="text" class="col-md-4" id="form-field-1" value="" />
+</div>
+<div class="row">
+    <input maxlength="3" readonly="" type="text" class="col-md-4" id="form-input-readonly" value="@Model.TotalPago"/>
+</div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Main")
+    @Html.ActionLink("Pagar", "Pagar", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Regresar", "Main")
 </p>

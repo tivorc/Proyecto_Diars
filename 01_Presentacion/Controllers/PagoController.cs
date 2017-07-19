@@ -33,8 +33,16 @@ namespace _01_Presentacion.Controllers
                 else
                 {
                     List<entPedido> lista = appPedido.Instancia.ListaPedidosOnline("Registrado", nombre);
+                    List<entPedido> listita = new List<entPedido>();
+                    foreach (var item in lista)
+                    {
+                        if (!item.TipoPago.DescripcionTipoPago.Equals("Paypal"))
+                        {
+                            listita.Add(item);
+                        }
+                    }
                     ViewBag.titulo = "Pedidos Online";
-                    return PartialView(lista);
+                    return PartialView(listita);
                 }
             }
         }
@@ -55,27 +63,14 @@ namespace _01_Presentacion.Controllers
         {
             entPedido p = appPedido.Instancia.DevolverPedido(pedidoID);
             int id = p.PedidoID;
-            if (p.TipoPago.DescripcionTipoPago.Equals("Paypal"))
+            if (p.TipoPago.DescripcionTipoPago.Equals("Tarjeta"))
             {
-                return RedirectToAction("PagoPaypal", "Pago", new { @id = p.PedidoID });
+                return RedirectToAction("PagoTarjeta", "Pago", new { @id = p.PedidoID });
             }
             else
             {
-                if (p.TipoPago.DescripcionTipoPago.Equals("Tarjeta"))
-                {
-                    return RedirectToAction("PagoTarjeta", "Pago", new { @id = p.PedidoID });
-                }
-                else
-                {
-                    return RedirectToAction("PagoEfectivo", "Pago", new { @id = p.PedidoID });
-                }
+                return RedirectToAction("PagoEfectivo", "Pago", new { @id = p.PedidoID });
             }
-        }
-
-        public ActionResult PagoPaypal(int id)
-        {
-            entPedido p = appPedido.Instancia.DevolverPedido(id);
-            return View(p);
         }
 
         public ActionResult PagoTarjeta(int id)
@@ -86,8 +81,16 @@ namespace _01_Presentacion.Controllers
 
         public ActionResult PagoEfectivo(int id)
         {
-            entPedido p = appPedido.Instancia.DevolverPedido(id);
+            entPago p = appPago.Instancia.CalcularTotal(id, ((entUsuario)Session["usuario"]).UsuarioID);
+            Session["pago"] = p;
             return View(p);
+        }
+
+        public ActionResult Pagar()
+        {
+            entPago p = (entPago)Session["pago"];
+            bool inserto = appPago.Instancia.InsertarPago(p);
+            return RedirectToAction("Main", "Pago");
         }
     }
 }

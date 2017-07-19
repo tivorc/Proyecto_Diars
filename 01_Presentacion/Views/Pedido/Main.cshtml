@@ -1,8 +1,10 @@
-﻿
+﻿@using _03_Dominio
+
 @{
     ViewBag.Title = "Main";
-    Layout = null;
+    Layout = "~/Views/MasterPages/MasterExtranet.cshtml";
 }
 
-<h2>Main</h2>
-
+<div class="container">
+    <iframe height="600" width="100%" src="@Url.Action("PedidosOnline","Pedido")"></iframe>
+</div>

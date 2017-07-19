@@ -11,13 +11,6 @@ namespace _01_Presentacion.Controllers
     {
         public ActionResult Main()
         {
-            return View();
-        }
-
-
-
-        public ActionResult Nuevo()
-        {
             if (Session["usuario"] != null)
             {
 
@@ -28,7 +21,23 @@ namespace _01_Presentacion.Controllers
             }
             return View();
         }
-        public ActionResult DetalleNuevo()
+
+        public ActionResult PedidosOnline()
+        {
+            if (Session["usuario"] != null)
+            {
+                entUsuario u = (entUsuario)Session["usuario"];
+                entCliente c = appCliente.Instancia.DevolverClienteLogin(u.UsuarioID);
+                List<entPedido> lista = appPedido.Instancia.ListarPedidosOnlineCliente(c.ClienteID);
+                return View(lista);
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        public ActionResult Nuevo()
         {
             List<entTipoPago> lista = appTipoPago.Instancia.ListarTipoPago();
             ViewBag.Lista = lista;
@@ -128,7 +137,7 @@ namespace _01_Presentacion.Controllers
             Session["pedido"] = null;
             Session["listaMenu"] = null;
             Session["listaProducto"] = null;
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Main", "Pedido");
         }
 
         public ActionResult GrabarPedido(int tipoPago)
@@ -153,13 +162,20 @@ namespace _01_Presentacion.Controllers
 
                 Session["listaMenu"] = null;
                 Session["listaProducto"] = null;
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Main", "Pedido");
             }
             else
             {
                 return View();
             }
         }
+
+        public ActionResult Pagar(int id)
+        {
+            entPago p = appPago.Instancia.CalcularTotal(id, ((entUsuario)Session["usuario"]).UsuarioID);
+            return View(p);
+        }
     }
 
 }
+

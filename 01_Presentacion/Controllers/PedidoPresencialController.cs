@@ -151,5 +151,14 @@ namespace _01_Presentacion.Controllers
             Session["listaProducto"] = null;
             return RedirectToAction("Main", "PedidoPresencial");
         }
+
+        public ActionResult PagoPresencial(int id)
+        {
+            List<entTipoPago> lista = appTipoPago.Instancia.ListarTipoPago();
+            lista.Remove(lista.Find(x => x.DescripcionTipoPago.Equals("Paypal")));
+            ViewBag.Lista = lista;
+            entPedido p = appPedido.Instancia.DevolverPedido(id);
+            return View(p);
+        }
     }
 }

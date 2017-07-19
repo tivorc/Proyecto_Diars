@@ -15,5 +15,6 @@ namespace _03_Dominio
         public string TipoPedido { get; set; }
         public DateTime Fecha { get; set; }
         public string EstadoPedido { get; set; }
+
     }
 }

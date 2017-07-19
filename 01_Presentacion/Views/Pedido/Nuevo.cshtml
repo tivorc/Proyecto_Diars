@@ -1,10 +1,347 @@
-﻿
+﻿@using _03_Dominio
+
 @{
-    ViewBag.Title = "Nuevo";
-    Layout = "~/Views/MasterPages/MasterExtranet.cshtml";
+    ViewBag.Title = "Pedido Online";
+    Layout = null;
 }
-<div class="container">
-    <iframe height="700" width="100%" src="@Url.Action("DetalleNuevo","Pedido")"></iframe>
-</div>
 
+<html>
+<head>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="~/Bootstrap/Intranet/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Bootstrap/Intranet/font-awesome/4.5.0/css/font-awesome.min.css" />
+
+    <!-- page specific plugin styles -->
+    <!-- text fonts -->
+    <link rel="stylesheet" href="~/Bootstrap/Intranet/css/fonts.googleapis.com.css" />
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="~/Bootstrap/Intranet/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+
+    <link rel="stylesheet" href="~/Bootstrap/Intranet/css/ace-skins.min.css" />
+    <link rel="stylesheet" href="~/Bootstrap/Intranet/css/ace-rtl.min.css" />
+
+    <!-- inline styles related to this page -->
+    <!-- ace settings handler -->
+    <script src="~/Bootstrap/Intranet/js/ace-extra.min.js"></script>
+</head>
+
+<body class="no-skin">
+    <div class="main-container ace-save-state" id="main-container">
+        <div class="main-content">
+            <div class="main-content-inner">
+
+                <div class="page-content">
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <!-- PAGE CONTENT BEGINS -->
+                            <h2>Nuevo Pedido</h2>
+                            <div id="clientePedido">
+
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div>
+                                    <label class="control-label col-md-1">Tipo de pago:</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <select class="form-control" id="tipoPago">
+                                        @{
+                                            List<entTipoPago> lista = (List<entTipoPago>)ViewBag.Lista;
+                                            foreach (var stp in lista)
+                                            {
+                                                <option value="@stp.TipoPagoID">@stp.DescripcionTipoPago</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div>
+                                        <input type="button" value="Agregar Menú" class="btn btn-primary" data-toggle="modal" data-target="#Menu" />
+                                    </div>
+                                    <br />
+                                    <div id="detalleMenu">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div>
+                                        <input type="button" value="Agregar Producto" class="btn btn-primary" data-toggle="modal" data-target="#Producto" />
+                                    </div>
+                                    <br />
+                                    <div id="detalleProducto">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+
+                            <!-- Modal para Agregar Menú-->
+                            <div class="modal fade" id="Menu" tabindex="1" role="dialog" aria-labelledby="Menu" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <p class="modal-title"> Agregar Menú</p>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div>
+                                                    <label class="control-label col-md-2">Entrada: </label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <select class="form-control" id="entrada">
+                                                        @{
+                                                            List<entProducto> entrada = (List<entProducto>)ViewBag.Entrada;
+                                                            foreach (var ent in entrada)
+                                                            {
+                                                                <option value="@ent.ProductoID">@ent.NombreProducto</option>
+                                                            }
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="row">
+                                                <div>
+                                                    <label class="control-label col-md-2">Segundo: </label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <select class="form-control" id="segundo">
+                                                        @{
+                                                            List<entProducto> segundo = (List<entProducto>)ViewBag.Segundo;
+                                                            foreach (var seg in segundo)
+                                                            {
+                                                                <option value="@seg.ProductoID">@seg.NombreProducto</option>
+                                                            }
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="row">
+                                                <div>
+                                                    <label class="control-label col-md-2">Postre: </label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <select class="form-control" id="postre">
+                                                        @{
+                                                            List<entProducto> postre = (List<entProducto>)ViewBag.Postre;
+                                                            foreach (var pos in postre)
+                                                            {
+                                                                <option value="@pos.ProductoID">@pos.NombreProducto</option>
+                                                            }
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="row">
+                                                <div>
+                                                    <label class="control-label col-md-2">Cantidad: </label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="number" class="form-control" placeholder="" id="cantidad">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="registrarMenu">Seleccionar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Fin modal para Agregar Menú-->
+                            <!-- Modal para Agregar Producto-->
+                            <div class="modal fade" id="Producto" tabindex="1" role="dialog" aria-labelledby="Menu" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <p class="modal-title"> Agregar Producto</p>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div>
+                                                    <label class="control-label col-md-2">Producto: </label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="text" id="busquedaProducto" class="form-control" placeholder="Buscar Producto">
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="row">
+                                                <div id="seleccionarProducto">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div>
+                                                    <label class="control-label col-md-2">Cantidad: </label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="number" class="form-control" placeholder="" id="cantidadProducto">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnAgregarProducto">Seleccionar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Fin modal para Agregar Menú-->
+                            <!-- Modal para Agregar Cliente-->
+                            <div class="modal fade" id="agregarCliente" tabindex="1" role="dialog" aria-labelledby="agregarCliente" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <p class="modal-title"> Agregar Cliente</p>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <div>
+                                                        <label class="control-label col-md-2">Buscar Cliente: </label>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input type="text" class="form-control" placeholder="Ingrese cliente a buscar" id="buscarCliente">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row" id="muestraListaClientes">
+
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnAgregarCliente">Seleccionar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Fin modal para Agregar Cliente-->
+
+                            <div class="pull-right">
+                                Total: <input type="text" value="" id="totalPedido" />
+                            </div>
+
+                            <div class="row">
+                                <div>
+                                    <a target="_parent" href="@Url.Action("Cancelar","Pedido")" class="btn btn-default">Cancelar</a>
+                                    <button type="button" class="btn btn-info" id="btnGuardar">Guardar</button>
+                                </div>
+                            </div>
+                            <!-- PAGE CONTENT ENDS -->
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.page-content -->
+            </div>
+        </div><!-- /.main-content -->
+    </div><!-- /.main-container -->
+
+    <script src="~/Bootstrap/Intranet/js/jquery-2.1.4.min.js"></script>
+
+    <script type="text/javascript">
+        if ('ontouchstart' in document.documentElement) document.write("<script src='Bootstrap/Intranet/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+    <script src="~/Bootstrap/Intranet/js/bootstrap.min.js"></script>
+
+    <!-- page specific plugin scripts -->
+    <!-- ace scripts -->
+    <script src="~/Bootstrap/Intranet/js/ace-elements.min.js"></script>
+    <script src="~/Bootstrap/Intranet/js/ace.min.js"></script>
+
+    <!-- inline scripts related to this page -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            muestradetalle();
+            muestraProducto();
+            muestraClientePedido();
+            muestraListaClientes();
+        });
+
+        $('#buscarCliente').keyup(function () {
+            muestraListaClientes();
+        });
+
+        var muestraListaClientes = function () {
+            $('#muestraListaClientes').load('@Url.Action("ListaClientes")', { Nombre: $('#buscarCliente').val() })
+        }
+
+        var muestraClientePedido = function () {
+            $('#clientePedido').load('@Url.Action("ClientePedido")')
+        }
+
+        $('#busquedaProducto').keyup(function () {
+            muestraProducto();
+        });
+
+        var muestraProducto = function () {
+            $('#seleccionarProducto').load('@Url.Action("SeleccionarProducto")', { busquedaProducto: $('#busquedaProducto').val() })
+        }
+
+        var muestradetalle = function () {
+            $('#detalleMenu').load('@Url.Action("DetalleMenu")')
+            $('#detalleProducto').load('@Url.Action("DetalleProducto")')
+        }
+
+        $('#registrarMenu').click(function () {
+            var _Entrada = $('#entrada').val();
+            var _Segundo = $('#segundo').val();
+            var _Postre = $('#postre').val();
+            var _Cantidad = $('#cantidad').val();
+
+            $.post('@Url.Action("AgregarMenu")', {
+                entrada: _Entrada,
+                segundo: _Segundo,
+                postre: _Postre,
+                cantidad: _Cantidad
+            })
+        });
+
+        $('#btnAgregarProducto').click(function () {
+            $('#tablaProducto tbody tr').each(function () {
+                if ($(this).find('.rdbtnProducto').is(':checked')) {
+                    var _productoID = $(this).find('.ProductoID').val();
+                    var _CantidadProducto = $('#cantidadProducto').val();
+
+                    $.post('@Url.Action("AgregarProducto")', {
+                        productoID: _productoID,
+                        cantidadProducto: _CantidadProducto
+                    })
+                }
+            })
+        });
+
+        $('#btnAgregarCliente').click(function () {
+            $('#tablaCliente tbody tr').each(function () {
+                if ($(this).find('.rdbtnPersona').is(':checked')) {
+                    var _personaID = $(this).find('.PersonaID').val();
+
+                    $.post('@Url.Action("AgregarCliente")', {
+                        personaID: _personaID,
+                    })
+                }
+            })
+        });
+
+        $('#btnGuardar').click(function () {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GrabarPedido")',
+                data: {
+                    tipoPago: $('#tipoPago').val()
+                }
+            }).done(function () { alert("El pedido se guardó correctamente"); window.open('@Url.Action("Main","Pedido")', '_parent'); })
+        });
+    </script>
+</body>
+</html>

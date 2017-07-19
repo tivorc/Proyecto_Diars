@@ -1,0 +1,78 @@
+﻿@model IEnumerable<_03_Dominio.entPedido>
+
+@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <link rel="stylesheet" href="~/Bootstrap/Intranet/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Bootstrap/Intranet/font-awesome/4.5.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/Bootstrap/Intranet/css/fonts.googleapis.com.css" />
+    <link rel="stylesheet" href="~/Bootstrap/Intranet/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+    <link rel="stylesheet" href="~/Bootstrap/Intranet/css/ace-skins.min.css" />
+    <link rel="stylesheet" href="~/Bootstrap/Intranet/css/ace-rtl.min.css" />
+    <script src="~/Bootstrap/Intranet/js/ace-extra.min.js"></script>
+</head>
+<body class="no-skin">
+    <div class="main-container ace-save-state" id="main-container">
+        <div class="main-content">
+            <div class="main-content-inner">
+                <div class="page-content">
+
+                    <h3>Mis pedidos</h3>
+                
+                    <p>
+                        <a href="@Url.Action("Nuevo","Pedido")" class="btn btn-primary">Nuevo Pedido</a>
+                    </p>    
+
+                    <table class="table">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.PedidoID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Fecha)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.EstadoPedido)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TipoPago.DescripcionTipoPago)
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PedidoID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Fecha)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.EstadoPedido)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TipoPago.DescripcionTipoPago)
+                                </td>
+                                <td>
+                                    @{if (item.EstadoPedido.Equals("Registrado") && item.TipoPago.DescripcionTipoPago.Equals("Paypal"))
+                                        {
+                                            @Html.ActionLink("Pagar", "Pagar", new { id = item.PedidoID }) }}
+                                    @Html.ActionLink("Detalles", "DetallePedido", new { pedidoID = item.PedidoID })
+                                </td>
+                            </tr>
+                                        }
+
+                    </table>
+                </div><!-- /.page-content -->
+            </div>
+        </div><!-- /.main-content -->
+    </div><!-- /.main-container -->
+</body>
+</html>

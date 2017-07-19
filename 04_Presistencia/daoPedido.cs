@@ -204,6 +204,41 @@ namespace _04_Presistencia
             catch (Exception e) { throw e; }
             finally { if (cmd != null) { cmd.Connection.Close(); } }
         }
+        
+        public List<entPedido> ListarPedidosOnlineCliente(int clienteID)
+        {
+            SqlCommand cmd = null;
+            List<entPedido> lista = new List<entPedido>();
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.conectar();
+                cmd = new SqlCommand("spListarPedidosOnlineCliente", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@clienteID", clienteID);
+                cn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    entPedido ped = new entPedido();
+                    ped.PedidoID = Convert.ToInt32(dr["pedidoID"]);
+                    ped.EstadoPedido = dr["estadoPedido"].ToString();
+                    ped.Fecha = Convert.ToDateTime(dr["fecha"]);
+                    entCliente cli = new entCliente();
+                    cli.ClienteID = Convert.ToInt32(dr["clienteID"]);
+                    entTipoPago tp = new entTipoPago();
+                    tp.TipoPagoID = Convert.ToInt32(dr["tipoPagoID"]);
+                    tp.DescripcionTipoPago = dr["descripcionTipoPago"].ToString();
+
+                    ped.Cliente = cli;
+                    ped.TipoPago = tp;
+
+                    lista.Add(ped);
+                }
+                return lista;
+            }
+            catch (Exception e) { throw e; }
+            finally { if (cmd != null) { cmd.Connection.Close(); } }
+        }
 
         public entPedido DevolverPedido(int pedidoID)
         {

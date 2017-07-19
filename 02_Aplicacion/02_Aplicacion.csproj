@@ -44,9 +44,11 @@
     <Compile Include="appDetallePedido.cs" />
     <Compile Include="appMenu.cs" />
     <Compile Include="appMesa.cs" />
+    <Compile Include="appPago.cs" />
     <Compile Include="appPedido.cs" />
     <Compile Include="appProducto.cs" />
     <Compile Include="appSubTipoProducto.cs" />
+    <Compile Include="appTrabajador.cs" />
     <Compile Include="appUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="appTipoPago.cs" />

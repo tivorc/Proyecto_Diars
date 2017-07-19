@@ -1,0 +1,75 @@
+﻿@model _03_Dominio.entPago
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <link rel="stylesheet" href="~/Bootstrap/Intranet/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Bootstrap/Intranet/font-awesome/4.5.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/Bootstrap/Intranet/css/fonts.googleapis.com.css" />
+    <link rel="stylesheet" href="~/Bootstrap/Intranet/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+    <link rel="stylesheet" href="~/Bootstrap/Intranet/css/ace-skins.min.css" />
+    <link rel="stylesheet" href="~/Bootstrap/Intranet/css/ace-rtl.min.css" />
+    <script src="~/Bootstrap/Intranet/js/ace-extra.min.js"></script>
+</head>
+<body class="no-skin">
+    <div class="main-container ace-save-state" id="main-container">
+        <div class="main-content">
+            <div class="main-content-inner">
+                <div class="page-content">
+                    <div>
+                        <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+
+                            <input type="hidden" name="cmd" value="_xclick" />
+                            <input type="hidden" name="business" value="soledad_mari77@hotmail.com" />
+
+                            <input type="hidden" name="item_name" value="Pedido @Model.Pedido.PedidoID" />
+                            <input type="hidden" name="amount" value="@Model.TotalPago" />
+                            <input type="submit" value="Pagar" />
+
+                        </form>
+                        <h4>Pedido</h4>
+                        <hr />
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.PagoID)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.PagoID)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Pedido.Cliente.Persona.Nombre)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Pedido.Cliente.Persona.Nombre)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.TotalPago)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.TotalPago)
+                            </dd>
+
+                        </dl>
+                    </div>
+                    <p>
+                        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+                        @Html.ActionLink("Back to List", "Index")
+                    </p>
+                </div><!-- /.page-content -->
+            </div>
+        </div><!-- /.main-content -->
+    </div><!-- /.main-container -->
+</body>
+</html>

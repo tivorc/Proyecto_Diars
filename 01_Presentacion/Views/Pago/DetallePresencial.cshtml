@@ -40,9 +40,7 @@
                 @Html.DisplayFor(modelItem => item.Mesa.NumeroMesa)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Detalles", "DetallePedido", new { pedidoID = item.PedidoID }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Pagar", "PagoPresencial", new { pedidoID = item.PedidoID })
             </td>
         </tr>
     }

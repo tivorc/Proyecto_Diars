@@ -377,9 +377,7 @@
     <Content Include="Views\PedidoLlamada\DetallePedido.cshtml" />
     <Content Include="Views\Pago\Main.cshtml" />
     <Content Include="Views\Pago\DetalleMain.cshtml" />
-    <Content Include="Views\Pago\PagoPaypal.cshtml" />
     <Content Include="Views\Pago\PagoTarjeta.cshtml" />
-    <Content Include="Views\Pago\PagoEfectivo.cshtml" />
     <Content Include="Views\PedidoPresencial\Main.cshtml" />
     <Content Include="Views\PedidoPresencial\DetalleMain.cshtml" />
     <Content Include="Views\PedidoPresencial\NuevoPedido.cshtml" />
@@ -387,12 +385,15 @@
     <Content Include="Views\PedidoPresencial\DetalleMenu.cshtml" />
     <Content Include="Views\PedidoPresencial\DetalleProducto.cshtml" />
     <Content Include="Views\Pago\DetallePresencial.cshtml" />
-    <Content Include="Views\Pedido\DetalleNuevo.cshtml" />
     <Content Include="Views\Pedido\DetalleMenu.cshtml" />
     <Content Include="Views\Pedido\DetalleProducto.cshtml" />
     <Content Include="Views\Pedido\SeleccionarProducto.cshtml" />
     <Content Include="Views\Pedido\Nuevo.cshtml" />
     <Content Include="Views\Pedido\Main.cshtml" />
+    <Content Include="Views\Pedido\PedidosOnline.cshtml" />
+    <Content Include="Views\Home\Contacto.cshtml" />
+    <Content Include="Views\Pedido\Pagar.cshtml" />
+    <Content Include="Views\Pago\PagoEfectivo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

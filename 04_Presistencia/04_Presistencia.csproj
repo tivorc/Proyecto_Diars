@@ -45,6 +45,7 @@
     <Compile Include="daoDetallePedido.cs" />
     <Compile Include="daoMenu.cs" />
     <Compile Include="daoMesa.cs" />
+    <Compile Include="daoPago.cs" />
     <Compile Include="daoPedido.cs" />
     <Compile Include="daoProducto.cs" />
     <Compile Include="daoTipoPago.cs" />
