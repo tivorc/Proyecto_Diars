@@ -392,6 +392,7 @@
     <Content Include="Views\Pedido\DetalleProducto.cshtml" />
     <Content Include="Views\Pedido\SeleccionarProducto.cshtml" />
     <Content Include="Views\Pedido\Nuevo.cshtml" />
+    <Content Include="Views\Pedido\Main.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

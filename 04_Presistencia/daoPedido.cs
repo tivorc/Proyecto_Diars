@@ -43,6 +43,28 @@ namespace _04_Presistencia
             finally { if (cmd != null) { cmd.Connection.Close(); } }
         }
 
+        public bool InsertarPedidoOnline(string xml)
+        {
+            SqlCommand cmd = null;
+            bool inserto = false;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.conectar();
+                cmd = new SqlCommand("spInsertarPedidoOnline", cn);
+                cmd.Parameters.AddWithValue("@prmstrXML", xml);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cn.Open();
+
+                int i = cmd.ExecuteNonQuery();
+                if (i > 0) { inserto = true; }
+                return inserto;
+            }
+            catch (Exception e) { throw e; }
+            finally { if (cmd != null) { cmd.Connection.Close(); } }
+        }
+
         public bool InsertarPedidoPresencial(string xml)
         {
             SqlCommand cmd = null;

@@ -63,17 +63,26 @@
                             <br />
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="col-md-3">
-                                        <input type="button" value="Agregar Menú" class="btn btn-primary btn-block" data-toggle="modal" data-target="#Menu" />
+                                    <div>
+                                        <input type="button" value="Agregar Menú" class="btn btn-primary" data-toggle="modal" data-target="#Menu" />
+                                    </div>
+                                    <br />
+                                    <div id="detalleMenu">
+
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="col-md-3">
-                                        <input type="button" value="Agregar Producto" class="btn btn-primary btn-block" data-toggle="modal" data-target="#Producto" />
+                                    <div>
+                                        <input type="button" value="Agregar Producto" class="btn btn-primary" data-toggle="modal" data-target="#Producto" />
+                                    </div>
+                                    <br />
+                                    <div id="detalleProducto">
+
                                     </div>
                                 </div>
                             </div>
                             <br />
+
                             <!-- Modal para Agregar Menú-->
                             <div class="modal fade" id="Menu" tabindex="1" role="dialog" aria-labelledby="Menu" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -218,15 +227,6 @@
                                 </div>
                             </div>
                             <!-- Fin modal para Agregar Cliente-->
-                            <div class="row">
-                                <div id="detalleMenu" class="col-md-6">
-
-                                </div>
-
-                                <div id="detalleProducto" class="col-md-6">
-
-                                </div>
-                            </div>
 
                             <div class="pull-right">
                                 Total: <input type="text" value="" id="totalPedido" />

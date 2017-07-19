@@ -9,6 +9,13 @@ namespace _01_Presentacion.Controllers
 {
     public class PedidoController : Controller
     {
+        public ActionResult Main()
+        {
+            return View();
+        }
+
+
+
         public ActionResult Nuevo()
         {
             if (Session["usuario"] != null)
@@ -141,8 +148,8 @@ namespace _01_Presentacion.Controllers
 
                 List<entDetallePedido> pro = (List<entDetallePedido>)Session["listaProducto"];
 
-                //bool inserto = false;
-                //inserto = appPedido.Instancia.InsertarPedidoLlamada(ped, men, pro);
+                bool inserto = false;
+                inserto = appPedido.Instancia.InsertarPedidoOnline(ped, men, pro);
 
                 Session["listaMenu"] = null;
                 Session["listaProducto"] = null;
